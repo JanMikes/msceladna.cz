@@ -31,25 +31,25 @@ export function FeatureCards({ data, sidebar }: FeatureCardsProps) {
       {data.cards.map((card, i) => {
         const content = (
           <div className={clsx(
-            'card p-6 h-full flex gap-4',
+            'card card-accent-top p-6 h-full flex gap-4',
             card.link && 'card-lift cursor-pointer'
           )}>
             {card.icon_type === 'image' && card.icon ? (
-              <div className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0">
+              <div className="w-11 h-11 rounded-xl overflow-hidden flex-shrink-0 bg-teal-tint">
                 <Image
                   src={card.icon.url}
                   alt={card.title ?? ''}
-                  width={40}
-                  height={40}
-                  className="w-10 h-10 object-cover"
+                  width={44}
+                  height={44}
+                  className="w-11 h-11 object-cover"
                 />
               </div>
             ) : card.icon_type === 'text' && card.icon_text ? (
-              <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white text-sm font-bold flex-shrink-0">
+              <div className="w-11 h-11 rounded-xl bg-teal-tint flex items-center justify-center text-primary text-lg flex-shrink-0">
                 {card.icon_text}
               </div>
             ) : card.icon_type === 'initials' && card.title ? (
-              <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white text-sm font-bold flex-shrink-0">
+              <div className="w-11 h-11 rounded-xl bg-primary flex items-center justify-center text-white text-sm font-bold flex-shrink-0">
                 {getInitials(card.title)}
               </div>
             ) : null}
@@ -58,11 +58,11 @@ export function FeatureCards({ data, sidebar }: FeatureCardsProps) {
                 <h3 className="font-bold text-primary text-lg mb-1">{card.title}</h3>
               )}
               {card.description && (
-                <p className="text-text-muted text-sm">{card.description}</p>
+                <p className="text-text-muted text-sm leading-relaxed">{card.description}</p>
               )}
               {card.link && !data.card_clickable && (
-                <span className="inline-block mt-3 text-primary-light text-sm font-medium hover:underline">
-                  {card.link.text || 'Více'} &rarr;
+                <span className="inline-flex items-center gap-1 mt-3 text-accent-dark text-sm font-semibold group-hover:gap-2 transition-all">
+                  {card.link.text || 'Více'} <span className="text-xs">&rarr;</span>
                 </span>
               )}
             </div>
@@ -75,7 +75,7 @@ export function FeatureCards({ data, sidebar }: FeatureCardsProps) {
               key={i}
               href={card.link.href}
               {...(card.link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-              className="block"
+              className="block group"
             >
               {content}
             </Link>
