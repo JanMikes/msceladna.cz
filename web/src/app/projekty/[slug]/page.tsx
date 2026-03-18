@@ -24,8 +24,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 const statusLabels: Record<string, string> = {
-  aktivni: 'Aktivni',
-  ukonceny: 'Ukonceny',
+  aktivni: 'Aktivní',
+  ukonceny: 'Ukončený',
 };
 
 export default async function ProjectDetailPage({ params }: PageProps) {
@@ -65,17 +65,17 @@ export default async function ProjectDetailPage({ params }: PageProps) {
 
           <div className="card p-6 space-y-3">
             {project.projectNumber && (
-              <p className="text-sm"><span className="font-medium text-primary">Registracni cislo:</span> <span className="text-text-muted">{project.projectNumber}</span></p>
+              <p className="text-sm"><span className="font-medium text-primary">Registrační číslo:</span> <span className="text-text-muted">{project.projectNumber}</span></p>
             )}
             {project.goal && (
-              <p className="text-sm"><span className="font-medium text-primary">Cil projektu:</span> <span className="text-text-muted">{project.goal}</span></p>
+              <p className="text-sm"><span className="font-medium text-primary">Cíl projektu:</span> <span className="text-text-muted">{project.goal}</span></p>
             )}
             {project.financialAmount && (
-              <p className="text-sm"><span className="font-medium text-primary">Vyse podpory:</span> <span className="text-accent font-semibold">{project.financialAmount}</span></p>
+              <p className="text-sm"><span className="font-medium text-primary">Výše podpory:</span> <span className="text-accent font-semibold">{project.financialAmount}</span></p>
             )}
             {(project.dateFrom || project.dateTo) && (
               <p className="text-sm">
-                <span className="font-medium text-primary">Obdobi:</span>{' '}
+                <span className="font-medium text-primary">Období:</span>{' '}
                 <span className="text-text-muted">
                   {project.dateFrom && new Date(project.dateFrom).toLocaleDateString('cs-CZ')}
                   {project.dateFrom && project.dateTo && ' - '}
@@ -94,7 +94,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
 
           {project.logos.length > 0 && (
             <div>
-              <h2 className="text-xl font-bold text-primary mb-4 heading-accent">Loga poskytovatelu</h2>
+              <h2 className="text-xl font-bold text-primary mb-4 heading-accent">Loga poskytovatelů</h2>
               <div className="flex flex-wrap items-center gap-6">
                 {project.logos.map((logo, i) => (
                   <Image
@@ -112,11 +112,11 @@ export default async function ProjectDetailPage({ params }: PageProps) {
 
           {project.publicityPoster && (
             <div>
-              <h2 className="text-xl font-bold text-primary mb-4 heading-accent">Plakat publicity</h2>
+              <h2 className="text-xl font-bold text-primary mb-4 heading-accent">Plakát publicity</h2>
               <div className="rounded-[var(--radius-card)] overflow-hidden">
                 <Image
                   src={project.publicityPoster.url}
-                  alt={project.publicityPoster.alternativeText || 'Plakat'}
+                  alt={project.publicityPoster.alternativeText || 'Plakát'}
                   width={project.publicityPoster.width || 800}
                   height={project.publicityPoster.height || 600}
                   className="w-full h-auto"

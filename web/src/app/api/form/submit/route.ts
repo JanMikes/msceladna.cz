@@ -10,12 +10,12 @@ export async function POST(request: Request) {
     const formName = formData.get('_formName') as string | null;
 
     if (!token || !formName) {
-      return NextResponse.json({ error: 'Neplatny pozadavek.' }, { status: 400 });
+      return NextResponse.json({ error: 'Neplatný požadavek.' }, { status: 400 });
     }
 
     const recipients = verifyFormToken(token);
     if (!recipients || recipients.length === 0) {
-      return NextResponse.json({ error: 'Neplatny formular.' }, { status: 400 });
+      return NextResponse.json({ error: 'Neplatný formulář.' }, { status: 400 });
     }
 
     // Build email HTML from form fields
@@ -31,7 +31,7 @@ export async function POST(request: Request) {
       .join('');
 
     const html = `
-      <h2>Novy formular: ${escapeHtml(formName)}</h2>
+      <h2>Nový formulář: ${escapeHtml(formName)}</h2>
       <table style="border-collapse:collapse;width:100%">
         ${fieldsHtml}
       </table>
@@ -39,13 +39,13 @@ export async function POST(request: Request) {
 
     const success = await sendEmail({
       to: recipients,
-      subject: `Novy formular: ${formName}`,
+      subject: `Nový formulář: ${formName}`,
       html,
     });
 
     if (!success) {
       return NextResponse.json(
-        { error: 'Odeslani e-mailu se nezdarilo. Zkuste to prosim pozdeji.' },
+        { error: 'Odeslání e-mailu se nezdařilo. Zkuste to prosím později.' },
         { status: 500 },
       );
     }
@@ -54,7 +54,7 @@ export async function POST(request: Request) {
   } catch (error) {
     console.error('[Form Submit] Error:', error);
     return NextResponse.json(
-      { error: 'Nastala neocekavana chyba.' },
+      { error: 'Nastala neočekávaná chyba.' },
       { status: 500 },
     );
   }

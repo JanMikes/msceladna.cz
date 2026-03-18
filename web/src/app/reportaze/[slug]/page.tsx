@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const article = await getNewsArticleBySlug(slug);
 
   if (!article) {
-    return { title: 'Clanek nenalezen' };
+    return { title: 'Článek nenalezen' };
   }
 
   return {
@@ -43,7 +43,7 @@ export default async function ReportazDetailPage({ params }: PageProps) {
       <div className="container mx-auto px-4 lg:px-8 pb-8 lg:pb-12">
         <Breadcrumbs
           items={[
-            { label: 'Reportaze', href: '/reportaze' },
+            { label: 'Reportáže', href: '/reportaze' },
             { label: article.title, href: `/reportaze/${article.slug}` },
           ]}
         />

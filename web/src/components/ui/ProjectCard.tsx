@@ -6,8 +6,8 @@ interface ProjectCardProps {
 }
 
 const statusLabels: Record<string, string> = {
-  aktivni: 'Aktivni',
-  ukonceny: 'Ukonceny',
+  aktivni: 'Aktivní',
+  ukonceny: 'Ukončený',
 };
 
 const statusColors: Record<string, string> = {
@@ -30,7 +30,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
           )}
         </div>
         {project.projectNumber && (
-          <p className="text-xs text-text-muted mb-2">Reg. c.: {project.projectNumber}</p>
+          <p className="text-xs text-text-muted mb-2">Reg. č.: {project.projectNumber}</p>
         )}
         {project.description && (
           <p className="text-text-muted text-sm line-clamp-3 flex-1 mb-3">{project.description}</p>

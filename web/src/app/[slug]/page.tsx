@@ -14,7 +14,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const page = await getPageBySlug(slug);
 
   if (!page) {
-    return { title: 'Stranka nenalezena' };
+    return { title: 'Stránka nenalezena' };
   }
 
   return {

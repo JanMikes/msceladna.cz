@@ -62,7 +62,7 @@ export function FeatureCards({ data, sidebar }: FeatureCardsProps) {
               )}
               {card.link && !data.card_clickable && (
                 <span className="inline-block mt-3 text-primary-light text-sm font-medium hover:underline">
-                  {card.link.text || 'Vice'} &rarr;
+                  {card.link.text || 'Více'} &rarr;
                 </span>
               )}
             </div>

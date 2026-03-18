@@ -82,7 +82,7 @@ export function Slider({ data }: SliderProps) {
                     className="inline-block px-6 py-2 bg-accent text-primary-dark font-medium rounded-[var(--radius-button)] hover:bg-accent-dark transition-colors self-start"
                     {...(slide.link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                   >
-                    {slide.link.text || 'Vice'}
+                    {slide.link.text || 'Více'}
                   </Link>
                 )}
               </div>
@@ -95,14 +95,14 @@ export function Slider({ data }: SliderProps) {
           <button
             onClick={scrollPrev}
             className="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
-            aria-label="Predchozi"
+            aria-label="Předchozí"
           >
             <ChevronLeft className="w-5 h-5" />
           </button>
           <button
             onClick={scrollNext}
             className="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
-            aria-label="Dalsi"
+            aria-label="Další"
           >
             <ChevronRight className="w-5 h-5" />
           </button>

@@ -46,7 +46,7 @@ export default function Header({ navigation }: HeaderProps) {
             {/* Logo */}
             <Link href="/" className="flex items-center gap-3 shrink-0 group">
               <span className="text-xl lg:text-2xl font-bold text-white">
-                MS Celadna
+                MŠ Čeladná
               </span>
             </Link>
 
@@ -143,7 +143,7 @@ export default function Header({ navigation }: HeaderProps) {
             <button
               onClick={() => setIsMobileMenuOpen(true)}
               className="lg:hidden w-10 h-10 rounded-[var(--radius-button)] border border-white/30 flex items-center justify-center transition-colors text-white hover:bg-white/10"
-              aria-label="Otevrit menu"
+              aria-label="Otevřít menu"
             >
               <Menu className="w-6 h-6" />
             </button>
@@ -179,7 +179,7 @@ export default function Header({ navigation }: HeaderProps) {
                 <button
                   onClick={closeMenus}
                   className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors"
-                  aria-label="Zavrit menu"
+                  aria-label="Zavřít menu"
                 >
                   <X className="w-6 h-6" />
                 </button>

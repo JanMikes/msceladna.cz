@@ -42,7 +42,7 @@ import type {
 } from '@/lib/types';
 
 export const metadata: Metadata = {
-  title: 'Prehled komponent',
+  title: 'Přehled komponent',
   robots: { index: false, follow: false },
 };
 
@@ -74,8 +74,8 @@ export default function KomponentyPage() {
     <main className="bg-surface pt-16 lg:pt-20">
       <div className="container mx-auto px-4 lg:px-8 py-8 lg:py-12 space-y-12">
         <div>
-          <h1 className="text-4xl font-bold text-primary mb-2">Prehled komponent</h1>
-          <p className="text-text-muted">Vsechny komponenty designoveho systemu MS Celadna s ukazkovymi daty.</p>
+          <h1 className="text-4xl font-bold text-primary mb-2">Přehled komponent</h1>
+          <p className="text-text-muted">Všechny komponenty designového systému MŠ Čeladná s ukázkovými daty.</p>
         </div>
 
         {/* Typography */}
@@ -89,19 +89,19 @@ export default function KomponentyPage() {
 
         {/* RichText */}
         <Section title="RichText">
-          <RichText data={{ id: 10, __component: 'components.text', text: '# Hlavni nadpis\n\nToto je odstavec s **tucnym textem** a *kurzivou*. Muzete pouzit take [odkazy](https://example.com).\n\n## Podnadpis\n\n- Polozka seznamu 1\n- Polozka seznamu 2\n- Polozka seznamu 3\n\n> Toto je citace - dulezita informace pro rodice.\n\n### Cislovany seznam\n\n1. Prvni krok\n2. Druhy krok\n3. Treti krok' } satisfies ComponentText} />
+          <RichText data={{ id: 10, __component: 'components.text', text: '# Hlavní nadpis\n\nToto je odstavec s **tučným textem** a *kurzívou*. Můžete použít také [odkazy](https://example.com).\n\n## Podnadpis\n\n- Položka seznamu 1\n- Položka seznamu 2\n- Položka seznamu 3\n\n> Toto je citace - důležitá informace pro rodiče.\n\n### Číslovaný seznam\n\n1. První krok\n2. Druhý krok\n3. Třetí krok' } satisfies ComponentText} />
         </Section>
 
         {/* Alerts */}
-        <Section title="Alert - vsechny varianty">
-          <Alert data={{ id: 20, __component: 'components.alert', type: 'info', title: 'Informace', text: 'Toto je informacni zprava pro rodice.' } satisfies ComponentAlert} />
-          <Alert data={{ id: 21, __component: 'components.alert', type: 'success', title: 'Uspech', text: 'Prihlaska byla uspesne odeslana.' } satisfies ComponentAlert} />
-          <Alert data={{ id: 22, __component: 'components.alert', type: 'warning', title: 'Upozorneni', text: 'Termin pro odevzdani prihlasek se blizi.' } satisfies ComponentAlert} />
-          <Alert data={{ id: 23, __component: 'components.alert', type: 'error', title: 'Chyba', text: 'Neco se pokazilo, zkuste to prosim znovu.' } satisfies ComponentAlert} />
+        <Section title="Alert - všechny varianty">
+          <Alert data={{ id: 20, __component: 'components.alert', type: 'info', title: 'Informace', text: 'Toto je informační zpráva pro rodiče.' } satisfies ComponentAlert} />
+          <Alert data={{ id: 21, __component: 'components.alert', type: 'success', title: 'Úspěch', text: 'Přihláška byla úspěšně odeslána.' } satisfies ComponentAlert} />
+          <Alert data={{ id: 22, __component: 'components.alert', type: 'warning', title: 'Upozornění', text: 'Termín pro odevzdání přihlášek se blíží.' } satisfies ComponentAlert} />
+          <Alert data={{ id: 23, __component: 'components.alert', type: 'error', title: 'Chyba', text: 'Něco se pokazilo, zkuste to prosím znovu.' } satisfies ComponentAlert} />
         </Section>
 
         {/* Buttons */}
-        <Section title="ButtonGroup - vsechny varianty a velikosti">
+        <Section title="ButtonGroup - všechny varianty a velikosti">
           {(['Primary', 'Secondary', 'Outline', 'Ghost'] as const).map((variant) => (
             <div key={variant} className="space-y-2">
               <p className="text-sm font-medium text-text-muted">{variant}</p>
@@ -119,7 +119,7 @@ export default function KomponentyPage() {
         </Section>
 
         {/* Badges */}
-        <Section title="Badges - vsechny varianty a velikosti">
+        <Section title="Badges - všechny varianty a velikosti">
           {(['S', 'M', 'L'] as const).map((size) => (
             <Badges key={size} data={{
               id: 40, __component: 'components.badges',
@@ -148,8 +148,8 @@ export default function KomponentyPage() {
                   icon: i % 4 === 1 ? smallImage : null,
                   icon_text: i % 4 === 2 ? 'AB' : null,
                   title: `Karta ${i + 1}`,
-                  description: 'Popis karty s dalsimi informacemi o obsahu.',
-                  link: { href: '#', external: false, text: 'Vice informaci', disabled: false },
+                  description: 'Popis karty s dalšími informacemi o obsahu.',
+                  link: { href: '#', external: false, text: 'Více informací', disabled: false },
                 })),
                 columns: cols,
                 card_clickable: false,
@@ -163,8 +163,8 @@ export default function KomponentyPage() {
           <BannerCards data={{
             id: 60, __component: 'components.banner-cards',
             cards: [
-              { icon_type: 'hidden', icon: null, icon_text: null, title: 'Dulezite oznameni', description: 'Toto je dulezita informace pro vsechny rodice nasi materske skoly.', link: { href: '#', external: false, text: 'Zjistit vice', disabled: false } },
-              { icon_type: 'hidden', icon: null, icon_text: null, title: 'Zapis do MS', description: 'Informace o zapisu do materske skoly pro skolni rok 2026/2027.', link: { href: '#', external: false, text: 'Podrobnosti', disabled: false } },
+              { icon_type: 'hidden', icon: null, icon_text: null, title: 'Důležité oznámení', description: 'Toto je důležitá informace pro všechny rodiče naší mateřské školy.', link: { href: '#', external: false, text: 'Zjistit více', disabled: false } },
+              { icon_type: 'hidden', icon: null, icon_text: null, title: 'Zápis do MŠ', description: 'Informace o zápisu do mateřské školy pro školní rok 2026/2027.', link: { href: '#', external: false, text: 'Podrobnosti', disabled: false } },
             ],
           } satisfies ComponentBannerCards} />
         </Section>
@@ -174,9 +174,9 @@ export default function KomponentyPage() {
           <ContactCards data={{
             id: 70, __component: 'components.contact-cards',
             cards: [
-              { name: 'Jana Novakova', role: 'Reditelka', phone: '+420 123 456 789', email: 'reditelka@msceladna.cz', photo: null },
-              { name: 'Petra Svobodova', role: 'Ucitelka - Beruska', phone: '+420 987 654 321', email: 'svobodova@msceladna.cz', photo: null },
-              { name: 'Marie Kralova', role: 'Ucitelka - Krtecek', phone: null, email: 'kralova@msceladna.cz', photo: null },
+              { name: 'Jana Nováková', role: 'Ředitelka', phone: '+420 123 456 789', email: 'reditelka@msceladna.cz', photo: null },
+              { name: 'Petra Svobodová', role: 'Učitelka - Beruška', phone: '+420 987 654 321', email: 'svobodova@msceladna.cz', photo: null },
+              { name: 'Marie Králová', role: 'Učitelka - Krteček', phone: null, email: 'kralova@msceladna.cz', photo: null },
             ],
           } satisfies ComponentContactCards} />
         </Section>
@@ -189,9 +189,9 @@ export default function KomponentyPage() {
               <Documents data={{
                 id: 80, __component: 'components.documents',
                 documents: [
-                  { name: 'Skolni rad.pdf', file: placeholderImage },
-                  { name: 'Prihlaska do MS.pdf', file: placeholderImage },
-                  { name: 'Informace pro rodice.pdf', file: placeholderImage },
+                  { name: 'Školní řád.pdf', file: placeholderImage },
+                  { name: 'Přihláška do MŠ.pdf', file: placeholderImage },
+                  { name: 'Informace pro rodiče.pdf', file: placeholderImage },
                 ],
                 columns: cols,
               } satisfies ComponentDocuments} />
@@ -207,9 +207,9 @@ export default function KomponentyPage() {
               <StatsHighlights data={{
                 id: 90, __component: 'components.stats-highlights',
                 items: [
-                  { number: '120', title: 'Deti', description: 'Celkova kapacita' },
-                  { number: '5', title: 'Trid', description: 'Ve dvou pracovistich' },
-                  { number: '15', title: 'Pedagogu', description: 'Kvalifikovanych' },
+                  { number: '120', title: 'Dětí', description: 'Celková kapacita' },
+                  { number: '5', title: 'Tříd', description: 'Ve dvou pracovištích' },
+                  { number: '15', title: 'Pedagogů', description: 'Kvalifikovaných' },
                   { number: '60+', title: 'Let', description: 'Tradice' },
                 ].slice(0, parseInt(cols)),
                 columns: cols,
@@ -219,13 +219,13 @@ export default function KomponentyPage() {
         </Section>
 
         {/* Timeline */}
-        <Section title="Timeline - style1 (vertikalni)">
+        <Section title="Timeline - style1 (vertikální)">
           <Timeline data={{
             id: 100, __component: 'components.timeline',
             items: [
-              { number: '2024', title: 'Rekonstrukce zahrady', description: 'Dokoncena kompletni rekonstrukce zahrady vcetne novych hernich prvku.' },
-              { number: '2023', title: 'Nove vybaveni trid', description: 'Modernizace vybaveni vsech trid novym nabytkem a pomuckami.' },
-              { number: '2022', title: 'Projekt EU', description: 'Ziskani dotace na rozvoj predskolniho vzdelavani.' },
+              { number: '2024', title: 'Rekonstrukce zahrady', description: 'Dokončena kompletní rekonstrukce zahrady včetně nových herních prvků.' },
+              { number: '2023', title: 'Nové vybavení tříd', description: 'Modernizace vybavení všech tříd novým nábytkem a pomůckami.' },
+              { number: '2022', title: 'Projekt EU', description: 'Získání dotace na rozvoj předškolního vzdělávání.' },
             ],
             collapsible: false,
             style: 'style1',
@@ -237,10 +237,10 @@ export default function KomponentyPage() {
           <Timeline data={{
             id: 101, __component: 'components.timeline',
             items: [
-              { number: '7:00', title: 'Prichod deti', description: 'Schovani do satny, hry v hernach.' },
-              { number: '8:30', title: 'Ranni kruh', description: 'Spolecne povidani, pohybove aktivity.' },
-              { number: '9:00', title: 'Svacinova', description: 'Zdravy dopoledni svacina.' },
-              { number: '9:30', title: 'Vzdelavaci aktivity', description: 'Ridene cinnosti dle tematickeho planu.' },
+              { number: '7:00', title: 'Příchod dětí', description: 'Schování do šatny, hry v hernách.' },
+              { number: '8:30', title: 'Ranní kruh', description: 'Společné povídání, pohybové aktivity.' },
+              { number: '9:00', title: 'Svačinová', description: 'Zdravá dopolední svačina.' },
+              { number: '9:30', title: 'Vzdělávací aktivity', description: 'Řízené činnosti dle tematického plánu.' },
             ],
             collapsible: true,
             style: 'style2',
@@ -253,9 +253,9 @@ export default function KomponentyPage() {
           <AccordionSections data={{
             id: 110, __component: 'components.accordion-sections',
             sections: [
-              { title: 'Jak probiha adaptace ditete?', description: 'Adaptacni proces probiha individualne. V prvnim tydnu doporucujeme kratsi pobyty, postupne prodluzovane.', default_open: true, files: [], photos: [], contacts: [] },
-              { title: 'Jake jsou provozni hodiny?', description: 'Materska skola je otevrena od **6:30** do **16:30** ve vsedni dny.', default_open: false, files: [], photos: [], contacts: [] },
-              { title: 'Co potrebuje dite s sebou?', description: 'Nahradni obleceni, prezuvky, batuzek, piti. Vice informaci najdete ve skolnim radu.', default_open: false, files: [{ name: 'Skolni rad.pdf', file: placeholderImage }], photos: [], contacts: [] },
+              { title: 'Jak probíhá adaptace dítěte?', description: 'Adaptační proces probíhá individuálně. V prvním týdnu doporučujeme kratší pobyty, postupně prodlužované.', default_open: true, files: [], photos: [], contacts: [] },
+              { title: 'Jaké jsou provozní hodiny?', description: 'Mateřská škola je otevřena od **6:30** do **16:30** ve všední dny.', default_open: false, files: [], photos: [], contacts: [] },
+              { title: 'Co potřebuje dítě s sebou?', description: 'Náhradní oblečení, přezůvky, batůžek, pití. Více informací najdete ve školním řádu.', default_open: false, files: [{ name: 'Školní řád.pdf', file: placeholderImage }], photos: [], contacts: [] },
             ],
           } satisfies ComponentAccordionSections} />
         </Section>
@@ -282,10 +282,10 @@ export default function KomponentyPage() {
           <LinksList data={{
             id: 130, __component: 'components.links-list',
             links: [
-              { href: '#', external: false, text: 'Skolni rad', disabled: false },
-              { href: '#', external: false, text: 'Jidelnicek', disabled: false },
-              { href: 'https://example.com', external: true, text: 'Externi odkaz', disabled: false },
-              { href: '#', external: false, text: 'Neaktivni odkaz', disabled: true },
+              { href: '#', external: false, text: 'Školní řád', disabled: false },
+              { href: '#', external: false, text: 'Jídelníček', disabled: false },
+              { href: 'https://example.com', external: true, text: 'Externí odkaz', disabled: false },
+              { href: '#', external: false, text: 'Neaktivní odkaz', disabled: true },
             ],
             layout: 'Grid',
           } satisfies ComponentLinksList} />
@@ -293,16 +293,16 @@ export default function KomponentyPage() {
           <LinksList data={{
             id: 131, __component: 'components.links-list',
             links: [
-              { href: '#', external: false, text: 'Skolni rad', disabled: false },
-              { href: '#', external: false, text: 'Jidelnicek', disabled: false },
-              { href: 'https://example.com', external: true, text: 'Externi odkaz', disabled: false },
+              { href: '#', external: false, text: 'Školní řád', disabled: false },
+              { href: '#', external: false, text: 'Jídelníček', disabled: false },
+              { href: 'https://example.com', external: true, text: 'Externí odkaz', disabled: false },
             ],
             layout: 'Rows',
           } satisfies ComponentLinksList} />
         </Section>
 
         {/* Section Dividers */}
-        <Section title="SectionDivider - vsechny kombinace">
+        <Section title="SectionDivider - všechny kombinace">
           {(['S', 'M', 'L'] as const).map((spacing) => (
             (['solid', 'dashed', 'dotted'] as const).map((style) => (
               <div key={`${spacing}-${style}`}>
@@ -314,7 +314,7 @@ export default function KomponentyPage() {
         </Section>
 
         {/* Video */}
-        <Section title="Video - vsechny pomery stran">
+        <Section title="Video - všechny poměry stran">
           {(['16:9', '4:3', '1:1'] as const).map((ratio) => (
             <div key={ratio} className="space-y-2">
               <p className="text-sm font-medium text-text-muted">aspect_ratio={ratio}</p>
@@ -341,7 +341,7 @@ export default function KomponentyPage() {
             grayscale: true,
             columns: '4',
           } satisfies ComponentPartnerLogos} />
-          <p className="text-sm font-medium text-text-muted mt-4">6 sloupcu, bez grayscale</p>
+          <p className="text-sm font-medium text-text-muted mt-4">6 sloupců, bez grayscale</p>
           <PartnerLogos data={{
             id: 171, __component: 'components.partner-logos',
             partners: Array.from({ length: 6 }, (_, i) => ({
@@ -359,8 +359,8 @@ export default function KomponentyPage() {
           <WorkplaceCards data={{
             id: 180, __component: 'components.workplace-cards',
             workplaces: [
-              { name: 'Beruska', slug: 'beruska', image: { ...placeholderImage, url: 'https://placehold.co/800x500/275D56/FFFFFF?text=Beruska' }, description: 'Pracoviste s kapacitou 60 deti ve 3 tridach.' },
-              { name: 'Krtecek', slug: 'krtecek', image: { ...placeholderImage, url: 'https://placehold.co/800x500/358577/FFFFFF?text=Krtecek' }, description: 'Pracoviste s kapacitou 60 deti ve 2 tridach.' },
+              { name: 'Beruška', slug: 'beruska', image: { ...placeholderImage, url: 'https://placehold.co/800x500/275D56/FFFFFF?text=Beruska' }, description: 'Pracoviště s kapacitou 60 dětí ve 3 třídách.' },
+              { name: 'Krteček', slug: 'krtecek', image: { ...placeholderImage, url: 'https://placehold.co/800x500/358577/FFFFFF?text=Krtecek' }, description: 'Pracoviště s kapacitou 60 dětí ve 2 třídách.' },
             ],
           } satisfies ComponentWorkplaceCards} />
         </Section>

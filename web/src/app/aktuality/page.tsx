@@ -6,7 +6,7 @@ import { clsx } from 'clsx';
 
 export const metadata: Metadata = {
   title: 'Aktuality',
-  description: 'Aktuality a novinky z Materske skoly Celadna.',
+  description: 'Aktuality a novinky z Mateřské školy Čeladná.',
 };
 
 interface PageProps {
@@ -44,7 +44,7 @@ export default async function AktualityPage({ searchParams }: PageProps) {
                 : 'hover:bg-primary/10'
             )}
           >
-            Vse
+            Vše
           </Link>
           {workplaces.map((w) => (
             <Link
@@ -69,7 +69,7 @@ export default async function AktualityPage({ searchParams }: PageProps) {
             ))}
           </div>
         ) : (
-          <p className="text-text-muted text-center py-12">Zadne aktuality nebyly nalezeny.</p>
+          <p className="text-text-muted text-center py-12">Žádné aktuality nebyly nalezeny.</p>
         )}
 
         {/* Pagination */}

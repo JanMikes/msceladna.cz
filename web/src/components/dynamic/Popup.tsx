@@ -38,7 +38,7 @@ export function Popup({ data }: PopupProps) {
         <button
           onClick={handleClose}
           className="absolute top-3 right-3 w-8 h-8 flex items-center justify-center text-text-muted hover:text-primary transition-colors"
-          aria-label="Zavrit"
+          aria-label="Zavřít"
         >
           <X className="w-5 h-5" />
         </button>
@@ -55,7 +55,7 @@ export function Popup({ data }: PopupProps) {
             className="inline-block px-6 py-2 bg-primary text-white font-medium rounded-[var(--radius-button)] hover:bg-primary-dark transition-colors"
             {...(data.link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
           >
-            {data.link.text || 'Vice'}
+            {data.link.text || 'Více'}
           </Link>
         )}
       </div>

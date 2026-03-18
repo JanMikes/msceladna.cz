@@ -24,7 +24,7 @@ export default function Footer({ footer, organization }: FooterProps) {
           {/* Organization Info */}
           <div className="sm:col-span-2 lg:col-span-1">
             <Link href="/" className="inline-block mb-4">
-              <span className="text-xl font-bold text-white">MS Celadna</span>
+              <span className="text-xl font-bold text-white">MŠ Čeladná</span>
             </Link>
             {footer?.text && (
               <p className="text-white/60 text-sm mb-4 leading-relaxed">
@@ -33,8 +33,8 @@ export default function Footer({ footer, organization }: FooterProps) {
             )}
             {organization && (
               <div className="text-white/50 text-xs space-y-0.5">
-                {organization.ico && <p>IC: {organization.ico}</p>}
-                {organization.dataBox && <p>Datova schranka: {organization.dataBox}</p>}
+                {organization.ico && <p>IČ: {organization.ico}</p>}
+                {organization.dataBox && <p>Datová schránka: {organization.dataBox}</p>}
               </div>
             )}
           </div>
@@ -99,7 +99,7 @@ export default function Footer({ footer, organization }: FooterProps) {
       <div className="border-t border-white/10">
         <div className="container mx-auto px-4 lg:px-8 py-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-white/50">
-            <p>&copy; {new Date().getFullYear()} {organization?.name || 'MS Celadna'}. Vsechna prava vyhrazena.</p>
+            <p>&copy; {new Date().getFullYear()} {organization?.name || 'MŠ Čeladná'}. Všechna práva vyhrazena.</p>
             {bottomLinks.length > 0 && (
               <div className="flex items-center gap-6">
                 {bottomLinks.map((link, index) => {

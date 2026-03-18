@@ -5,8 +5,8 @@ import Link from 'next/link';
 import { clsx } from 'clsx';
 
 export const metadata: Metadata = {
-  title: 'Reportaze',
-  description: 'Reportaze a clanky z Materske skoly Celadna.',
+  title: 'Reportáže',
+  description: 'Reportáže a články z Mateřské školy Čeladná.',
 };
 
 interface PageProps {
@@ -30,7 +30,7 @@ export default async function ReportazePage({ searchParams }: PageProps) {
     <main className="bg-surface pt-16 lg:pt-20">
       <div className="container mx-auto px-4 lg:px-8 py-8 lg:py-12">
         <h1 className="text-3xl lg:text-4xl font-bold text-primary heading-accent mb-8">
-          Reportaze
+          Reportáže
         </h1>
 
         <div className="flex flex-wrap gap-2 mb-8">
@@ -41,7 +41,7 @@ export default async function ReportazePage({ searchParams }: PageProps) {
               !workplaceSlug ? 'bg-primary text-white' : 'hover:bg-primary/10'
             )}
           >
-            Vse
+            Vše
           </Link>
           {workplaces.map((w) => (
             <Link
@@ -64,7 +64,7 @@ export default async function ReportazePage({ searchParams }: PageProps) {
             ))}
           </div>
         ) : (
-          <p className="text-text-muted text-center py-12">Zadne reportaze nebyly nalezeny.</p>
+          <p className="text-text-muted text-center py-12">Žádné reportáže nebyly nalezeny.</p>
         )}
 
         {totalPages > 1 && (

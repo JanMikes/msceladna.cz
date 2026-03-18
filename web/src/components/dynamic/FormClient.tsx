@@ -33,14 +33,14 @@ export function FormClient({ form, token }: FormClientProps) {
 
       if (!response.ok) {
         const data = await response.json().catch(() => ({}));
-        throw new Error(data.error || 'Odeslani formulare se nezdarilo.');
+        throw new Error(data.error || 'Odeslání formuláře se nezdařilo.');
       }
 
       setStatus('success');
       formRef.current?.reset();
     } catch (err) {
       setStatus('error');
-      setErrorMessage(err instanceof Error ? err.message : 'Odeslani formulare se nezdarilo.');
+      setErrorMessage(err instanceof Error ? err.message : 'Odeslání formuláře se nezdařilo.');
     }
   }
 

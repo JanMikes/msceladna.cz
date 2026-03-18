@@ -14,26 +14,26 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    template: '%s | MS Celadna',
-    default: 'MS Celadna | Materska skola Celadna',
+    template: '%s | MŠ Čeladná',
+    default: 'MŠ Čeladná | Mateřská škola Čeladná',
   },
   description:
-    'Oficialni webove stranky Materske skoly Celadna. Informace o skolce, aktuality, dokumenty a kontakty.',
+    'Oficiální webové stránky Mateřské školy Čeladná. Informace o školce, aktuality, dokumenty a kontakty.',
   keywords: [
-    'Materska skola Celadna',
-    'MS Celadna',
-    'skolka',
-    'predskolni vzdelavani',
-    'Celadna',
+    'Mateřská škola Čeladná',
+    'MŠ Čeladná',
+    'školka',
+    'předškolní vzdělávání',
+    'Čeladná',
   ],
-  authors: [{ name: 'MS Celadna' }],
+  authors: [{ name: 'MŠ Čeladná' }],
   openGraph: {
     type: 'website',
     locale: 'cs_CZ',
-    siteName: 'MS Celadna',
-    title: 'MS Celadna | Materska skola Celadna',
+    siteName: 'MŠ Čeladná',
+    title: 'MŠ Čeladná | Mateřská škola Čeladná',
     description:
-      'Oficialni webove stranky Materske skoly Celadna. Informace o skolce, aktuality, dokumenty a kontakty.',
+      'Oficiální webové stránky Mateřské školy Čeladná. Informace o školce, aktuality, dokumenty a kontakty.',
   },
   robots: {
     index: true,

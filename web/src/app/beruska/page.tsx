@@ -4,8 +4,8 @@ import { DynamicZone } from '@/components/strapi/DynamicZone';
 import SidePanel from '@/components/layout/SidePanel';
 
 export const metadata: Metadata = {
-  title: 'Beruska',
-  description: 'Pracoviste Beruska - Materska skola Celadna.',
+  title: 'Beruška',
+  description: 'Pracoviště Beruška - Mateřská škola Čeladná.',
 };
 
 export default async function BeruskaPage() {
@@ -16,9 +16,9 @@ export default async function BeruskaPage() {
       <main className="bg-surface pt-16 lg:pt-20">
         <div className="container mx-auto px-4 lg:px-8 py-16 text-center">
           <h1 className="text-3xl lg:text-4xl font-bold text-primary heading-accent mb-4">
-            Beruska
+            Beruška
           </h1>
-          <p className="text-text-muted">Obsah bude brzy doplnen.</p>
+          <p className="text-text-muted">Obsah bude brzy doplněn.</p>
         </div>
       </main>
     );

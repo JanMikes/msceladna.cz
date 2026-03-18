@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const article = await getNewsArticleBySlug(slug);
 
   if (!article) {
-    return { title: 'Clanek nenalezen' };
+    return { title: 'Článek nenalezen' };
   }
 
   return {

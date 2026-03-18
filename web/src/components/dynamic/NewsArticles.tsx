@@ -35,7 +35,7 @@ export async function NewsArticles({ data, sidebar }: NewsArticlesProps) {
             className="inline-block px-6 py-2 bg-primary text-white font-medium rounded-[var(--radius-button)] hover:bg-primary-dark transition-colors"
             {...(data.show_all_link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
           >
-            {data.show_all_link.text || 'Vsechny novinky'}
+            {data.show_all_link.text || 'Všechny novinky'}
           </Link>
         </div>
       )}

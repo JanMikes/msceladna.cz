@@ -6,7 +6,7 @@ import { clsx } from 'clsx';
 
 export const metadata: Metadata = {
   title: 'Projekty',
-  description: 'Projekty Materske skoly Celadna.',
+  description: 'Projekty Mateřské školy Čeladná.',
 };
 
 interface PageProps {
@@ -34,7 +34,7 @@ export default async function ProjektyPage({ searchParams }: PageProps) {
               !status ? 'bg-primary text-white' : 'hover:bg-primary/10'
             )}
           >
-            Vse
+            Vše
           </Link>
           <Link
             href="/projekty?stav=aktivni"
@@ -43,7 +43,7 @@ export default async function ProjektyPage({ searchParams }: PageProps) {
               status === 'aktivni' ? 'bg-primary text-white' : 'hover:bg-primary/10'
             )}
           >
-            Aktivni
+            Aktivní
           </Link>
           <Link
             href="/projekty?stav=ukonceny"
@@ -52,7 +52,7 @@ export default async function ProjektyPage({ searchParams }: PageProps) {
               status === 'ukonceny' ? 'bg-primary text-white' : 'hover:bg-primary/10'
             )}
           >
-            Ukoncene
+            Ukončené
           </Link>
         </div>
 
@@ -63,7 +63,7 @@ export default async function ProjektyPage({ searchParams }: PageProps) {
             ))}
           </div>
         ) : (
-          <p className="text-text-muted text-center py-12">Zadne projekty nebyly nalezeny.</p>
+          <p className="text-text-muted text-center py-12">Žádné projekty nebyly nalezeny.</p>
         )}
       </div>
     </main>

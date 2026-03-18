@@ -24,7 +24,7 @@ export function BannerCards({ data }: BannerCardsProps) {
               className="inline-block mt-4 text-accent font-medium hover:underline"
               {...(card.link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
             >
-              {card.link.text || 'Vice'}
+              {card.link.text || 'Více'}
             </Link>
           )}
         </div>

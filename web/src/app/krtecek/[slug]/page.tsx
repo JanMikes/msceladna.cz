@@ -14,11 +14,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const page = await getPageBySlug(slug);
 
   if (!page) {
-    return { title: 'Stranka nenalezena' };
+    return { title: 'Stránka nenalezena' };
   }
 
   return {
-    title: `${page.title} | Krtecek`,
+    title: `${page.title} | Krteček`,
     description: page.metaDescription || undefined,
   };
 }
@@ -38,7 +38,7 @@ export default async function KrtecekSubPage({ params }: PageProps) {
       <div className="container mx-auto px-4 lg:px-8 pb-8 lg:pb-12">
         <Breadcrumbs
           items={[
-            { label: 'Krtecek', href: '/krtecek' },
+            { label: 'Krteček', href: '/krtecek' },
             { label: page.title, href: `/krtecek/${slug}` },
           ]}
         />
