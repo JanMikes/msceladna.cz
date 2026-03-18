@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_components_timelines",
+  "info": {
+    "displayName": "Časová osa",
+    "description": "Numbered timeline steps"
+  },
+  "attributes": {
+    "items": {
+      "type": "component",
+      "component": "elements.timeline-item",
+      "repeatable": true
+    },
+    "collapsible": {
+      "type": "boolean",
+      "default": false
+    },
+    "style": {
+      "type": "enumeration",
+      "enum": ["style1", "style2"],
+      "default": "style1"
+    },
+    "showPreview": {
+      "type": "boolean",
+      "default": true
+    }
+  }
+}

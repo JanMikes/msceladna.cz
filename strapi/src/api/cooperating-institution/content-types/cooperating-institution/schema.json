@@ -1,0 +1,43 @@
+{
+  "kind": "collectionType",
+  "collectionName": "cooperating_institutions",
+  "info": {
+    "singularName": "cooperating-institution",
+    "pluralName": "cooperating-institutions",
+    "displayName": "Spolupracující pracoviště"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "type": {
+      "type": "string"
+    },
+    "contactPerson": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "email": {
+      "type": "email"
+    },
+    "web": {
+      "type": "string"
+    },
+    "address": {
+      "type": "string"
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "sortOrder": {
+      "type": "integer",
+      "default": 0
+    }
+  }
+}

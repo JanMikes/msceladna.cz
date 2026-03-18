@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "navigations",
+  "info": {
+    "singularName": "navigation",
+    "pluralName": "navigations",
+    "displayName": "Hlavní menu"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "link": {
+      "type": "component",
+      "component": "elements.link",
+      "repeatable": false,
+      "required": true
+    },
+    "children": {
+      "type": "component",
+      "component": "elements.nav-item",
+      "repeatable": true
+    },
+    "sortOrder": {
+      "type": "integer",
+      "default": 0
+    }
+  }
+}

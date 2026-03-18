@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_components_employee_cards",
+  "info": {
+    "displayName": "Tým zaměstnanců",
+    "description": "Employee cards grid with optional workplace filter"
+  },
+  "attributes": {
+    "workplace": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::workplace.workplace"
+    },
+    "showAll": {
+      "type": "boolean",
+      "default": true
+    }
+  }
+}

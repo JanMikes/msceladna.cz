@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_elements_nav_items",
+  "info": {
+    "displayName": "Položka menu",
+    "description": "Navigation menu item"
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "link": {
+      "type": "component",
+      "component": "elements.link",
+      "repeatable": false,
+      "required": true
+    }
+  }
+}

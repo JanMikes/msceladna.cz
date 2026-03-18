@@ -1,0 +1,46 @@
+{
+  "name": "msceladna-web",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
+  },
+  "dependencies": {
+    "@tailwindcss/typography": "^0.5.19",
+    "clsx": "^2.1.1",
+    "embla-carousel-autoplay": "^8.5.1",
+    "embla-carousel-react": "^8.5.1",
+    "framer-motion": "^11.15.0",
+    "lucide-react": "^0.469.0",
+    "marked": "^17.0.3",
+    "next": "^16.0",
+    "nodemailer": "^7.0.13",
+    "qs": "^6.13.0",
+    "react": "19.2.0",
+    "react-dom": "19.2.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@types/node": "^20",
+    "@types/nodemailer": "^7.0.11",
+    "@types/qs": "^6.9.0",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@vitejs/plugin-react": "^6.0.1",
+    "eslint": "^9",
+    "eslint-config-next": "16.0.3",
+    "jsdom": "^29.0.0",
+    "postcss": "^8",
+    "tailwindcss": "^4",
+    "typescript": "^5",
+    "vitest": "^4.1.0"
+  }
+}

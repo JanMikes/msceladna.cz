@@ -1,0 +1,12 @@
+{
+  "collectionName": "components_components_texts",
+  "info": {
+    "displayName": "Textové pole",
+    "description": "Rich text content block"
+  },
+  "attributes": {
+    "text": {
+      "type": "richtext"
+    }
+  }
+}

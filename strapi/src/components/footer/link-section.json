@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_footer_link_sections",
+  "info": {
+    "displayName": "Sekce odkazů",
+    "description": "Footer link section with title and links"
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "links": {
+      "type": "component",
+      "component": "elements.text-link",
+      "repeatable": true,
+      "required": true
+    },
+    "sortOrder": {
+      "type": "integer",
+      "default": 0
+    }
+  }
+}

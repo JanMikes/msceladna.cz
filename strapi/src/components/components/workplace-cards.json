@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_components_workplace_cards",
+  "info": {
+    "displayName": "Dlaždice pracovišť",
+    "description": "Grid of workplace cards"
+  },
+  "attributes": {
+    "cards": {
+      "type": "component",
+      "component": "elements.workplace-card",
+      "repeatable": true
+    }
+  }
+}

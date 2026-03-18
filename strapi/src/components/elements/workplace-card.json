@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_elements_workplace_cards",
+  "info": {
+    "displayName": "Dlaždice pracoviště",
+    "description": "Workplace card with title, description, image and link"
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["images"]
+    },
+    "link": {
+      "type": "component",
+      "component": "elements.link",
+      "repeatable": false
+    }
+  }
+}

@@ -1,0 +1,38 @@
+# Dependencies
+node_modules
+
+# Docker compose override (contains secrets)
+compose.override.yaml
+
+# Claude Code
+.claude/settings.local.json
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Next.js
+web/.next
+web/out
+
+# Strapi
+strapi/.tmp
+strapi/.cache
+strapi/build
+strapi/dist
+strapi/exports
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea
+.vscode
+*.swp
+*.swo

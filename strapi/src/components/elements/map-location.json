@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_elements_map_locations",
+  "info": {
+    "displayName": "Umístění na mapě",
+    "description": "Map location pin"
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "address": {
+      "type": "string"
+    },
+    "lat": {
+      "type": "string"
+    },
+    "lng": {
+      "type": "string"
+    }
+  }
+}

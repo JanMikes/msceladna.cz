@@ -1,0 +1,14 @@
+# Copy this file to compose.override.yaml and fill in the actual secrets.
+# compose.override.yaml is gitignored and should never be committed.
+
+services:
+    strapi:
+        environment:
+            APP_KEYS: 'CHANGE_ME_1,CHANGE_ME_2'
+            JWT_SECRET: CHANGE_ME
+            ADMIN_JWT_SECRET: CHANGE_ME
+            API_TOKEN_SALT: CHANGE_ME
+            TRANSFER_TOKEN_SALT: CHANGE_ME
+    web:
+        environment:
+            STRAPI_API_TOKEN: CHANGE_ME

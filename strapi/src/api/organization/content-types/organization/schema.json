@@ -1,0 +1,45 @@
+{
+  "kind": "singleType",
+  "collectionName": "organizations",
+  "info": {
+    "singularName": "organization",
+    "pluralName": "organizations",
+    "displayName": "Organizace"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "address": {
+      "type": "string"
+    },
+    "ico": {
+      "type": "string"
+    },
+    "dataBox": {
+      "type": "string"
+    },
+    "web": {
+      "type": "string"
+    },
+    "email": {
+      "type": "email"
+    },
+    "phoneManagement": {
+      "type": "string"
+    },
+    "phoneAdmin": {
+      "type": "string"
+    },
+    "founder": {
+      "type": "string"
+    },
+    "founderUrl": {
+      "type": "string"
+    }
+  }
+}

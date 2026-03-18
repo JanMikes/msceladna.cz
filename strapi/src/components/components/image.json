@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_components_images",
+  "info": {
+    "displayName": "Obrázek",
+    "description": "Single image display"
+  },
+  "attributes": {
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["images"]
+    }
+  }
+}

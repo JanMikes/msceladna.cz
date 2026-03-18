@@ -1,0 +1,58 @@
+{
+  "kind": "collectionType",
+  "collectionName": "employees",
+  "info": {
+    "singularName": "employee",
+    "pluralName": "employees",
+    "displayName": "Zaměstnanec"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "firstName": {
+      "type": "string",
+      "required": true
+    },
+    "lastName": {
+      "type": "string",
+      "required": true
+    },
+    "role": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "email": {
+      "type": "email"
+    },
+    "photo": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["images"]
+    },
+    "bio": {
+      "type": "richtext"
+    },
+    "qualifications": {
+      "type": "richtext"
+    },
+    "courses": {
+      "type": "richtext"
+    },
+    "workplace": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::workplace.workplace"
+    },
+    "sortOrder": {
+      "type": "integer",
+      "default": 0
+    },
+    "category": {
+      "type": "enumeration",
+      "enum": ["vedeni", "pedagogicky", "provozni"]
+    }
+  }
+}

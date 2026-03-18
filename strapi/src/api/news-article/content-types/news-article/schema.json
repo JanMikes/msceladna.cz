@@ -1,0 +1,64 @@
+{
+  "kind": "collectionType",
+  "collectionName": "news_articles",
+  "info": {
+    "singularName": "news-article",
+    "pluralName": "news-articles",
+    "displayName": "Aktualita"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title",
+      "required": true
+    },
+    "date": {
+      "type": "datetime",
+      "required": true
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "mainPhoto": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["images"]
+    },
+    "gallery": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": ["images"]
+    },
+    "files": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": ["files", "images", "videos", "audios"]
+    },
+    "video": {
+      "type": "string"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": ["aktualita", "reportaz"],
+      "required": true
+    },
+    "workplaces": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::workplace.workplace"
+    },
+    "tags": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::tag.tag",
+      "inversedBy": "newsArticles"
+    }
+  }
+}

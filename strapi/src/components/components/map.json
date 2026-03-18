@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_components_maps",
+  "info": {
+    "displayName": "Mapa",
+    "description": "Map with location pins"
+  },
+  "attributes": {
+    "locations": {
+      "type": "component",
+      "component": "elements.map-location",
+      "repeatable": true
+    }
+  }
+}

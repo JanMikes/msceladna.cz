@@ -1,0 +1,111 @@
+{
+  "kind": "collectionType",
+  "collectionName": "workplaces",
+  "info": {
+    "singularName": "workplace",
+    "pluralName": "workplaces",
+    "displayName": "Pracoviště"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name",
+      "required": true
+    },
+    "address": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "email": {
+      "type": "email"
+    },
+    "classCount": {
+      "type": "integer"
+    },
+    "childrenCapacity": {
+      "type": "integer"
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "gardenDescription": {
+      "type": "richtext"
+    },
+    "virtualTourUrl": {
+      "type": "string"
+    },
+    "programType": {
+      "type": "enumeration",
+      "enum": ["zacit_spolu", "bezna_ms"]
+    },
+    "specifics": {
+      "type": "richtext"
+    },
+    "content": {
+      "type": "dynamiczone",
+      "components": [
+        "components.text",
+        "components.heading",
+        "components.alert",
+        "components.links-list",
+        "components.video",
+        "components.feature-cards",
+        "components.banner-cards",
+        "components.documents",
+        "components.partner-logos",
+        "components.stats-highlights",
+        "components.timeline",
+        "components.section-divider",
+        "components.slider",
+        "components.gallery-slider",
+        "components.photo-gallery",
+        "components.button-group",
+        "components.contact-cards",
+        "components.accordion-sections",
+        "components.popup",
+        "components.badges",
+        "components.image",
+        "components.news-articles",
+        "components.form",
+        "components.workplace-cards",
+        "components.employee-cards",
+        "components.map"
+      ]
+    },
+    "sidebar": {
+      "type": "dynamiczone",
+      "components": [
+        "components.text",
+        "components.heading",
+        "components.alert",
+        "components.links-list",
+        "components.button-group",
+        "components.contact-cards",
+        "components.documents",
+        "components.section-divider",
+        "components.timeline",
+        "components.feature-cards",
+        "components.slider",
+        "components.gallery-slider",
+        "components.photo-gallery",
+        "components.news-articles",
+        "components.badges",
+        "components.image",
+        "components.form",
+        "components.accordion-sections",
+        "components.stats-highlights",
+        "components.employee-cards",
+        "components.map"
+      ]
+    }
+  }
+}
