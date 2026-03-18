@@ -80,11 +80,11 @@ services:
         image: node:24
         restart: unless-stopped
         tty: true
-        working_dir: /app/web
+        working_dir: /app
         ports:
             - "3000:3000"
         volumes:
-            - .:/app
+            - ./web:/app
         environment:
             NODE_ENV: development
             PORT: 3000
@@ -110,7 +110,7 @@ services:
                 condition: service_healthy
             mailpit:
                 condition: service_started
-        command: bash -c "cd /app && npm install && cd /app/web && npm run dev"
+        command: bash -c "npm install && npm run dev"
 
     nginx:
         image: nginx:alpine
