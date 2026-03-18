@@ -119,4 +119,4 @@ jobs:
                 host: ${{ secrets.DEPLOY_HOST }}
                 username: ${{ secrets.DEPLOY_USERNAME }}
                 key: ${{ secrets.DEPLOY_PRIVATE_KEY }}
-                script: cd /deployment/msceladna-web && ./deploy-web.sh
+                script: cd /deployment/msceladna && ./deploy-web.sh
