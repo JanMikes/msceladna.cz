@@ -51,6 +51,9 @@ const featureCardPopulate = {
   populate: {
     icon: mediaFields,
     link: textLinkPopulate,
+    icon_1: mediaFields,
+    icon_2: mediaFields,
+    icon_3: mediaFields,
   },
 };
 

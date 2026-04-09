@@ -77,8 +77,9 @@ function mapDynamicZoneComponent(raw: StrapiRawDynamicZoneComponent): DynamicZon
       return {
         ...base,
         __component: 'components.feature-cards',
-        cards: mapCards(raw.cards),
+        cards: mapFeatureCards(raw.cards),
         columns: (raw.columns as '2' | '3' | '4') ?? '3',
+        style: (raw.style as '1' | '2') ?? '1',
         card_clickable: (raw.card_clickable as boolean) ?? false,
       };
 
@@ -267,6 +268,21 @@ function mapCards(raw: unknown) {
     title: c.title ?? null,
     description: c.description ?? null,
     link: resolveTextLink(c.link),
+  }));
+}
+
+function mapFeatureCards(raw: unknown) {
+  if (!Array.isArray(raw)) return [];
+  return raw.map((c) => ({
+    icon_type: (c.icon_type as 'hidden' | 'image' | 'text' | 'initials') ?? 'initials',
+    icon: mapMedia(c.icon),
+    icon_text: (c.icon_text as string) ?? null,
+    title: c.title ?? null,
+    description: c.description ?? null,
+    link: resolveTextLink(c.link),
+    icon_1: mapMedia(c.icon_1),
+    icon_2: mapMedia(c.icon_2),
+    icon_3: mapMedia(c.icon_3),
   }));
 }
 

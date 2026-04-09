@@ -223,8 +223,9 @@ export interface ComponentVideo extends DynamicZoneBase {
 
 export interface ComponentFeatureCards extends DynamicZoneBase {
   __component: 'components.feature-cards';
-  cards: { icon_type: 'hidden' | 'image' | 'text' | 'initials'; icon: MediaImage | null; icon_text: string | null; title: string | null; description: string | null; link: ResolvedTextLink | null }[];
+  cards: { icon_type: 'hidden' | 'image' | 'text' | 'initials'; icon: MediaImage | null; icon_text: string | null; title: string | null; description: string | null; link: ResolvedTextLink | null; icon_1: MediaImage | null; icon_2: MediaImage | null; icon_3: MediaImage | null }[];
   columns: '2' | '3' | '4';
+  style: '1' | '2';
   card_clickable: boolean;
 }
 

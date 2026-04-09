@@ -18,6 +18,11 @@
     "card_clickable": {
       "type": "boolean",
       "default": false
+    },
+    "style": {
+      "type": "enumeration",
+      "enum": ["1", "2"],
+      "default": "1"
     }
   }
 }

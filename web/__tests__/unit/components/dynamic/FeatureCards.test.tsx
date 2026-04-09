@@ -10,9 +10,10 @@ describe('FeatureCards component', () => {
       __component: 'components.feature-cards',
       columns: '3',
       card_clickable: false,
+      style: '1' as const,
       cards: [
-        { icon_type: 'hidden', icon: null, icon_text: null, title: 'Card 1', description: 'Desc 1', link: null },
-        { icon_type: 'hidden', icon: null, icon_text: null, title: 'Card 2', description: 'Desc 2', link: null },
+        { icon_type: 'hidden', icon: null, icon_text: null, icon_1: null, icon_2: null, icon_3: null, title: 'Card 1', description: 'Desc 1', link: null },
+        { icon_type: 'hidden', icon: null, icon_text: null, icon_1: null, icon_2: null, icon_3: null, title: 'Card 2', description: 'Desc 2', link: null },
       ],
     };
     render(<FeatureCards data={data} />);
@@ -28,8 +29,9 @@ describe('FeatureCards component', () => {
       __component: 'components.feature-cards',
       columns: '2',
       card_clickable: false,
+      style: '1' as const,
       cards: [
-        { icon_type: 'initials', icon: null, icon_text: null, title: 'Jan Novak', description: null, link: null },
+        { icon_type: 'initials', icon: null, icon_text: null, icon_1: null, icon_2: null, icon_3: null, title: 'Jan Novak', description: null, link: null },
       ],
     };
     render(<FeatureCards data={data} />);
@@ -43,8 +45,9 @@ describe('FeatureCards component', () => {
       __component: 'components.feature-cards',
       columns: '2',
       card_clickable: false,
+      style: '1' as const,
       cards: [
-        { icon_type: 'text', icon: null, icon_text: 'AB', title: 'Card Title', description: null, link: null },
+        { icon_type: 'text', icon: null, icon_text: 'AB', icon_1: null, icon_2: null, icon_3: null, title: 'Card Title', description: null, link: null },
       ],
     };
     render(<FeatureCards data={data} />);
@@ -57,11 +60,15 @@ describe('FeatureCards component', () => {
       __component: 'components.feature-cards',
       columns: '3',
       card_clickable: false,
+      style: '1' as const,
       cards: [
         {
           icon_type: 'hidden',
           icon: null,
           icon_text: null,
+          icon_1: null,
+          icon_2: null,
+          icon_3: null,
           title: 'Linked Card',
           description: null,
           link: { href: '/about', external: false, text: 'Learn More', disabled: false },
@@ -83,6 +90,7 @@ describe('FeatureCards component', () => {
       __component: 'components.feature-cards',
       columns: '3',
       card_clickable: false,
+      style: '1' as const,
       cards: [],
     };
     const { container } = render(<FeatureCards data={data} />);
@@ -95,8 +103,9 @@ describe('FeatureCards component', () => {
       __component: 'components.feature-cards',
       columns: '4',
       card_clickable: false,
+      style: '1' as const,
       cards: [
-        { icon_type: 'hidden', icon: null, icon_text: null, title: 'Card', description: null, link: null },
+        { icon_type: 'hidden', icon: null, icon_text: null, icon_1: null, icon_2: null, icon_3: null, title: 'Card', description: null, link: null },
       ],
     };
     const { container } = render(<FeatureCards data={data} />);
@@ -110,8 +119,9 @@ describe('FeatureCards component', () => {
       __component: 'components.feature-cards',
       columns: '3',
       card_clickable: false,
+      style: '1' as const,
       cards: [
-        { icon_type: 'hidden', icon: null, icon_text: null, title: 'Card', description: null, link: null },
+        { icon_type: 'hidden', icon: null, icon_text: null, icon_1: null, icon_2: null, icon_3: null, title: 'Card', description: null, link: null },
       ],
     };
     const { container } = render(<FeatureCards data={data} sidebar />);

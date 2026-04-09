@@ -115,6 +115,8 @@ export interface ComponentsFeatureCards extends Struct.ComponentSchema {
     cards: Schema.Attribute.Component<'elements.feature-card', true>;
     columns: Schema.Attribute.Enumeration<['2', '3', '4']> &
       Schema.Attribute.DefaultTo<'3'>;
+    style: Schema.Attribute.Enumeration<['1', '2']> &
+      Schema.Attribute.DefaultTo<'1'>;
   };
 }
 
@@ -445,6 +447,9 @@ export interface ElementsFeatureCard extends Struct.ComponentSchema {
   attributes: {
     description: Schema.Attribute.Text;
     icon: Schema.Attribute.Media<'images'>;
+    icon_1: Schema.Attribute.Media<'images'>;
+    icon_2: Schema.Attribute.Media<'images'>;
+    icon_3: Schema.Attribute.Media<'images'>;
     icon_text: Schema.Attribute.String;
     icon_type: Schema.Attribute.Enumeration<
       ['hidden', 'image', 'text', 'initials']

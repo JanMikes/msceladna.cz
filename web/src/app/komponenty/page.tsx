@@ -137,26 +137,52 @@ export default function KomponentyPage() {
         </Section>
 
         {/* Feature Cards */}
-        <Section title="FeatureCards - 2, 3, 4 sloupce">
-          {(['2', '3', '4'] as const).map((cols) => (
-            <div key={cols} className="space-y-2">
-              <p className="text-sm font-medium text-text-muted">{cols} sloupce</p>
+        {(['1', '2'] as const).map((style) => (
+          <Section key={style} title={`FeatureCards - Style ${style}`}>
+            {(['2', '3', '4'] as const).map((cols) => (
+              <div key={cols} className="space-y-2">
+                <p className="text-sm font-medium text-text-muted">Style {style} - {cols} sloupce</p>
+                <FeatureCards data={{
+                  id: 50, __component: 'components.feature-cards',
+                  cards: Array.from({ length: parseInt(cols) }, (_, i) => ({
+                    icon_type: i === 0 ? 'image' as const : i === 1 ? 'initials' as const : 'hidden' as const,
+                    icon: i === 0 ? smallImage : null,
+                    icon_text: null,
+                    title: `Karta ${i + 1}`,
+                    description: 'Popis karty s dalšími informacemi o obsahu, protože tady každý napíše věty, které budou dlouhé, takže asi si to i tak měl OK.',
+                    link: { href: '#', external: false, text: style === '2' ? 'Více informací' : 'Zobrazit', disabled: false },
+                    icon_1: { url: 'https://placehold.co/120x120/AFC25E/FFFFFF?text=Ikon+1', alternativeText: 'Ikon 1', width: 120, height: 120 },
+                    icon_2: { url: 'https://placehold.co/90x90/AFC25E/FFFFFF?text=Ikon+2', alternativeText: 'Ikon 2', width: 90, height: 90 },
+                    icon_3: { url: 'https://placehold.co/70x70/AFC25E/FFFFFF?text=Ikon+3', alternativeText: 'Ikon 3', width: 70, height: 70 },
+                  })),
+                  columns: cols,
+                  style: style,
+                  card_clickable: false,
+                } satisfies ComponentFeatureCards} />
+              </div>
+            ))}
+            <div className="space-y-2">
+              <p className="text-sm font-medium text-text-muted">Style {style} - 3 sloupce, bez ikon</p>
               <FeatureCards data={{
-                id: 50, __component: 'components.feature-cards',
-                cards: Array.from({ length: parseInt(cols) }, (_, i) => ({
-                  icon_type: (['hidden', 'image', 'text', 'initials'] as const)[i % 4],
-                  icon: i % 4 === 1 ? smallImage : null,
-                  icon_text: i % 4 === 2 ? 'AB' : null,
+                id: 51, __component: 'components.feature-cards',
+                cards: Array.from({ length: 3 }, (_, i) => ({
+                  icon_type: i === 0 ? 'image' as const : 'hidden' as const,
+                  icon: i === 0 ? smallImage : null,
+                  icon_text: null,
                   title: `Karta ${i + 1}`,
                   description: 'Popis karty s dalšími informacemi o obsahu.',
-                  link: { href: '#', external: false, text: 'Více informací', disabled: false },
+                  link: { href: '#', external: false, text: style === '2' ? 'Více informací' : 'Zobrazit', disabled: false },
+                  icon_1: null,
+                  icon_2: null,
+                  icon_3: null,
                 })),
-                columns: cols,
+                columns: '3',
+                style: style,
                 card_clickable: false,
               } satisfies ComponentFeatureCards} />
             </div>
-          ))}
-        </Section>
+          </Section>
+        ))}
 
         {/* Banner Cards */}
         <Section title="BannerCards">
