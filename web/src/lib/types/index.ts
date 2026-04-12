@@ -264,7 +264,7 @@ export interface ComponentTimeline extends DynamicZoneBase {
 export interface ComponentSectionDivider extends DynamicZoneBase {
   __component: 'components.section-divider';
   spacing: 'S' | 'M' | 'L';
-  style: 'solid' | 'dashed' | 'dotted';
+  style: 'solid' | 'dashed' | 'dotted' | 'v1' | 'v2' | 'v3' | 'v4' | 'v5';
 }
 
 export interface ComponentSlider extends DynamicZoneBase {

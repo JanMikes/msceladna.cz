@@ -130,7 +130,7 @@ function mapDynamicZoneComponent(raw: StrapiRawDynamicZoneComponent): DynamicZon
         ...base,
         __component: 'components.section-divider',
         spacing: (raw.spacing as 'S' | 'M' | 'L') ?? 'M',
-        style: (raw.style as 'solid' | 'dashed' | 'dotted') ?? 'solid',
+        style: (raw.style as 'solid' | 'dashed' | 'dotted' | 'v1' | 'v2' | 'v3' | 'v4' | 'v5') ?? 'solid',
       };
 
     case 'components.slider':

@@ -28,10 +28,10 @@ export function CardSlider({ data }: CardSliderProps) {
   return (
     <div className="relative group">
       <div className="overflow-hidden px-6 sm:px-10" ref={emblaRef}>
-        <div className="flex gap-6 py-14">
+        <div className="flex py-14">
           {items.map((item, i) => {
             const card = (
-              <div className="relative card pt-14 pb-6 px-6 text-center h-full flex flex-col items-center">
+              <div className="relative card pt-14 pb-6 px-6 text-center h-full flex flex-col items-center mx-3">
                 {/* Circular icon overlapping top edge */}
                 {item.icon && (
                   <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-20 h-20 rounded-full overflow-hidden bg-surface shadow-sm">
@@ -61,7 +61,7 @@ export function CardSlider({ data }: CardSliderProps) {
             return (
               <div
                 key={i}
-                className="flex-[0_0_85%] sm:flex-[0_0_45%] lg:flex-[0_0_calc(33.333%-16px)] min-w-0"
+                className="flex-[0_0_85%] sm:flex-[0_0_50%] lg:flex-[0_0_33.333%] min-w-0"
               >
                 {item.link ? (
                   <Link

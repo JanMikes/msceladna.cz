@@ -64,6 +64,17 @@ export interface ComponentsButtonGroup extends Struct.ComponentSchema {
   };
 }
 
+export interface ComponentsCardSlider extends Struct.ComponentSchema {
+  collectionName: 'components_components_card_sliders';
+  info: {
+    description: 'Carousel of cards with icon, heading, text and CTA';
+    displayName: 'Slider karet';
+  };
+  attributes: {
+    items: Schema.Attribute.Component<'elements.card-slider-item', true>;
+  };
+}
+
 export interface ComponentsContactCards extends Struct.ComponentSchema {
   collectionName: 'components_components_contact_cards';
   info: {
@@ -266,7 +277,9 @@ export interface ComponentsSectionDivider extends Struct.ComponentSchema {
   attributes: {
     spacing: Schema.Attribute.Enumeration<['S', 'M', 'L']> &
       Schema.Attribute.DefaultTo<'M'>;
-    style: Schema.Attribute.Enumeration<['solid', 'dashed', 'dotted']> &
+    style: Schema.Attribute.Enumeration<
+      ['solid', 'dashed', 'dotted', 'v1', 'v2', 'v3', 'v4', 'v5']
+    > &
       Schema.Attribute.DefaultTo<'solid'>;
   };
 }
@@ -732,6 +745,7 @@ declare module '@strapi/strapi' {
       'components.badges': ComponentsBadges;
       'components.banner-cards': ComponentsBannerCards;
       'components.button-group': ComponentsButtonGroup;
+      'components.card-slider': ComponentsCardSlider;
       'components.contact-cards': ComponentsContactCards;
       'components.documents': ComponentsDocuments;
       'components.employee-cards': ComponentsEmployeeCards;

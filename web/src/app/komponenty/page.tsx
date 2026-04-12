@@ -334,7 +334,7 @@ export default function KomponentyPage() {
         </Section>
 
         {/* Section Dividers */}
-        <Section title="SectionDivider - všechny kombinace">
+        <Section title="SectionDivider - klasické">
           {(['S', 'M', 'L'] as const).map((spacing) => (
             (['solid', 'dashed', 'dotted'] as const).map((style) => (
               <div key={`${spacing}-${style}`}>
@@ -342,6 +342,15 @@ export default function KomponentyPage() {
                 <SectionDivider data={{ id: 140, __component: 'components.section-divider', spacing, style } satisfies ComponentSectionDivider} />
               </div>
             ))
+          ))}
+        </Section>
+
+        <Section title="SectionDivider - SVG styly (v1–v5)">
+          {(['v1', 'v2', 'v3', 'v4', 'v5'] as const).map((style) => (
+            <div key={style}>
+              <p className="text-xs text-text-muted">{style}</p>
+              <SectionDivider data={{ id: 141, __component: 'components.section-divider', spacing: 'M', style } satisfies ComponentSectionDivider} />
+            </div>
           ))}
         </Section>
 
