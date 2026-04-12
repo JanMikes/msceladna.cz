@@ -9,6 +9,16 @@
       "type": "media",
       "multiple": false,
       "allowedTypes": ["images"]
+    },
+    "width": {
+      "type": "enumeration",
+      "enum": ["25", "33", "40", "50", "66", "75", "80", "100"],
+      "default": "100"
+    },
+    "align": {
+      "type": "enumeration",
+      "enum": ["left", "center", "right"],
+      "default": "center"
     }
   }
 }

@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_elements_hero_slider_infos",
+  "info": {
+    "displayName": "Info položka hero slideru",
+    "description": "Information item with icon, heading and text"
+  },
+  "attributes": {
+    "icon": {
+      "type": "media",
+      "allowedTypes": ["images"],
+      "multiple": false
+    },
+    "heading": {
+      "type": "string"
+    },
+    "text": {
+      "type": "text"
+    }
+  }
+}

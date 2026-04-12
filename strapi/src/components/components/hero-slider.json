@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_components_hero_sliders",
+  "info": {
+    "displayName": "Slider",
+    "description": "Full-width content slider with image, text and info items"
+  },
+  "attributes": {
+    "slides": {
+      "type": "component",
+      "component": "elements.hero-slider-slide",
+      "repeatable": true
+    }
+  }
+}

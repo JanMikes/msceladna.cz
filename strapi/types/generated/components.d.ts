@@ -171,6 +171,17 @@ export interface ComponentsHeading extends Struct.ComponentSchema {
   };
 }
 
+export interface ComponentsHeroSlider extends Struct.ComponentSchema {
+  collectionName: 'components_components_hero_sliders';
+  info: {
+    description: 'Full-width content slider with image, text and info items';
+    displayName: 'Slider';
+  };
+  attributes: {
+    slides: Schema.Attribute.Component<'elements.hero-slider-slide', true>;
+  };
+}
+
 export interface ComponentsImage extends Struct.ComponentSchema {
   collectionName: 'components_components_images';
   info: {
@@ -178,7 +189,13 @@ export interface ComponentsImage extends Struct.ComponentSchema {
     displayName: 'Obr\u00E1zek';
   };
   attributes: {
+    align: Schema.Attribute.Enumeration<['left', 'center', 'right']> &
+      Schema.Attribute.DefaultTo<'center'>;
     image: Schema.Attribute.Media<'images'>;
+    width: Schema.Attribute.Enumeration<
+      ['25', '33', '40', '50', '66', '75', '80', '100']
+    > &
+      Schema.Attribute.DefaultTo<'100'>;
   };
 }
 
@@ -487,6 +504,34 @@ export interface ElementsFeatureCard extends Struct.ComponentSchema {
   };
 }
 
+export interface ElementsHeroSliderInfo extends Struct.ComponentSchema {
+  collectionName: 'components_elements_hero_slider_infos';
+  info: {
+    description: 'Information item with icon, heading and text';
+    displayName: 'Info polo\u017Eka hero slideru';
+  };
+  attributes: {
+    heading: Schema.Attribute.String;
+    icon: Schema.Attribute.Media<'images'>;
+    text: Schema.Attribute.Text;
+  };
+}
+
+export interface ElementsHeroSliderSlide extends Struct.ComponentSchema {
+  collectionName: 'components_elements_hero_slider_slides';
+  info: {
+    description: 'Hero slider slide with heading, text, CTA, image and info items';
+    displayName: 'Slide hero slideru';
+  };
+  attributes: {
+    heading: Schema.Attribute.String;
+    image: Schema.Attribute.Media<'images'>;
+    informations: Schema.Attribute.Component<'elements.hero-slider-info', true>;
+    link: Schema.Attribute.Component<'elements.text-link', false>;
+    text: Schema.Attribute.Text;
+  };
+}
+
 export interface ElementsLink extends Struct.ComponentSchema {
   collectionName: 'components_elements_links';
   info: {
@@ -753,6 +798,7 @@ declare module '@strapi/strapi' {
       'components.form': ComponentsForm;
       'components.gallery-slider': ComponentsGallerySlider;
       'components.heading': ComponentsHeading;
+      'components.hero-slider': ComponentsHeroSlider;
       'components.image': ComponentsImage;
       'components.links-list': ComponentsLinksList;
       'components.map': ComponentsMap;
@@ -775,6 +821,8 @@ declare module '@strapi/strapi' {
       'elements.document-item': ElementsDocumentItem;
       'elements.expandable-section': ElementsExpandableSection;
       'elements.feature-card': ElementsFeatureCard;
+      'elements.hero-slider-info': ElementsHeroSliderInfo;
+      'elements.hero-slider-slide': ElementsHeroSliderSlide;
       'elements.link': ElementsLink;
       'elements.map-location': ElementsMapLocation;
       'elements.nav-item': ElementsNavItem;

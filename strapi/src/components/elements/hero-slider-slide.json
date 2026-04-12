@@ -1,0 +1,30 @@
+{
+  "collectionName": "components_elements_hero_slider_slides",
+  "info": {
+    "displayName": "Slide hero slideru",
+    "description": "Hero slider slide with heading, text, CTA, image and info items"
+  },
+  "attributes": {
+    "heading": {
+      "type": "string"
+    },
+    "text": {
+      "type": "text"
+    },
+    "link": {
+      "type": "component",
+      "component": "elements.text-link",
+      "repeatable": false
+    },
+    "image": {
+      "type": "media",
+      "allowedTypes": ["images"],
+      "multiple": false
+    },
+    "informations": {
+      "type": "component",
+      "component": "elements.hero-slider-info",
+      "repeatable": true
+    }
+  }
+}

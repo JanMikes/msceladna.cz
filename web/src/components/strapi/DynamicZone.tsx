@@ -12,7 +12,6 @@ import { PartnerLogos } from '../dynamic/PartnerLogos';
 import { StatsHighlights } from '../dynamic/StatsHighlights';
 import { Timeline } from '../dynamic/Timeline';
 import { SectionDivider } from '../dynamic/SectionDivider';
-import { Slider } from '../dynamic/Slider';
 import { GallerySlider } from '../dynamic/GallerySlider';
 import { PhotoGallery } from '../dynamic/PhotoGallery';
 import { ButtonGroup } from '../dynamic/ButtonGroup';
@@ -27,6 +26,7 @@ import { WorkplaceCards } from '../dynamic/WorkplaceCards';
 import { EmployeeCards } from '../dynamic/EmployeeCards';
 import { MapEmbed } from '../dynamic/MapEmbed';
 import { CardSlider } from '../dynamic/CardSlider';
+import { HeroSlider } from '../dynamic/HeroSlider';
 
 interface DynamicZoneProps {
   components: DynamicZoneComponent[];
@@ -71,9 +71,7 @@ function DynamicZoneItem({ component, sidebar }: { component: DynamicZoneCompone
       return <Timeline data={component} sidebar={sidebar} />;
     case 'components.section-divider':
       return <SectionDivider data={component} />;
-    case 'components.slider':
-      return <Slider data={component} />;
-    case 'components.gallery-slider':
+case 'components.gallery-slider':
       return <GallerySlider data={component} sidebar={sidebar} />;
     case 'components.photo-gallery':
       return <PhotoGallery data={component} sidebar={sidebar} />;
@@ -102,6 +100,8 @@ function DynamicZoneItem({ component, sidebar }: { component: DynamicZoneCompone
       return <FormBlock data={component} />;
     case 'components.card-slider':
       return <CardSlider data={component} />;
+    case 'components.hero-slider':
+      return <HeroSlider data={component} />;
     default:
       return <ComponentError componentType={(component as DynamicZoneComponent).__component} />;
   }

@@ -19,9 +19,9 @@ import { Badges } from '@/components/dynamic/Badges';
 import { ImageBlock } from '@/components/dynamic/ImageBlock';
 import { WorkplaceCards } from '@/components/dynamic/WorkplaceCards';
 import { MapEmbed } from '@/components/dynamic/MapEmbed';
-import { Slider } from '@/components/dynamic/Slider';
 import { GallerySlider } from '@/components/dynamic/GallerySlider';
 import { CardSlider } from '@/components/dynamic/CardSlider';
+import { HeroSlider } from '@/components/dynamic/HeroSlider';
 import type {
   ComponentText,
   ComponentAlert,
@@ -42,9 +42,9 @@ import type {
   ComponentImage,
   ComponentWorkplaceCards,
   ComponentMap,
-  ComponentSlider,
   ComponentGallerySlider,
   ComponentCardSlider,
+  ComponentHeroSlider,
 } from '@/lib/types';
 
 export const metadata: Metadata = {
@@ -366,7 +366,18 @@ export default function KomponentyPage() {
 
         {/* Image */}
         <Section title="ImageBlock">
-          <ImageBlock data={{ id: 160, __component: 'components.image', image: placeholderImage } satisfies ComponentImage} />
+          <div>
+            <p className="text-xs text-text-muted">width=100%</p>
+            <ImageBlock data={{ id: 160, __component: 'components.image', image: placeholderImage, width: '100', align: 'center' } satisfies ComponentImage} />
+          </div>
+          {(['75', '50', '33'] as const).map((w) => (
+            (['left', 'center', 'right'] as const).map((a) => (
+              <div key={`${w}-${a}`}>
+                <p className="text-xs text-text-muted">width={w}%, align={a}</p>
+                <ImageBlock data={{ id: 160, __component: 'components.image', image: placeholderImage, width: w, align: a } satisfies ComponentImage} />
+              </div>
+            ))
+          ))}
         </Section>
 
         {/* Partner Logos */}
@@ -421,18 +432,20 @@ export default function KomponentyPage() {
 
         {/* Slider */}
         <Section title="Slider">
-          <Slider data={{
-            id: 220, __component: 'components.slider',
+          <HeroSlider data={{
+            id: 215, __component: 'components.hero-slider',
             slides: Array.from({ length: 3 }, (_, i) => ({
-              title: `Slide ${i + 1}`,
-              description: 'Popis slidu s dalšími informacemi.',
-              link: { href: '#', external: false, text: 'Zjistit více', disabled: false },
-              image: null,
-              background_image: { ...placeholderImage, url: `https://placehold.co/1200x600/275D56/FFFFFF?text=Slide+${i + 1}` },
+              heading: `Nadpis slide ${i + 1}`,
+              text: 'Lorem ipsum je ukázkový text používaný v tiskařském a sazečském průmyslu. Lorem ipsum je standardní fiktivní text.',
+              link: { href: '#', external: false, text: 'Více informací', disabled: false },
+              image: { url: `https://placehold.co/800x600/275D56/FFFFFF?text=Slide+${i + 1}`, alternativeText: `Slide ${i + 1}`, width: 800, height: 600 },
+              informations: Array.from({ length: 3 }, (_, j) => ({
+                icon: { url: `https://placehold.co/80x80/275D56/FFFFFF?text=${j + 1}`, alternativeText: `Ikona ${j + 1}`, width: 80, height: 80 },
+                heading: `Headline ${j + 1}`,
+                text: 'Lorem ipsum je ukázkový text.',
+              })),
             })),
-            autoplay: true,
-            autoplay_interval: 5000,
-          } satisfies ComponentSlider} />
+          } satisfies ComponentHeroSlider} />
         </Section>
 
         {/* Gallery Slider */}

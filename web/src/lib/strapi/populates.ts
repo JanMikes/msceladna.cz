@@ -118,11 +118,6 @@ function buildDynamicZonePopulate() {
         },
       },
       'components.section-divider': { populate: '*' },
-      'components.slider': {
-        populate: {
-          slides: slidePopulate,
-        },
-      },
       'components.gallery-slider': {
         populate: {
           photos: photoPopulate,
@@ -196,6 +191,21 @@ function buildDynamicZonePopulate() {
             populate: {
               icon: mediaFields,
               link: textLinkPopulate,
+            },
+          },
+        },
+      },
+      'components.hero-slider': {
+        populate: {
+          slides: {
+            populate: {
+              link: textLinkPopulate,
+              image: mediaFields,
+              informations: {
+                populate: {
+                  icon: mediaFields,
+                },
+              },
             },
           },
         },

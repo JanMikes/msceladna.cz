@@ -1,4 +1,4 @@
-import type { BreadcrumbItem, DynamicZoneComponent, Page } from '@/lib/types';
+import type { BreadcrumbItem, ComponentImage, DynamicZoneComponent, Page } from '@/lib/types';
 import type { StrapiRawDynamicZoneComponent, StrapiRawPage, StrapiRawPageParent } from '../types';
 import { resolveTextLink } from '../link-resolver';
 import { mapMedia } from './shared';
@@ -133,15 +133,6 @@ function mapDynamicZoneComponent(raw: StrapiRawDynamicZoneComponent): DynamicZon
         style: (raw.style as 'solid' | 'dashed' | 'dotted' | 'v1' | 'v2' | 'v3' | 'v4' | 'v5') ?? 'solid',
       };
 
-    case 'components.slider':
-      return {
-        ...base,
-        __component: 'components.slider',
-        slides: mapSlides(raw.slides),
-        autoplay: (raw.autoplay as boolean) ?? false,
-        autoplay_interval: (raw.autoplay_interval as number) ?? 5000,
-      };
-
     case 'components.gallery-slider':
       return {
         ...base,
@@ -202,6 +193,8 @@ function mapDynamicZoneComponent(raw: StrapiRawDynamicZoneComponent): DynamicZon
         ...base,
         __component: 'components.image',
         image: mapMedia(raw.image as Parameters<typeof mapMedia>[0]),
+        width: (raw.width as ComponentImage['width']) ?? '100',
+        align: (raw.align as ComponentImage['align']) ?? 'center',
       };
 
     case 'components.news-articles':
@@ -252,6 +245,13 @@ function mapDynamicZoneComponent(raw: StrapiRawDynamicZoneComponent): DynamicZon
         ...base,
         __component: 'components.card-slider',
         items: mapCardSliderItems(raw.items),
+      };
+
+    case 'components.hero-slider':
+      return {
+        ...base,
+        __component: 'components.hero-slider',
+        slides: mapHeroSliderSlides(raw.slides),
       };
 
     default:
@@ -442,5 +442,25 @@ function mapCardSliderItems(raw: unknown) {
     heading: (item.heading as string) ?? null,
     text: (item.text as string) ?? null,
     link: resolveTextLink(item.link),
+  }));
+}
+
+function mapHeroSliderSlides(raw: unknown) {
+  if (!Array.isArray(raw)) return [];
+  return raw.map((s) => ({
+    heading: (s.heading as string) ?? null,
+    text: (s.text as string) ?? null,
+    link: resolveTextLink(s.link),
+    image: mapMedia(s.image),
+    informations: mapHeroSliderInfos(s.informations),
+  }));
+}
+
+function mapHeroSliderInfos(raw: unknown) {
+  if (!Array.isArray(raw)) return [];
+  return raw.map((info) => ({
+    icon: mapMedia(info.icon),
+    heading: (info.heading as string) ?? null,
+    text: (info.text as string) ?? null,
   }));
 }

@@ -351,6 +351,8 @@ export interface ComponentBadges extends DynamicZoneBase {
 export interface ComponentImage extends DynamicZoneBase {
   __component: 'components.image';
   image: MediaImage | null;
+  width: '25' | '33' | '40' | '50' | '66' | '75' | '80' | '100';
+  align: 'left' | 'center' | 'right';
 }
 
 export interface ComponentNewsArticles extends DynamicZoneBase {
@@ -391,6 +393,21 @@ export interface ComponentCardSlider extends DynamicZoneBase {
     heading: string | null;
     text: string | null;
     link: ResolvedTextLink | null;
+  }[];
+}
+
+export interface ComponentHeroSlider extends DynamicZoneBase {
+  __component: 'components.hero-slider';
+  slides: {
+    heading: string | null;
+    text: string | null;
+    link: ResolvedTextLink | null;
+    image: MediaImage | null;
+    informations: {
+      icon: MediaImage | null;
+      heading: string | null;
+      text: string | null;
+    }[];
   }[];
 }
 
@@ -438,7 +455,6 @@ export type DynamicZoneComponent =
   | ComponentStatsHighlights
   | ComponentTimeline
   | ComponentSectionDivider
-  | ComponentSlider
   | ComponentGallerySlider
   | ComponentPhotoGallery
   | ComponentButtonGroup
@@ -452,4 +468,5 @@ export type DynamicZoneComponent =
   | ComponentEmployeeCards
   | ComponentMap
   | ComponentForm
-  | ComponentCardSlider;
+  | ComponentCardSlider
+  | ComponentHeroSlider;
