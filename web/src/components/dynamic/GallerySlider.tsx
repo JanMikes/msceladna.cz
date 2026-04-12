@@ -27,11 +27,12 @@ export function GallerySlider({ data, sidebar }: GallerySliderProps) {
 
   return (
     <div className="relative group">
+      <div className="px-6 sm:px-10">
       <div className="overflow-hidden rounded-[var(--radius-card)]" ref={emblaRef}>
-        <div className="flex gap-4">
+        <div className="flex">
           {photos.map((photo, i) => (
             <div key={i} className={sidebar ? 'flex-[0_0_100%] min-w-0' : 'flex-[0_0_80%] sm:flex-[0_0_45%] lg:flex-[0_0_30%] min-w-0'}>
-              <div className="relative aspect-[4/3] rounded-[var(--radius-card)] overflow-hidden">
+              <div className="relative aspect-[4/3] rounded-[var(--radius-card)] overflow-hidden mx-2">
                 <Image
                   src={photo.image!.url}
                   alt={photo.image!.alternativeText || ''}
@@ -43,6 +44,7 @@ export function GallerySlider({ data, sidebar }: GallerySliderProps) {
             </div>
           ))}
         </div>
+      </div>
       </div>
       {photos.length > 1 && (
         <>

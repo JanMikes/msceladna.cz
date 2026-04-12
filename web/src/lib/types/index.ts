@@ -259,7 +259,8 @@ export interface StatItem {
 export interface ComponentStatsHighlights extends DynamicZoneBase {
   __component: 'components.stats-highlights';
   items: StatItem[];
-  columns: '2' | '3' | '4';
+  columns: '2' | '3' | '4' | '5';
+  style: '1' | '2';
 }
 
 export interface ComponentStatsSection extends DynamicZoneBase {

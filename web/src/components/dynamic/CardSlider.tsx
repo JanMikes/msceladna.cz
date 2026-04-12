@@ -27,7 +27,8 @@ export function CardSlider({ data }: CardSliderProps) {
 
   return (
     <div className="relative group">
-      <div className="overflow-hidden px-6 sm:px-10" ref={emblaRef}>
+      <div className="px-6 sm:px-10">
+      <div className="overflow-hidden" ref={emblaRef}>
         <div className="flex py-14">
           {items.map((item, i) => {
             const card = (
@@ -78,6 +79,7 @@ export function CardSlider({ data }: CardSliderProps) {
             );
           })}
         </div>
+      </div>
       </div>
       {items.length > 1 && (
         <>

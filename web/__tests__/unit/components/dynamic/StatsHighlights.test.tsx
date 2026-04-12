@@ -12,7 +12,7 @@ describe('StatsHighlights component', () => {
     const data: ComponentStatsHighlights = {
       id: 1,
       __component: 'components.stats-highlights',
-      columns: '3',
+      style: '2' as const, columns: '3',
       items: [item('150', 'Children', 'enrolled'), item('12', 'Teachers', 'qualified')],
     };
     render(<StatsHighlights data={data} />);
@@ -27,7 +27,7 @@ describe('StatsHighlights component', () => {
     const data: ComponentStatsHighlights = {
       id: 2,
       __component: 'components.stats-highlights',
-      columns: '4',
+      style: '2' as const, columns: '4',
       items: [],
     };
     const { container } = render(<StatsHighlights data={data} />);
@@ -38,7 +38,7 @@ describe('StatsHighlights component', () => {
     const data: ComponentStatsHighlights = {
       id: 3,
       __component: 'components.stats-highlights',
-      columns: '2',
+      style: '2' as const, columns: '2',
       items: [item('42', 'Stat', null)],
     };
     const { container } = render(<StatsHighlights data={data} />);

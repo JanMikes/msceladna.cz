@@ -112,7 +112,8 @@ function mapDynamicZoneComponent(raw: StrapiRawDynamicZoneComponent): DynamicZon
         ...base,
         __component: 'components.stats-highlights',
         items: mapSimpleItems(raw.items),
-        columns: (raw.columns as '2' | '3' | '4') ?? '4',
+        columns: (raw.columns as '2' | '3' | '4' | '5') ?? '4',
+        style: (raw.style as '1' | '2') ?? '2',
       };
 
     case 'components.timeline':

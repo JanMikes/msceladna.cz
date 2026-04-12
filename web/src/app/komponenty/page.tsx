@@ -256,23 +256,26 @@ export default function KomponentyPage() {
         </Section>
 
         {/* Stats Highlights */}
-        <Section title="StatsHighlights - 2, 3, 4 sloupce">
-          {(['2', '3', '4'] as const).map((cols) => (
-            <div key={cols} className="space-y-2">
-              <p className="text-sm font-medium text-text-muted">{cols} sloupce</p>
-              <StatsHighlights data={{
-                id: 90, __component: 'components.stats-highlights',
-                items: [
-                  { number: '120', title: 'Dětí', description: 'Celková kapacita', icon_1: null, icon_2: null, icon_3: null },
-                  { number: '5', title: 'Tříd', description: 'Ve dvou pracovištích', icon_1: null, icon_2: null, icon_3: null },
-                  { number: '15', title: 'Pedagogů', description: 'Kvalifikovaných', icon_1: null, icon_2: null, icon_3: null },
-                  { number: '60+', title: 'Let', description: 'Tradice', icon_1: null, icon_2: null, icon_3: null },
-                ].slice(0, parseInt(cols)),
-                columns: cols,
-              } satisfies ComponentStatsHighlights} />
-            </div>
-          ))}
-        </Section>
+        {(['1', '2'] as const).map((s) => (
+          <Section key={s} title={`StatsHighlights - Style ${s}`}>
+            {(['2', '3', '4'] as const).map((cols) => (
+              <div key={cols} className="space-y-2">
+                <p className="text-sm font-medium text-text-muted">Style {s} - {cols} sloupce</p>
+                <StatsHighlights data={{
+                  id: 90, __component: 'components.stats-highlights',
+                  style: s,
+                  items: [
+                    { number: '10', title: 'Registrovaných členů', description: 'Lorem ipsum is simply dummy text ofcsdcdnkjsndc knj sdkjxnsk djkjsdslkxsd', icon_1: s === '1' ? { url: 'https://placehold.co/96x96/AFC25E/FFFFFF?text=Ikon+1', alternativeText: 'Ikon 1', width: 96, height: 96 } : null, icon_2: null, icon_3: null },
+                    { number: '10', title: 'Headline', description: 'Lorem ipsum is simply dummy text ofcsdcdnkjsndc knj sdkjxnsk djkjsdslkxsd', icon_1: s === '1' ? { url: 'https://placehold.co/96x96/AFC25E/FFFFFF?text=Ikon+1', alternativeText: 'Ikon 1', width: 96, height: 96 } : null, icon_2: null, icon_3: null },
+                    { number: '10', title: 'Headline', description: 'Lorem ipsum is simply dummy text ofcsdcdnkjsndc', icon_1: s === '1' ? { url: 'https://placehold.co/96x96/AFC25E/FFFFFF?text=Ikon+1', alternativeText: 'Ikon 1', width: 96, height: 96 } : null, icon_2: null, icon_3: null },
+                    { number: '10', title: 'Registrovaných členů', description: 'Lorem ipsum is simply dummy text', icon_1: s === '1' ? { url: 'https://placehold.co/96x96/AFC25E/FFFFFF?text=Ikon+1', alternativeText: 'Ikon 1', width: 96, height: 96 } : null, icon_2: null, icon_3: null },
+                  ].slice(0, parseInt(cols)),
+                  columns: cols,
+                } satisfies ComponentStatsHighlights} />
+              </div>
+            ))}
+          </Section>
+        ))}
 
         {/* Stats Section */}
         <Section title="StatsSection">

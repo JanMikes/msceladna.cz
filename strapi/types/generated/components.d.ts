@@ -324,9 +324,25 @@ export interface ComponentsStatsHighlights extends Struct.ComponentSchema {
     displayName: 'Statistiky';
   };
   attributes: {
-    columns: Schema.Attribute.Enumeration<['2', '3', '4']> &
+    columns: Schema.Attribute.Enumeration<['2', '3', '4', '5']> &
       Schema.Attribute.DefaultTo<'4'>;
     items: Schema.Attribute.Component<'elements.stat-item', true>;
+    style: Schema.Attribute.Enumeration<['1', '2']> &
+      Schema.Attribute.DefaultTo<'2'>;
+  };
+}
+
+export interface ComponentsStatsSection extends Struct.ComponentSchema {
+  collectionName: 'components_components_stats_sections';
+  info: {
+    description: 'Stats section with heading, description, CTA and stat items';
+    displayName: 'Sekce statistik';
+  };
+  attributes: {
+    description: Schema.Attribute.Text;
+    heading: Schema.Attribute.String;
+    items: Schema.Attribute.Component<'elements.stat-item', true>;
+    link: Schema.Attribute.Component<'elements.text-link', false>;
   };
 }
 
@@ -822,6 +838,7 @@ declare module '@strapi/strapi' {
       'components.section-divider': ComponentsSectionDivider;
       'components.slider': ComponentsSlider;
       'components.stats-highlights': ComponentsStatsHighlights;
+      'components.stats-section': ComponentsStatsSection;
       'components.text': ComponentsText;
       'components.timeline': ComponentsTimeline;
       'components.video': ComponentsVideo;
