@@ -22,6 +22,21 @@
       "type": "media",
       "multiple": false,
       "allowedTypes": ["images"]
+    },
+    "icon_1": {
+      "type": "media",
+      "allowedTypes": ["images"],
+      "multiple": false
+    },
+    "icon_2": {
+      "type": "media",
+      "allowedTypes": ["images"],
+      "multiple": false
+    },
+    "icon_3": {
+      "type": "media",
+      "allowedTypes": ["images"],
+      "multiple": false
     }
   }
 }

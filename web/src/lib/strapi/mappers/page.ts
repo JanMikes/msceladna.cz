@@ -160,6 +160,7 @@ function mapDynamicZoneComponent(raw: StrapiRawDynamicZoneComponent): DynamicZon
       return {
         ...base,
         __component: 'components.contact-cards',
+        style: (raw.style as '1' | '2' | '3') ?? '1',
         cards: mapContactCards(raw.cards),
       };
 
@@ -211,7 +212,8 @@ function mapDynamicZoneComponent(raw: StrapiRawDynamicZoneComponent): DynamicZon
       return {
         ...base,
         __component: 'components.workplace-cards',
-        workplaces: mapWorkplaceCardItems(raw.workplaces),
+        style: (raw.style as '1' | '2') ?? '1',
+        workplaces: mapWorkplaceCardItems(raw.workplaces ?? raw.cards),
       };
 
     case 'components.employee-cards':
@@ -354,6 +356,9 @@ function mapContactCards(raw: unknown) {
     phone: c.phone ?? null,
     email: c.email ?? null,
     photo: mapMedia(c.photo),
+    icon_1: mapMedia(c.icon_1),
+    icon_2: mapMedia(c.icon_2),
+    icon_3: mapMedia(c.icon_3),
   }));
 }
 
@@ -389,10 +394,14 @@ function mapWorkplaceRefs(raw: unknown) {
 function mapWorkplaceCardItems(raw: unknown) {
   if (!Array.isArray(raw)) return [];
   return raw.map((w) => ({
-    name: w.name ?? '',
+    name: w.name ?? w.title ?? '',
     slug: w.slug ?? '',
     image: mapMedia(w.image),
     description: w.description ?? null,
+    icon_1: mapMedia(w.icon_1),
+    icon_2: mapMedia(w.icon_2),
+    icon_3: mapMedia(w.icon_3),
+    link: resolveTextLink(w.link),
   }));
 }
 

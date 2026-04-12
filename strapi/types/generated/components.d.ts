@@ -83,6 +83,8 @@ export interface ComponentsContactCards extends Struct.ComponentSchema {
   };
   attributes: {
     cards: Schema.Attribute.Component<'elements.contact-card-person', true>;
+    style: Schema.Attribute.Enumeration<['1', '2', '3']> &
+      Schema.Attribute.DefaultTo<'1'>;
   };
 }
 
@@ -375,6 +377,8 @@ export interface ComponentsWorkplaceCards extends Struct.ComponentSchema {
   };
   attributes: {
     cards: Schema.Attribute.Component<'elements.workplace-card', true>;
+    style: Schema.Attribute.Enumeration<['1', '2']> &
+      Schema.Attribute.DefaultTo<'1'>;
   };
 }
 
@@ -676,8 +680,11 @@ export interface ElementsWorkplaceCard extends Struct.ComponentSchema {
   };
   attributes: {
     description: Schema.Attribute.Text;
+    icon_1: Schema.Attribute.Media<'images'>;
+    icon_2: Schema.Attribute.Media<'images'>;
+    icon_3: Schema.Attribute.Media<'images'>;
     image: Schema.Attribute.Media<'images'>;
-    link: Schema.Attribute.Component<'elements.link', false>;
+    link: Schema.Attribute.Component<'elements.text-link', false>;
     title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }

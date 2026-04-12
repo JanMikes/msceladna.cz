@@ -19,6 +19,7 @@ import { Badges } from '@/components/dynamic/Badges';
 import { ImageBlock } from '@/components/dynamic/ImageBlock';
 import { WorkplaceCards } from '@/components/dynamic/WorkplaceCards';
 import { MapEmbed } from '@/components/dynamic/MapEmbed';
+import { NewsCard } from '@/components/ui/NewsCard';
 import { GallerySlider } from '@/components/dynamic/GallerySlider';
 import { CardSlider } from '@/components/dynamic/CardSlider';
 import { HeroSlider } from '@/components/dynamic/HeroSlider';
@@ -202,16 +203,37 @@ export default function KomponentyPage() {
         </Section>
 
         {/* Contact Cards */}
-        <Section title="ContactCards">
-          <ContactCards data={{
-            id: 70, __component: 'components.contact-cards',
-            cards: [
-              { name: 'Jana Nováková', role: 'Ředitelka', phone: '+420 123 456 789', email: 'reditelka@msceladna.cz', photo: null },
-              { name: 'Petra Svobodová', role: 'Učitelka - Beruška', phone: '+420 987 654 321', email: 'svobodova@msceladna.cz', photo: null },
-              { name: 'Marie Králová', role: 'Učitelka - Krteček', phone: null, email: 'kralova@msceladna.cz', photo: null },
-            ],
-          } satisfies ComponentContactCards} />
-        </Section>
+        {(['1', '2', '3'] as const).map((s) => (
+          <Section key={s} title={`ContactCards - Style ${s}`}>
+            <ContactCards data={{
+              id: 70, __component: 'components.contact-cards',
+              style: s,
+              cards: [
+                {
+                  name: 'Jana Nováková', role: 'Ředitelka', phone: '+420 123 456 789', email: 'jana.novakova@msceladna.cz',
+                  photo: { url: 'https://placehold.co/120x120/275D56/FFFFFF?text=JN', alternativeText: 'Jana', width: 120, height: 120 },
+                  icon_1: { url: 'https://placehold.co/96x96/AFC25E/FFFFFF?text=Ikon+1', alternativeText: 'Ikon 1', width: 96, height: 96 },
+                  icon_2: { url: 'https://placehold.co/64x64/AFC25E/FFFFFF?text=Ikon+2', alternativeText: 'Ikon 2', width: 64, height: 64 },
+                  icon_3: { url: 'https://placehold.co/56x56/AFC25E/FFFFFF?text=Ikon+3', alternativeText: 'Ikon 3', width: 56, height: 56 },
+                },
+                {
+                  name: 'Jana Nováková', role: null, phone: 'kontakt', email: 'jana.novakova@msceladna.cz',
+                  photo: { url: 'https://placehold.co/120x120/275D56/FFFFFF?text=JN', alternativeText: 'Jana', width: 120, height: 120 },
+                  icon_1: { url: 'https://placehold.co/96x96/AFC25E/FFFFFF?text=Ikon+1', alternativeText: 'Ikon 1', width: 96, height: 96 },
+                  icon_2: { url: 'https://placehold.co/64x64/AFC25E/FFFFFF?text=Ikon+2', alternativeText: 'Ikon 2', width: 64, height: 64 },
+                  icon_3: { url: 'https://placehold.co/56x56/AFC25E/FFFFFF?text=Ikon+3', alternativeText: 'Ikon 3', width: 56, height: 56 },
+                },
+                {
+                  name: 'Jana Nováková', role: null, phone: 'kontakt', email: 'jana.novakova@msceladna.cz',
+                  photo: { url: 'https://placehold.co/120x120/275D56/FFFFFF?text=JN', alternativeText: 'Jana', width: 120, height: 120 },
+                  icon_1: { url: 'https://placehold.co/96x96/AFC25E/FFFFFF?text=Ikon+1', alternativeText: 'Ikon 1', width: 96, height: 96 },
+                  icon_2: { url: 'https://placehold.co/64x64/AFC25E/FFFFFF?text=Ikon+2', alternativeText: 'Ikon 2', width: 64, height: 64 },
+                  icon_3: { url: 'https://placehold.co/56x56/AFC25E/FFFFFF?text=Ikon+3', alternativeText: 'Ikon 3', width: 56, height: 56 },
+                },
+              ],
+            } satisfies ComponentContactCards} />
+          </Section>
+        ))}
 
         {/* Documents */}
         <Section title="Documents - 1, 2, 3 sloupce">
@@ -407,14 +429,76 @@ export default function KomponentyPage() {
         </Section>
 
         {/* Workplace Cards */}
-        <Section title="WorkplaceCards">
+        <Section title="WorkplaceCards - Style 1">
           <WorkplaceCards data={{
             id: 180, __component: 'components.workplace-cards',
+            style: '1',
             workplaces: [
-              { name: 'Beruška', slug: 'beruska', image: { ...placeholderImage, url: 'https://placehold.co/800x500/275D56/FFFFFF?text=Beruska' }, description: 'Pracoviště s kapacitou 60 dětí ve 3 třídách.' },
-              { name: 'Krteček', slug: 'krtecek', image: { ...placeholderImage, url: 'https://placehold.co/800x500/358577/FFFFFF?text=Krtecek' }, description: 'Pracoviště s kapacitou 60 dětí ve 2 třídách.' },
+              {
+                name: 'Velmi dlouhý testovací nadpis k nějakému překliku', slug: 'beruska',
+                image: null, description: 'Lorem Ipsum is simply dummy text of Lorem Ipsum is simply dummy txt of',
+                link: { href: '#', external: false, text: 'Zobrazit', disabled: false },
+                icon_1: { url: 'https://placehold.co/200x200/FFFFFF/275D56?text=Mascot', alternativeText: 'Mascot', width: 200, height: 200 },
+                icon_2: { url: 'https://placehold.co/48x48/FFFFFF/275D56?text=i2', alternativeText: 'Icon 2', width: 48, height: 48 },
+                icon_3: { url: 'https://placehold.co/48x48/FFFFFF/275D56?text=i3', alternativeText: 'Icon 3', width: 48, height: 48 },
+              },
+              {
+                name: 'Velmi dlouhý testovací nadpis k nějakému překliku', slug: 'krtecek',
+                image: null, description: 'Lorem Ipsum is simply dummy text of Lorem Ipsum is simply dummy txt of',
+                link: { href: '#', external: false, text: 'Zobrazit', disabled: false },
+                icon_1: { url: 'https://placehold.co/200x200/FFFFFF/AFC25E?text=Mascot', alternativeText: 'Mascot', width: 200, height: 200 },
+                icon_2: { url: 'https://placehold.co/48x48/FFFFFF/AFC25E?text=i3', alternativeText: 'Icon 2', width: 48, height: 48 },
+                icon_3: { url: 'https://placehold.co/48x48/FFFFFF/AFC25E?text=i3', alternativeText: 'Icon 3', width: 48, height: 48 },
+              },
             ],
           } satisfies ComponentWorkplaceCards} />
+        </Section>
+
+        <Section title="WorkplaceCards - Style 2">
+          <WorkplaceCards data={{
+            id: 181, __component: 'components.workplace-cards',
+            style: '2',
+            workplaces: [
+              {
+                name: 'Velmi dlouhý testovací nadpis k nějakému překliku', slug: 'beruska',
+                image: null, description: 'Lorem Ipsum is simply dummy text of Lorem Ipsum is simply dummy txt of',
+                link: { href: '#', external: false, text: 'Zobrazit', disabled: false },
+                icon_1: { url: 'https://placehold.co/200x200/FFFFFF/AFC25E?text=Mascot', alternativeText: 'Mascot', width: 200, height: 200 },
+                icon_2: { url: 'https://placehold.co/48x48/FFFFFF/AFC25E?text=i3', alternativeText: 'Icon 2', width: 48, height: 48 },
+                icon_3: { url: 'https://placehold.co/48x48/FFFFFF/AFC25E?text=i3', alternativeText: 'Icon 3', width: 48, height: 48 },
+              },
+              {
+                name: 'Velmi dlouhý testovací nadpis k nějakému překliku', slug: 'krtecek',
+                image: null, description: 'Lorem Ipsum is simply dummy text of Lorem Ipsum is simply dummy txt of',
+                link: { href: '#', external: false, text: 'Zobrazit', disabled: false },
+                icon_1: { url: 'https://placehold.co/200x200/FFFFFF/275D56?text=Mascot', alternativeText: 'Mascot', width: 200, height: 200 },
+                icon_2: { url: 'https://placehold.co/48x48/FFFFFF/275D56?text=i2', alternativeText: 'Icon 2', width: 48, height: 48 },
+                icon_3: { url: 'https://placehold.co/48x48/FFFFFF/275D56?text=i3', alternativeText: 'Icon 3', width: 48, height: 48 },
+              },
+            ],
+          } satisfies ComponentWorkplaceCards} />
+        </Section>
+
+        {/* News Cards */}
+        <Section title="NewsCard (aktuality)">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {Array.from({ length: 3 }, (_, i) => (
+              <NewsCard
+                key={i}
+                article={{
+                  documentId: `demo-${i}`,
+                  title: `Ukázková aktualita ${i + 1}`,
+                  slug: `ukazkova-aktualita-${i + 1}`,
+                  date: new Date(2026, 3 - i, 15 - i * 3).toISOString(),
+                  description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus.',
+                  mainPhoto: { url: `https://placehold.co/800x450/275D56/FFFFFF?text=Aktualita+${i + 1}`, alternativeText: `Aktualita ${i + 1}`, width: 800, height: 450 },
+                  type: null,
+                  workplaces: [{ name: i % 2 === 0 ? 'Beruška' : 'Krteček', slug: i % 2 === 0 ? 'beruska' : 'krtecek' }],
+                  tags: [],
+                }}
+              />
+            ))}
+          </div>
         </Section>
 
         {/* Card Slider */}

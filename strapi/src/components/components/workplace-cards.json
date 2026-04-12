@@ -9,6 +9,11 @@
       "type": "component",
       "component": "elements.workplace-card",
       "repeatable": true
+    },
+    "style": {
+      "type": "enumeration",
+      "enum": ["1", "2"],
+      "default": "1"
     }
   }
 }

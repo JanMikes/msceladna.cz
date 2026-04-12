@@ -9,6 +9,11 @@
       "type": "component",
       "component": "elements.contact-card-person",
       "repeatable": true
+    },
+    "style": {
+      "type": "enumeration",
+      "enum": ["1", "2", "3"],
+      "default": "1"
     }
   }
 }

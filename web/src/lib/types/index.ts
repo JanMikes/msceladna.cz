@@ -303,12 +303,16 @@ export interface ComponentButtonGroup extends DynamicZoneBase {
 
 export interface ComponentContactCards extends DynamicZoneBase {
   __component: 'components.contact-cards';
+  style: '1' | '2' | '3';
   cards: {
     name: string;
     role: string | null;
     phone: string | null;
     email: string | null;
     photo: MediaImage | null;
+    icon_1: MediaImage | null;
+    icon_2: MediaImage | null;
+    icon_3: MediaImage | null;
   }[];
 }
 
@@ -365,11 +369,16 @@ export interface ComponentNewsArticles extends DynamicZoneBase {
 
 export interface ComponentWorkplaceCards extends DynamicZoneBase {
   __component: 'components.workplace-cards';
+  style: '1' | '2';
   workplaces: {
     name: string;
     slug: string;
     image: MediaImage | null;
     description: string | null;
+    icon_1: MediaImage | null;
+    icon_2: MediaImage | null;
+    icon_3: MediaImage | null;
+    link: ResolvedTextLink | null;
   }[];
 }
 

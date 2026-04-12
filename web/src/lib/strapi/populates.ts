@@ -36,6 +36,9 @@ const slidePopulate = {
 const contactCardPopulate = {
   populate: {
     photo: mediaFields,
+    icon_1: mediaFields,
+    icon_2: mediaFields,
+    icon_3: mediaFields,
   },
 };
 
@@ -72,6 +75,10 @@ const partnerLogoPopulate = {
 const workplaceCardPopulate = {
   populate: {
     image: mediaFields,
+    icon_1: mediaFields,
+    icon_2: mediaFields,
+    icon_3: mediaFields,
+    link: textLinkPopulate,
   },
 };
 
@@ -166,7 +173,7 @@ function buildDynamicZonePopulate() {
       },
       'components.workplace-cards': {
         populate: {
-          workplaces: workplaceCardPopulate,
+          cards: workplaceCardPopulate,
         },
       },
       'components.employee-cards': { populate: '*' },

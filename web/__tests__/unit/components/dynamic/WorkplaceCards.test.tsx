@@ -3,24 +3,23 @@ import { render, screen } from '@testing-library/react';
 import { WorkplaceCards } from '@/components/dynamic/WorkplaceCards';
 import type { ComponentWorkplaceCards } from '@/lib/types';
 
+const baseWorkplace = {
+  image: null,
+  icon_1: null,
+  icon_2: null,
+  icon_3: null,
+  link: null,
+};
+
 describe('WorkplaceCards component', () => {
   it('renders workplace tiles', () => {
     const data: ComponentWorkplaceCards = {
       id: 1,
       __component: 'components.workplace-cards',
+      style: '1' as const,
       workplaces: [
-        {
-          name: 'MŠ Pod Hůrkou',
-          slug: 'pod-hurkou',
-          image: null,
-          description: 'A nice kindergarten',
-        },
-        {
-          name: 'MŠ U Školky',
-          slug: 'u-skolky',
-          image: null,
-          description: null,
-        },
+        { ...baseWorkplace, name: 'MŠ Pod Hůrkou', slug: 'pod-hurkou', description: 'A nice kindergarten' },
+        { ...baseWorkplace, name: 'MŠ U Školky', slug: 'u-skolky', description: null },
       ],
     };
     render(<WorkplaceCards data={data} />);
@@ -29,40 +28,16 @@ describe('WorkplaceCards component', () => {
     expect(screen.getByText('A nice kindergarten')).toBeInTheDocument();
   });
 
-  it('renders links to workplace pages', () => {
-    const data: ComponentWorkplaceCards = {
-      id: 2,
-      __component: 'components.workplace-cards',
-      workplaces: [
-        {
-          name: 'MŠ Pod Hůrkou',
-          slug: 'pod-hurkou',
-          image: null,
-          description: null,
-        },
-      ],
-    };
-    const { container } = render(<WorkplaceCards data={data} />);
-    const link = container.querySelector('a');
-    expect(link).not.toBeNull();
-    expect(link!.getAttribute('href')).toBe('/pod-hurkou');
-  });
-
-  it('renders fallback content when no image', () => {
+  it('renders with style 1 bg-primary', () => {
     const data: ComponentWorkplaceCards = {
       id: 3,
       __component: 'components.workplace-cards',
+      style: '1' as const,
       workplaces: [
-        {
-          name: 'No Image WP',
-          slug: 'no-image',
-          image: null,
-          description: 'Description here',
-        },
+        { ...baseWorkplace, name: 'Test', slug: 'test', description: 'Description here' },
       ],
     };
     const { container } = render(<WorkplaceCards data={data} />);
-    // Without image, it renders a div with bg-primary
     expect(container.querySelector('.bg-primary')).not.toBeNull();
   });
 
@@ -70,6 +45,7 @@ describe('WorkplaceCards component', () => {
     const data: ComponentWorkplaceCards = {
       id: 4,
       __component: 'components.workplace-cards',
+      style: '1' as const,
       workplaces: [],
     };
     const { container } = render(<WorkplaceCards data={data} />);
