@@ -451,6 +451,9 @@ export interface ElementsContactCardPerson extends Struct.ComponentSchema {
   };
   attributes: {
     email: Schema.Attribute.String;
+    icon_1: Schema.Attribute.Media<'images'>;
+    icon_2: Schema.Attribute.Media<'images'>;
+    icon_3: Schema.Attribute.Media<'images'>;
     name: Schema.Attribute.String & Schema.Attribute.Required;
     phone: Schema.Attribute.String;
     photo: Schema.Attribute.Media<'images'>;
@@ -624,6 +627,9 @@ export interface ElementsStatItem extends Struct.ComponentSchema {
   };
   attributes: {
     description: Schema.Attribute.Text;
+    icon_1: Schema.Attribute.Media<'images'>;
+    icon_2: Schema.Attribute.Media<'images'>;
+    icon_3: Schema.Attribute.Media<'images'>;
     number: Schema.Attribute.String;
     title: Schema.Attribute.String;
   };

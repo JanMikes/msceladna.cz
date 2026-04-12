@@ -27,6 +27,7 @@ import { EmployeeCards } from '../dynamic/EmployeeCards';
 import { MapEmbed } from '../dynamic/MapEmbed';
 import { CardSlider } from '../dynamic/CardSlider';
 import { HeroSlider } from '../dynamic/HeroSlider';
+import { StatsSection } from '../dynamic/StatsSection';
 
 interface DynamicZoneProps {
   components: DynamicZoneComponent[];
@@ -102,6 +103,8 @@ case 'components.gallery-slider':
       return <CardSlider data={component} />;
     case 'components.hero-slider':
       return <HeroSlider data={component} />;
+    case 'components.stats-section':
+      return <StatsSection data={component} />;
     default:
       return <ComponentError componentType={(component as DynamicZoneComponent).__component} />;
   }

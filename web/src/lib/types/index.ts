@@ -247,10 +247,27 @@ export interface ComponentPartnerLogos extends DynamicZoneBase {
   columns: '2' | '3' | '4' | '5' | '6';
 }
 
+export interface StatItem {
+  number: string | null;
+  title: string | null;
+  description: string | null;
+  icon_1: MediaImage | null;
+  icon_2: MediaImage | null;
+  icon_3: MediaImage | null;
+}
+
 export interface ComponentStatsHighlights extends DynamicZoneBase {
   __component: 'components.stats-highlights';
-  items: { number: string | null; title: string | null; description: string | null }[];
+  items: StatItem[];
   columns: '2' | '3' | '4';
+}
+
+export interface ComponentStatsSection extends DynamicZoneBase {
+  __component: 'components.stats-section';
+  heading: string | null;
+  description: string | null;
+  link: ResolvedTextLink | null;
+  items: StatItem[];
 }
 
 export interface ComponentTimeline extends DynamicZoneBase {
@@ -478,4 +495,5 @@ export type DynamicZoneComponent =
   | ComponentMap
   | ComponentForm
   | ComponentCardSlider
-  | ComponentHeroSlider;
+  | ComponentHeroSlider
+  | ComponentStatsSection;

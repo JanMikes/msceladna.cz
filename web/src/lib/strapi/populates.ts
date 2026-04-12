@@ -116,7 +116,25 @@ function buildDynamicZonePopulate() {
       },
       'components.stats-highlights': {
         populate: {
-          items: { populate: '*' },
+          items: {
+            populate: {
+              icon_1: mediaFields,
+              icon_2: mediaFields,
+              icon_3: mediaFields,
+            },
+          },
+        },
+      },
+      'components.stats-section': {
+        populate: {
+          link: textLinkPopulate,
+          items: {
+            populate: {
+              icon_1: mediaFields,
+              icon_2: mediaFields,
+              icon_3: mediaFields,
+            },
+          },
         },
       },
       'components.timeline': {

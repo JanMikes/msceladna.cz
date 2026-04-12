@@ -23,6 +23,7 @@ import { NewsCard } from '@/components/ui/NewsCard';
 import { GallerySlider } from '@/components/dynamic/GallerySlider';
 import { CardSlider } from '@/components/dynamic/CardSlider';
 import { HeroSlider } from '@/components/dynamic/HeroSlider';
+import { StatsSection } from '@/components/dynamic/StatsSection';
 import type {
   ComponentText,
   ComponentAlert,
@@ -46,6 +47,7 @@ import type {
   ComponentGallerySlider,
   ComponentCardSlider,
   ComponentHeroSlider,
+  ComponentStatsSection,
 } from '@/lib/types';
 
 export const metadata: Metadata = {
@@ -261,15 +263,33 @@ export default function KomponentyPage() {
               <StatsHighlights data={{
                 id: 90, __component: 'components.stats-highlights',
                 items: [
-                  { number: '120', title: 'Dětí', description: 'Celková kapacita' },
-                  { number: '5', title: 'Tříd', description: 'Ve dvou pracovištích' },
-                  { number: '15', title: 'Pedagogů', description: 'Kvalifikovaných' },
-                  { number: '60+', title: 'Let', description: 'Tradice' },
+                  { number: '120', title: 'Dětí', description: 'Celková kapacita', icon_1: null, icon_2: null, icon_3: null },
+                  { number: '5', title: 'Tříd', description: 'Ve dvou pracovištích', icon_1: null, icon_2: null, icon_3: null },
+                  { number: '15', title: 'Pedagogů', description: 'Kvalifikovaných', icon_1: null, icon_2: null, icon_3: null },
+                  { number: '60+', title: 'Let', description: 'Tradice', icon_1: null, icon_2: null, icon_3: null },
                 ].slice(0, parseInt(cols)),
                 columns: cols,
               } satisfies ComponentStatsHighlights} />
             </div>
           ))}
+        </Section>
+
+        {/* Stats Section */}
+        <Section title="StatsSection">
+          <StatsSection data={{
+            id: 95, __component: 'components.stats-section',
+            heading: 'Testovací nadpis, raději napsaný na dva řádky',
+            description: 'Popis karty s dalšími informacemi o obsahu, Popis karty s dalšími informacemi o obsahu',
+            link: { href: '#', external: false, text: 'Více informací', disabled: false },
+            items: Array.from({ length: 3 }, (_, i) => ({
+              number: '10',
+              title: 'Headline',
+              description: 'Lorem Ipsum is simply dummy text ofcsdcdnkjsndc knj sdkjxnsk djkjsdslkxsd',
+              icon_1: { url: `https://placehold.co/112x112/FFFFFF/AFC25E?text=Ikon+1`, alternativeText: 'Ikon 1', width: 112, height: 112 },
+              icon_2: null,
+              icon_3: null,
+            })),
+          } satisfies ComponentStatsSection} />
         </Section>
 
         {/* Timeline */}

@@ -256,6 +256,16 @@ function mapDynamicZoneComponent(raw: StrapiRawDynamicZoneComponent): DynamicZon
         slides: mapHeroSliderSlides(raw.slides),
       };
 
+    case 'components.stats-section':
+      return {
+        ...base,
+        __component: 'components.stats-section',
+        heading: (raw.heading as string) ?? null,
+        description: (raw.description as string) ?? null,
+        link: resolveTextLink(raw.link as Parameters<typeof resolveTextLink>[0]),
+        items: mapSimpleItems(raw.items),
+      };
+
     default:
       return null;
   }
@@ -318,6 +328,9 @@ function mapSimpleItems(raw: unknown) {
     number: i.number ?? null,
     title: i.title ?? null,
     description: i.description ?? null,
+    icon_1: mapMedia(i.icon_1),
+    icon_2: mapMedia(i.icon_2),
+    icon_3: mapMedia(i.icon_3),
   }));
 }
 

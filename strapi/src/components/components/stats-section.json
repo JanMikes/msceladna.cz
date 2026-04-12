@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_components_stats_sections",
+  "info": {
+    "displayName": "Sekce statistik",
+    "description": "Stats section with heading, description, CTA and stat items"
+  },
+  "attributes": {
+    "heading": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "link": {
+      "type": "component",
+      "component": "elements.text-link",
+      "repeatable": false
+    },
+    "items": {
+      "type": "component",
+      "component": "elements.stat-item",
+      "repeatable": true
+    }
+  }
+}

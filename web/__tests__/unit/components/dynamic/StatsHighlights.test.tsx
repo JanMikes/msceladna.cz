@@ -3,16 +3,17 @@ import { render, screen } from '@testing-library/react';
 import { StatsHighlights } from '@/components/dynamic/StatsHighlights';
 import type { ComponentStatsHighlights } from '@/lib/types';
 
+const item = (number: string, title: string, description: string | null) => ({
+  number, title, description, icon_1: null, icon_2: null, icon_3: null,
+});
+
 describe('StatsHighlights component', () => {
   it('renders stat items', () => {
     const data: ComponentStatsHighlights = {
       id: 1,
       __component: 'components.stats-highlights',
       columns: '3',
-      items: [
-        { number: '150', title: 'Children', description: 'enrolled' },
-        { number: '12', title: 'Teachers', description: 'qualified' },
-      ],
+      items: [item('150', 'Children', 'enrolled'), item('12', 'Teachers', 'qualified')],
     };
     render(<StatsHighlights data={data} />);
     expect(screen.getByText('150')).toBeInTheDocument();
@@ -38,9 +39,7 @@ describe('StatsHighlights component', () => {
       id: 3,
       __component: 'components.stats-highlights',
       columns: '2',
-      items: [
-        { number: '42', title: 'Stat', description: null },
-      ],
+      items: [item('42', 'Stat', null)],
     };
     const { container } = render(<StatsHighlights data={data} />);
     const grid = container.firstElementChild;
