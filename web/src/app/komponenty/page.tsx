@@ -19,6 +19,9 @@ import { Badges } from '@/components/dynamic/Badges';
 import { ImageBlock } from '@/components/dynamic/ImageBlock';
 import { WorkplaceCards } from '@/components/dynamic/WorkplaceCards';
 import { MapEmbed } from '@/components/dynamic/MapEmbed';
+import { Slider } from '@/components/dynamic/Slider';
+import { GallerySlider } from '@/components/dynamic/GallerySlider';
+import { CardSlider } from '@/components/dynamic/CardSlider';
 import type {
   ComponentText,
   ComponentAlert,
@@ -39,6 +42,9 @@ import type {
   ComponentImage,
   ComponentWorkplaceCards,
   ComponentMap,
+  ComponentSlider,
+  ComponentGallerySlider,
+  ComponentCardSlider,
 } from '@/lib/types';
 
 export const metadata: Metadata = {
@@ -389,6 +395,45 @@ export default function KomponentyPage() {
               { name: 'Krteček', slug: 'krtecek', image: { ...placeholderImage, url: 'https://placehold.co/800x500/358577/FFFFFF?text=Krtecek' }, description: 'Pracoviště s kapacitou 60 dětí ve 2 třídách.' },
             ],
           } satisfies ComponentWorkplaceCards} />
+        </Section>
+
+        {/* Card Slider */}
+        <Section title="CardSlider">
+          <CardSlider data={{
+            id: 210, __component: 'components.card-slider',
+            items: Array.from({ length: 6 }, (_, i) => ({
+              icon: { url: `https://placehold.co/160x160/275D56/FFFFFF?text=Foto+${i + 1}`, alternativeText: `Foto ${i + 1}`, width: 160, height: 160 },
+              heading: `Nadpis ${i + 1}`,
+              text: 'Lorem ipsum je ukázkový text používaný v tiskařském průmyslu.',
+              link: { href: '#', external: false, text: 'Více informací', disabled: false },
+            })),
+          } satisfies ComponentCardSlider} />
+        </Section>
+
+        {/* Slider */}
+        <Section title="Slider">
+          <Slider data={{
+            id: 220, __component: 'components.slider',
+            slides: Array.from({ length: 3 }, (_, i) => ({
+              title: `Slide ${i + 1}`,
+              description: 'Popis slidu s dalšími informacemi.',
+              link: { href: '#', external: false, text: 'Zjistit více', disabled: false },
+              image: null,
+              background_image: { ...placeholderImage, url: `https://placehold.co/1200x600/275D56/FFFFFF?text=Slide+${i + 1}` },
+            })),
+            autoplay: true,
+            autoplay_interval: 5000,
+          } satisfies ComponentSlider} />
+        </Section>
+
+        {/* Gallery Slider */}
+        <Section title="GallerySlider">
+          <GallerySlider data={{
+            id: 230, __component: 'components.gallery-slider',
+            photos: Array.from({ length: 6 }, (_, i) => ({
+              image: { ...placeholderImage, url: `https://placehold.co/800x600/275D56/FFFFFF?text=Galerie+${i + 1}` },
+            })),
+          } satisfies ComponentGallerySlider} />
         </Section>
 
         {/* Map */}

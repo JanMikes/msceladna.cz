@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_components_card_sliders",
+  "info": {
+    "displayName": "Slider karet",
+    "description": "Carousel of cards with icon, heading, text and CTA"
+  },
+  "attributes": {
+    "items": {
+      "type": "component",
+      "component": "elements.card-slider-item",
+      "repeatable": true
+    }
+  }
+}

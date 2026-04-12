@@ -247,6 +247,13 @@ function mapDynamicZoneComponent(raw: StrapiRawDynamicZoneComponent): DynamicZon
         hide_on_web: (raw.hide_on_web as boolean) ?? false,
       };
 
+    case 'components.card-slider':
+      return {
+        ...base,
+        __component: 'components.card-slider',
+        items: mapCardSliderItems(raw.items),
+      };
+
     default:
       return null;
   }
@@ -426,4 +433,14 @@ function mapFormInputs(raw: unknown) {
 function mapRecipients(raw: unknown): string[] {
   if (!Array.isArray(raw)) return [];
   return raw.map((r) => r.email as string).filter(Boolean);
+}
+
+function mapCardSliderItems(raw: unknown) {
+  if (!Array.isArray(raw)) return [];
+  return raw.map((item) => ({
+    icon: mapMedia(item.icon),
+    heading: (item.heading as string) ?? null,
+    text: (item.text as string) ?? null,
+    link: resolveTextLink(item.link),
+  }));
 }

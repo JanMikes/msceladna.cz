@@ -26,6 +26,7 @@ import { FormBlock } from '../dynamic/FormBlock';
 import { WorkplaceCards } from '../dynamic/WorkplaceCards';
 import { EmployeeCards } from '../dynamic/EmployeeCards';
 import { MapEmbed } from '../dynamic/MapEmbed';
+import { CardSlider } from '../dynamic/CardSlider';
 
 interface DynamicZoneProps {
   components: DynamicZoneComponent[];
@@ -99,6 +100,8 @@ function DynamicZoneItem({ component, sidebar }: { component: DynamicZoneCompone
     case 'components.form':
       if (component.hide_on_web) return null;
       return <FormBlock data={component} />;
+    case 'components.card-slider':
+      return <CardSlider data={component} />;
     default:
       return <ComponentError componentType={(component as DynamicZoneComponent).__component} />;
   }

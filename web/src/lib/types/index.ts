@@ -384,6 +384,16 @@ export interface ComponentMap extends DynamicZoneBase {
   height: number;
 }
 
+export interface ComponentCardSlider extends DynamicZoneBase {
+  __component: 'components.card-slider';
+  items: {
+    icon: MediaImage | null;
+    heading: string | null;
+    text: string | null;
+    link: ResolvedTextLink | null;
+  }[];
+}
+
 export interface FormInput {
   name: string;
   label: string;
@@ -441,4 +451,5 @@ export type DynamicZoneComponent =
   | ComponentWorkplaceCards
   | ComponentEmployeeCards
   | ComponentMap
-  | ComponentForm;
+  | ComponentForm
+  | ComponentCardSlider;

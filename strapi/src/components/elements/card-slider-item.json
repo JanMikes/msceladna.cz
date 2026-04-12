@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_elements_card_slider_items",
+  "info": {
+    "displayName": "Položka slideru karet",
+    "description": "Card slider item with icon, heading, text and CTA"
+  },
+  "attributes": {
+    "icon": {
+      "type": "media",
+      "allowedTypes": ["images"],
+      "multiple": false
+    },
+    "heading": {
+      "type": "string"
+    },
+    "text": {
+      "type": "text"
+    },
+    "link": {
+      "type": "component",
+      "component": "elements.text-link",
+      "repeatable": false
+    }
+  }
+}

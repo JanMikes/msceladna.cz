@@ -190,6 +190,16 @@ function buildDynamicZonePopulate() {
           recipients: { populate: '*' },
         },
       },
+      'components.card-slider': {
+        populate: {
+          items: {
+            populate: {
+              icon: mediaFields,
+              link: textLinkPopulate,
+            },
+          },
+        },
+      },
     },
   };
 }

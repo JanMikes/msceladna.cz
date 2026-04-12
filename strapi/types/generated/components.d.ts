@@ -395,6 +395,20 @@ export interface ElementsButton extends Struct.ComponentSchema {
   };
 }
 
+export interface ElementsCardSliderItem extends Struct.ComponentSchema {
+  collectionName: 'components_elements_card_slider_items';
+  info: {
+    description: 'Card slider item with icon, heading, text and CTA';
+    displayName: 'Polo\u017Eka slideru karet';
+  };
+  attributes: {
+    heading: Schema.Attribute.String;
+    icon: Schema.Attribute.Media<'images'>;
+    link: Schema.Attribute.Component<'elements.text-link', false>;
+    text: Schema.Attribute.Text;
+  };
+}
+
 export interface ElementsContactCardPerson extends Struct.ComponentSchema {
   collectionName: 'components_elements_contact_card_people';
   info: {
@@ -742,6 +756,7 @@ declare module '@strapi/strapi' {
       'elements.badge': ElementsBadge;
       'elements.banner-card': ElementsBannerCard;
       'elements.button': ElementsButton;
+      'elements.card-slider-item': ElementsCardSliderItem;
       'elements.contact-card-person': ElementsContactCardPerson;
       'elements.document-item': ElementsDocumentItem;
       'elements.expandable-section': ElementsExpandableSection;
