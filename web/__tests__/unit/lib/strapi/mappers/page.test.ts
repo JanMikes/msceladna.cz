@@ -485,6 +485,7 @@ describe('mapPage', () => {
       sidebar: [
         { id: 2, __component: 'components.heading', text: 'Sidebar Heading', type: 'h3' },
       ],
+      menu_set: null,
     };
 
     const result = mapPage(raw);
@@ -492,9 +493,10 @@ describe('mapPage', () => {
     expect(result.title).toBe('About');
     expect(result.slug).toBe('about');
     expect(result.metaDescription).toBe('About page');
+    expect(result.menuSetId).toBeNull();
     expect(result.breadcrumbs).toHaveLength(2);
     expect(result.breadcrumbs[0]).toEqual({ label: 'Home', href: '/home' });
-    expect(result.breadcrumbs[1]).toEqual({ label: 'About', href: '/about' });
+    expect(result.breadcrumbs[1]).toEqual({ label: 'About', href: '/home/about' });
     expect(result.content).toHaveLength(1);
     expect(result.sidebar).toHaveLength(1);
   });
@@ -509,6 +511,7 @@ describe('mapPage', () => {
       parent: null,
       content: [],
       sidebar: null,
+      menu_set: null,
     };
 
     const result = mapPage(raw);
@@ -540,12 +543,30 @@ describe('mapPage', () => {
       },
       content: [],
       sidebar: null,
+      menu_set: null,
     };
 
     const result = mapPage(raw);
     expect(result.breadcrumbs).toHaveLength(3);
-    expect(result.breadcrumbs[0].label).toBe('Root');
-    expect(result.breadcrumbs[1].label).toBe('Middle');
-    expect(result.breadcrumbs[2].label).toBe('Deep');
+    expect(result.breadcrumbs[0]).toEqual({ label: 'Root', href: '/root' });
+    expect(result.breadcrumbs[1]).toEqual({ label: 'Middle', href: '/root/middle' });
+    expect(result.breadcrumbs[2]).toEqual({ label: 'Deep', href: '/root/middle/deep' });
+  });
+
+  it('maps menu_set slug', () => {
+    const raw: StrapiRawPage = {
+      id: 1,
+      documentId: 'doc-1',
+      title: 'Beruska',
+      slug: 'beruska',
+      meta_description: null,
+      parent: null,
+      content: [],
+      sidebar: null,
+      menu_set: { documentId: 'doc-menu-1' },
+    };
+
+    const result = mapPage(raw);
+    expect(result.menuSetId).toBe('doc-menu-1');
   });
 });

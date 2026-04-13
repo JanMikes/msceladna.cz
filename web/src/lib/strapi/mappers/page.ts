@@ -4,14 +4,21 @@ import { resolveTextLink } from '../link-resolver';
 import { mapMedia } from './shared';
 
 function buildBreadcrumbs(parent: StrapiRawPageParent | null | undefined, currentTitle: string, currentSlug: string): BreadcrumbItem[] {
-  const chain: BreadcrumbItem[] = [];
+  const ancestors: { title: string; slug: string }[] = [];
   let node = parent;
   while (node) {
-    chain.push({ label: node.title, href: `/${node.slug}` });
+    ancestors.push({ title: node.title, slug: node.slug });
     node = node.parent;
   }
-  chain.reverse();
-  chain.push({ label: currentTitle, href: `/${currentSlug}` });
+  ancestors.reverse();
+
+  let path = '';
+  const chain: BreadcrumbItem[] = ancestors.map((a) => {
+    path += `/${a.slug}`;
+    return { label: a.title, href: path };
+  });
+  path += `/${currentSlug}`;
+  chain.push({ label: currentTitle, href: path });
   return chain;
 }
 
@@ -21,6 +28,7 @@ export function mapPage(raw: StrapiRawPage): Page {
     title: raw.title,
     slug: raw.slug,
     metaDescription: raw.meta_description ?? null,
+    menuSetId: raw.menu_set?.documentId ?? null,
     breadcrumbs: buildBreadcrumbs(raw.parent, raw.title, raw.slug),
     content: mapDynamicZone(raw.content),
     sidebar: mapDynamicZone(raw.sidebar ?? []),
@@ -87,7 +95,8 @@ function mapDynamicZoneComponent(raw: StrapiRawDynamicZoneComponent): DynamicZon
       return {
         ...base,
         __component: 'components.banner-cards',
-        cards: mapCards(raw.cards),
+        style: (raw.style as '1' | '2') ?? '1',
+        cards: mapBannerCards(raw.cards),
       };
 
     case 'components.documents':
@@ -485,5 +494,23 @@ function mapHeroSliderInfos(raw: unknown) {
     icon: mapMedia(info.icon),
     heading: (info.heading as string) ?? null,
     text: (info.text as string) ?? null,
+  }));
+}
+
+function mapBannerCards(raw: unknown) {
+  if (!Array.isArray(raw)) return [];
+  return raw.map((c) => ({
+    title: c.title ?? null,
+    description: c.description ?? null,
+    link: resolveTextLink(c.link),
+    image: mapMedia(c.image),
+    image_position: (c.image_position as 'left' | 'right') ?? 'left',
+    icon_1: mapMedia(c.icon_1),
+    icon_2: mapMedia(c.icon_2),
+    icon_3: mapMedia(c.icon_3),
+    icon_4: mapMedia(c.icon_4),
+    icon_5: mapMedia(c.icon_5),
+    icon_6: mapMedia(c.icon_6),
+    icon_7: mapMedia(c.icon_7),
   }));
 }

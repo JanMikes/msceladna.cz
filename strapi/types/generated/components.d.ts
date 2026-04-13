@@ -48,6 +48,8 @@ export interface ComponentsBannerCards extends Struct.ComponentSchema {
   };
   attributes: {
     cards: Schema.Attribute.Component<'elements.banner-card', true>;
+    style: Schema.Attribute.Enumeration<['1', '2']> &
+      Schema.Attribute.DefaultTo<'1'>;
   };
 }
 
@@ -418,11 +420,21 @@ export interface ElementsBadge extends Struct.ComponentSchema {
 export interface ElementsBannerCard extends Struct.ComponentSchema {
   collectionName: 'components_elements_banner_cards';
   info: {
-    description: 'Banner card with title, description and link';
+    description: 'Banner card with title, description, link, image and icons';
     displayName: 'Banner karta';
   };
   attributes: {
     description: Schema.Attribute.Text;
+    icon_1: Schema.Attribute.Media<'images'>;
+    icon_2: Schema.Attribute.Media<'images'>;
+    icon_3: Schema.Attribute.Media<'images'>;
+    icon_4: Schema.Attribute.Media<'images'>;
+    icon_5: Schema.Attribute.Media<'images'>;
+    icon_6: Schema.Attribute.Media<'images'>;
+    icon_7: Schema.Attribute.Media<'images'>;
+    image: Schema.Attribute.Media<'images'>;
+    image_position: Schema.Attribute.Enumeration<['left', 'right']> &
+      Schema.Attribute.DefaultTo<'left'>;
     link: Schema.Attribute.Component<'elements.text-link', false>;
     title: Schema.Attribute.String;
   };

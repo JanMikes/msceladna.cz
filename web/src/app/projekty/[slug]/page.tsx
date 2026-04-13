@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Breadcrumbs from '@/components/layout/Breadcrumbs';
+import MenuSetOverride from '@/components/layout/MenuSetOverride';
 import { getProjectBySlug } from '@/lib/strapi/data';
 import { MarkdownContent } from '@/components/ui/MarkdownContent';
 
@@ -38,6 +39,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
 
   return (
     <main className="bg-surface pt-16 lg:pt-20">
+      <MenuSetOverride pageSlug="projekty" />
       <div className="container mx-auto px-4 lg:px-8 pb-8 lg:pb-12">
         <Breadcrumbs
           items={[

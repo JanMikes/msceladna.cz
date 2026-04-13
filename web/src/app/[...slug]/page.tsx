@@ -2,46 +2,57 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import SidePanel from '@/components/layout/SidePanel';
 import Breadcrumbs from '@/components/layout/Breadcrumbs';
-import { getPageBySlug } from '@/lib/strapi/data';
+import NavigationOverride from '@/components/layout/NavigationOverride';
+import { getPageBySlug, getNavigation } from '@/lib/strapi/data';
 import { DynamicZone } from '@/components/strapi/DynamicZone';
 
 interface PageProps {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string[] }>;
+}
+
+function getParentChainSlugs(breadcrumbs: { href: string }[]): string[] {
+  return breadcrumbs.map((b) => b.href.split('/').filter(Boolean).pop() ?? '');
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const page = await getPageBySlug(slug);
+  const pageSlug = slug[slug.length - 1];
+  const page = await getPageBySlug(pageSlug);
 
   if (!page) {
     return { title: 'Stránka nenalezena' };
   }
 
   return {
-    title: `${page.title} | Beruška`,
+    title: page.title,
     description: page.metaDescription || undefined,
   };
 }
 
-export default async function BeruskaSubPage({ params }: PageProps) {
+export default async function CmsPage({ params }: PageProps) {
   const { slug } = await params;
-  const page = await getPageBySlug(slug);
+  const pageSlug = slug[slug.length - 1];
+
+  const page = await getPageBySlug(pageSlug);
 
   if (!page) {
     notFound();
   }
 
+  // Verify URL path matches the parent chain from Strapi
+  const expectedSlugs = getParentChainSlugs(page.breadcrumbs);
+  if (expectedSlugs.length !== slug.length || !expectedSlugs.every((s, i) => s === slug[i])) {
+    notFound();
+  }
+
+  const menuNavigation = page.menuSetId ? await getNavigation(page.menuSetId) : null;
   const hasSidebar = page.sidebar && page.sidebar.length > 0;
 
   return (
     <main className="bg-surface pt-16 lg:pt-20">
+      {menuNavigation && <NavigationOverride navigation={menuNavigation} />}
       <div className="container mx-auto px-4 lg:px-8 pb-8 lg:pb-12">
-        <Breadcrumbs
-          items={[
-            { label: 'Beruška', href: '/beruska' },
-            { label: page.title, href: `/beruska/${slug}` },
-          ]}
-        />
+        <Breadcrumbs items={page.breadcrumbs} />
         {hasSidebar ? (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2 space-y-6">

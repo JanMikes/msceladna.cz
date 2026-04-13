@@ -1,5 +1,6 @@
-import { getPageBySlug } from '@/lib/strapi/data';
+import { getPageBySlug, getNavigation } from '@/lib/strapi/data';
 import { DynamicZone } from '@/components/strapi/DynamicZone';
+import NavigationOverride from '@/components/layout/NavigationOverride';
 
 export default async function HomePage() {
   const page = await getPageBySlug('uvod');
@@ -19,8 +20,11 @@ export default async function HomePage() {
     );
   }
 
+  const menuNavigation = page.menuSetId ? await getNavigation(page.menuSetId) : null;
+
   return (
     <main className="bg-surface pt-16 lg:pt-20">
+      {menuNavigation && <NavigationOverride navigation={menuNavigation} />}
       <div className="container mx-auto px-4 lg:px-8 pb-8 lg:pb-12">
         <div className="space-y-6">
           <DynamicZone components={page.content} />

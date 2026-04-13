@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 import { clsx } from 'clsx';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ChevronDown } from 'lucide-react';
-import type { NavigationItem } from '@/lib/types';
+import { useNavigation } from './NavigationContext';
 
 function LeafIcon({ className }: { className?: string }) {
   return (
@@ -33,11 +33,8 @@ function LeafIcon({ className }: { className?: string }) {
   );
 }
 
-interface HeaderProps {
-  navigation: NavigationItem[];
-}
-
-export default function Header({ navigation }: HeaderProps) {
+export default function Header() {
+  const { navigation } = useNavigation();
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);

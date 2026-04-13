@@ -54,14 +54,30 @@ export async function getPageBySlug(slug: string): Promise<Page | null> {
 
 // ── Navigation ──
 
-export async function getNavigation(): Promise<NavigationItem[]> {
+export async function getNavigation(menuSetId?: string): Promise<NavigationItem[]> {
   const client = getStrapiClient();
+  const filters: Record<string, unknown> = {};
+  if (menuSetId) {
+    filters.menu_set = { documentId: { $eq: menuSetId } };
+  }
   const { data } = await client.findMany<StrapiRawNavigation>('navigations', {
+    filters,
     sort: 'sortOrder:asc',
     populate: buildNavigationPopulate(),
     pagination: { pageSize: 100 },
   });
   return data.map(mapNavigation).filter((item): item is NavigationItem => item !== null);
+}
+
+export async function getPageMenuSetId(slug: string): Promise<string | null> {
+  const client = getStrapiClient();
+  const { data } = await client.findMany<{ menu_set: { documentId: string } | null }>('pages', {
+    filters: { slug: { $eq: slug } },
+    fields: ['slug'],
+    populate: { menu_set: { fields: ['documentId'] } },
+    pagination: { pageSize: 1 },
+  });
+  return data.length > 0 ? (data[0].menu_set?.documentId ?? null) : null;
 }
 
 // ── Footer ──

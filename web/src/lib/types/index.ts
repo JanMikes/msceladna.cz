@@ -178,6 +178,7 @@ export interface Page {
   title: string;
   slug: string;
   metaDescription: string | null;
+  menuSetId: string | null;
   breadcrumbs: BreadcrumbItem[];
   content: DynamicZoneComponent[];
   sidebar: DynamicZoneComponent[];
@@ -229,9 +230,25 @@ export interface ComponentFeatureCards extends DynamicZoneBase {
   card_clickable: boolean;
 }
 
+export interface BannerCard {
+  title: string | null;
+  description: string | null;
+  link: ResolvedTextLink | null;
+  image: MediaImage | null;
+  image_position: 'left' | 'right';
+  icon_1: MediaImage | null;
+  icon_2: MediaImage | null;
+  icon_3: MediaImage | null;
+  icon_4: MediaImage | null;
+  icon_5: MediaImage | null;
+  icon_6: MediaImage | null;
+  icon_7: MediaImage | null;
+}
+
 export interface ComponentBannerCards extends DynamicZoneBase {
   __component: 'components.banner-cards';
-  cards: { icon_type: 'hidden' | 'image' | 'text' | 'initials'; icon: MediaImage | null; icon_text: string | null; title: string | null; description: string | null; link: ResolvedTextLink | null }[];
+  style: '1' | '2';
+  cards: BannerCard[];
 }
 
 export interface ComponentDocuments extends DynamicZoneBase {

@@ -59,6 +59,15 @@ export interface StrapiRawTextLink extends StrapiRawLink {
   disabled: boolean;
 }
 
+// ── Raw menu set ──
+
+export interface StrapiRawMenuSet {
+  id: number;
+  documentId: string;
+  name: string;
+  is_default: boolean;
+}
+
 // ── Raw navigation ──
 
 export interface StrapiRawNavigationChild {
@@ -75,6 +84,7 @@ export interface StrapiRawNavigation {
   link: StrapiRawLink | null;
   children: StrapiRawNavigationChild[] | null;
   sortOrder: number;
+  menu_set: { documentId: string } | null;
 }
 
 // ── Raw page ──
@@ -102,6 +112,7 @@ export interface StrapiRawPage {
   parent: StrapiRawPageParent | null;
   content: StrapiRawDynamicZoneComponent[];
   sidebar: StrapiRawDynamicZoneComponent[] | null;
+  menu_set: { documentId: string } | null;
 }
 
 // ── Raw footer ──

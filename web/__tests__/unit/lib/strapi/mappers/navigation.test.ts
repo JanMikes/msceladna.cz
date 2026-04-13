@@ -11,6 +11,8 @@ describe('mapNavigation', () => {
       link: { id: 1, page: { slug: 'about' }, anchor: null, url: null, file: null },
       children: null,
       sortOrder: 0,
+      menu_set: null,
+
     };
 
     const result = mapNavigation(raw);
@@ -42,6 +44,8 @@ describe('mapNavigation', () => {
         },
       ],
       sortOrder: 0,
+      menu_set: null,
+
     };
 
     const result = mapNavigation(raw);
@@ -60,6 +64,8 @@ describe('mapNavigation', () => {
       link: null,
       children: null,
       sortOrder: 0,
+      menu_set: null,
+
     };
 
     expect(mapNavigation(raw)).toBeNull();
@@ -86,6 +92,8 @@ describe('mapNavigation', () => {
         },
       ],
       sortOrder: 0,
+      menu_set: null,
+
     };
 
     const result = mapNavigation(raw);
@@ -102,6 +110,8 @@ describe('mapNavigation', () => {
       link: { id: 1, page: null, anchor: null, url: 'https://external.com', file: null },
       children: null,
       sortOrder: 0,
+      menu_set: null,
+
     };
 
     const result = mapNavigation(raw);

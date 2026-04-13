@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { getProjects } from '@/lib/strapi/data';
 import { ProjectCard } from '@/components/ui/ProjectCard';
+import MenuSetOverride from '@/components/layout/MenuSetOverride';
 import Link from 'next/link';
 import { clsx } from 'clsx';
 
@@ -21,6 +22,7 @@ export default async function ProjektyPage({ searchParams }: PageProps) {
 
   return (
     <main className="bg-surface pt-16 lg:pt-20">
+      <MenuSetOverride pageSlug="projekty" />
       <div className="container mx-auto px-4 lg:px-8 py-8 lg:py-12">
         <h1 className="text-3xl lg:text-4xl font-bold text-primary heading-accent mb-8">
           Projekty

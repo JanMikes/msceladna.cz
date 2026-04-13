@@ -28,6 +28,11 @@
     "sortOrder": {
       "type": "integer",
       "default": 0
+    },
+    "menu_set": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::menu-set.menu-set"
     }
   }
 }

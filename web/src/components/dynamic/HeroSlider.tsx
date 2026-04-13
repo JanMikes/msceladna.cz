@@ -22,11 +22,10 @@ export function HeroSlider({ data }: HeroSliderProps) {
 
   return (
     <div className="relative group">
-      <div className="px-12">
       <div className="overflow-hidden" ref={emblaRef}>
         <div className="flex">
           {slides.map((slide, i) => (
-            <div key={i} className="flex-[0_0_100%] min-w-0">
+            <div key={i} className="flex-[0_0_100%] min-w-0 px-12">
               <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-center">
                 {/* Left: text content */}
                 <div className="flex-1 min-w-0">
@@ -92,7 +91,6 @@ export function HeroSlider({ data }: HeroSliderProps) {
             </div>
           ))}
         </div>
-      </div>
       </div>
       {slides.length > 1 && (
         <>

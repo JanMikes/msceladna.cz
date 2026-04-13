@@ -575,6 +575,35 @@ export interface ApiFormForm extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiMenuSetMenuSet extends Struct.CollectionTypeSchema {
+  collectionName: 'menu_sets';
+  info: {
+    displayName: 'Sada menu';
+    pluralName: 'menu-sets';
+    singularName: 'menu-set';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    is_default: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::menu-set.menu-set'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiNavigationNavigation extends Struct.CollectionTypeSchema {
   collectionName: 'navigations';
   info: {
@@ -598,6 +627,7 @@ export interface ApiNavigationNavigation extends Struct.CollectionTypeSchema {
       'api::navigation.navigation'
     > &
       Schema.Attribute.Private;
+    menu_set: Schema.Attribute.Relation<'manyToOne', 'api::menu-set.menu-set'>;
     publishedAt: Schema.Attribute.DateTime;
     sortOrder: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
     title: Schema.Attribute.String & Schema.Attribute.Required;
@@ -737,6 +767,7 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::page.page'> &
       Schema.Attribute.Private;
+    menu_set: Schema.Attribute.Relation<'manyToOne', 'api::menu-set.menu-set'>;
     meta_description: Schema.Attribute.String;
     parent: Schema.Attribute.Relation<'manyToOne', 'api::page.page'>;
     publishedAt: Schema.Attribute.DateTime;
@@ -1458,6 +1489,7 @@ declare module '@strapi/strapi' {
       'api::employee.employee': ApiEmployeeEmployee;
       'api::footer.footer': ApiFooterFooter;
       'api::form.form': ApiFormForm;
+      'api::menu-set.menu-set': ApiMenuSetMenuSet;
       'api::navigation.navigation': ApiNavigationNavigation;
       'api::news-article.news-article': ApiNewsArticleNewsArticle;
       'api::organization.organization': ApiOrganizationOrganization;

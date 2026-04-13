@@ -84,6 +84,11 @@
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::page.page"
+    },
+    "menu_set": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::menu-set.menu-set"
     }
   }
 }

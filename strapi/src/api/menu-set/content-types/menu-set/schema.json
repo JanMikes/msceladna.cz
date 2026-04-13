@@ -1,0 +1,22 @@
+{
+  "kind": "collectionType",
+  "collectionName": "menu_sets",
+  "info": {
+    "singularName": "menu-set",
+    "pluralName": "menu-sets",
+    "displayName": "Sada menu"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "is_default": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

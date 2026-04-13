@@ -2,7 +2,7 @@
   "collectionName": "components_elements_banner_cards",
   "info": {
     "displayName": "Banner karta",
-    "description": "Banner card with title, description and link"
+    "description": "Banner card with title, description, link, image and icons"
   },
   "attributes": {
     "title": {
@@ -15,6 +15,51 @@
       "type": "component",
       "component": "elements.text-link",
       "repeatable": false
+    },
+    "image": {
+      "type": "media",
+      "allowedTypes": ["images"],
+      "multiple": false
+    },
+    "image_position": {
+      "type": "enumeration",
+      "enum": ["left", "right"],
+      "default": "left"
+    },
+    "icon_1": {
+      "type": "media",
+      "allowedTypes": ["images"],
+      "multiple": false
+    },
+    "icon_2": {
+      "type": "media",
+      "allowedTypes": ["images"],
+      "multiple": false
+    },
+    "icon_3": {
+      "type": "media",
+      "allowedTypes": ["images"],
+      "multiple": false
+    },
+    "icon_4": {
+      "type": "media",
+      "allowedTypes": ["images"],
+      "multiple": false
+    },
+    "icon_5": {
+      "type": "media",
+      "allowedTypes": ["images"],
+      "multiple": false
+    },
+    "icon_6": {
+      "type": "media",
+      "allowedTypes": ["images"],
+      "multiple": false
+    },
+    "icon_7": {
+      "type": "media",
+      "allowedTypes": ["images"],
+      "multiple": false
     }
   }
 }

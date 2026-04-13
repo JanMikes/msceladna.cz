@@ -63,6 +63,14 @@ const featureCardPopulate = {
 const bannerCardPopulate = {
   populate: {
     link: textLinkPopulate,
+    image: mediaFields,
+    icon_1: mediaFields,
+    icon_2: mediaFields,
+    icon_3: mediaFields,
+    icon_4: mediaFields,
+    icon_5: mediaFields,
+    icon_6: mediaFields,
+    icon_7: mediaFields,
   },
 };
 
@@ -251,6 +259,7 @@ export function buildPagePopulate() {
     content: buildDynamicZonePopulate(),
     sidebar: buildDynamicZonePopulate(),
     ...buildParentPopulate(5),
+    menu_set: { fields: ['documentId'] },
   };
 }
 
@@ -283,6 +292,7 @@ export function buildNavigationPopulate() {
         },
       },
     },
+    menu_set: { fields: ['documentId'] },
   };
 }
 

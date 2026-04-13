@@ -194,13 +194,61 @@ export default function KomponentyPage() {
         ))}
 
         {/* Banner Cards */}
-        <Section title="BannerCards">
+        <Section title="BannerCards - Style 1 (image left)">
           <BannerCards data={{
             id: 60, __component: 'components.banner-cards',
-            cards: [
-              { icon_type: 'hidden', icon: null, icon_text: null, title: 'Důležité oznámení', description: 'Toto je důležitá informace pro všechny rodiče naší mateřské školy.', link: { href: '#', external: false, text: 'Zjistit více', disabled: false } },
-              { icon_type: 'hidden', icon: null, icon_text: null, title: 'Zápis do MŠ', description: 'Informace o zápisu do mateřské školy pro školní rok 2026/2027.', link: { href: '#', external: false, text: 'Podrobnosti', disabled: false } },
-            ],
+            style: '1',
+            cards: [{
+              title: 'Testovací nadpis', description: 'Popis karty s dalšími informacemi o obsahu, protože tady každý debil napíše věty, které budou dlouhé, takže asi si to i tak měl OK.',
+              link: { href: '#', external: false, text: 'Více informací', disabled: false },
+              image: { url: 'https://placehold.co/800x500/358577/FFFFFF?text=Foto', alternativeText: 'Foto', width: 800, height: 500 },
+              image_position: 'left',
+              icon_1: { url: 'https://placehold.co/112x112/AFC25E/FFFFFF?text=Ikon+1', alternativeText: '', width: 112, height: 112 },
+              icon_2: { url: 'https://placehold.co/64x64/AFC25E/FFFFFF?text=Ikon+2', alternativeText: '', width: 64, height: 64 },
+              icon_3: { url: 'https://placehold.co/56x56/AFC25E/FFFFFF?text=Ikon+3', alternativeText: '', width: 56, height: 56 },
+              icon_4: { url: 'https://placehold.co/56x56/AFC25E/FFFFFF?text=Ikon+4', alternativeText: '', width: 56, height: 56 },
+              icon_5: { url: 'https://placehold.co/96x96/AFC25E/FFFFFF?text=Ikon+5', alternativeText: '', width: 96, height: 96 },
+              icon_6: { url: 'https://placehold.co/56x56/AFC25E/FFFFFF?text=Ikon+6', alternativeText: '', width: 56, height: 56 },
+              icon_7: { url: 'https://placehold.co/48x48/AFC25E/FFFFFF?text=Ikon+7', alternativeText: '', width: 48, height: 48 },
+            }],
+          } satisfies ComponentBannerCards} />
+        </Section>
+
+        <Section title="BannerCards - Style 1 (image right)">
+          <BannerCards data={{
+            id: 61, __component: 'components.banner-cards',
+            style: '1',
+            cards: [{
+              title: 'Testovací nadpis', description: 'Popis karty s dalšími informacemi o obsahu, protože tady každý debil napíše věty, které budou dlouhé, takže asi si to i tak měl OK.',
+              link: { href: '#', external: false, text: 'Více informací', disabled: false },
+              image: { url: 'https://placehold.co/800x500/358577/FFFFFF?text=Foto', alternativeText: 'Foto', width: 800, height: 500 },
+              image_position: 'right',
+              icon_1: { url: 'https://placehold.co/112x112/AFC25E/FFFFFF?text=Ikon+1', alternativeText: '', width: 112, height: 112 },
+              icon_2: { url: 'https://placehold.co/64x64/AFC25E/FFFFFF?text=Ikon+2', alternativeText: '', width: 64, height: 64 },
+              icon_3: { url: 'https://placehold.co/56x56/AFC25E/FFFFFF?text=Ikon+3', alternativeText: '', width: 56, height: 56 },
+              icon_4: { url: 'https://placehold.co/56x56/AFC25E/FFFFFF?text=Ikon+4', alternativeText: '', width: 56, height: 56 },
+              icon_5: { url: 'https://placehold.co/96x96/AFC25E/FFFFFF?text=Ikon+5', alternativeText: '', width: 96, height: 96 },
+              icon_6: { url: 'https://placehold.co/56x56/AFC25E/FFFFFF?text=Ikon+6', alternativeText: '', width: 56, height: 56 },
+              icon_7: { url: 'https://placehold.co/48x48/AFC25E/FFFFFF?text=Ikon+7', alternativeText: '', width: 48, height: 48 },
+            }],
+          } satisfies ComponentBannerCards} />
+        </Section>
+
+        <Section title="BannerCards - Style 2">
+          <BannerCards data={{
+            id: 62, __component: 'components.banner-cards',
+            style: '2',
+            cards: [{
+              title: 'Testovací nadpis', description: 'Popis karty s dalšími informacemi o obsahu.',
+              link: { href: '#', external: false, text: 'Více informací', disabled: false },
+              image: null, image_position: 'left',
+              icon_1: { url: 'https://placehold.co/96x96/FFFFFF/275D56?text=Ikon+1', alternativeText: '', width: 96, height: 96 },
+              icon_2: { url: 'https://placehold.co/96x96/FFFFFF/275D56?text=Ikon+2', alternativeText: '', width: 96, height: 96 },
+              icon_3: { url: 'https://placehold.co/96x96/FFFFFF/275D56?text=Ikon+3', alternativeText: '', width: 96, height: 96 },
+              icon_4: { url: 'https://placehold.co/112x112/FFFFFF/275D56?text=Ikon+4', alternativeText: '', width: 112, height: 112 },
+              icon_5: { url: 'https://placehold.co/128x128/FFFFFF/275D56?text=Ikon+6', alternativeText: '', width: 128, height: 128 },
+              icon_6: null, icon_7: null,
+            }],
           } satisfies ComponentBannerCards} />
         </Section>
 

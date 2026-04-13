@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
+import { NavigationProvider } from '@/components/layout/NavigationContext';
 import { getNavigation, getFooter, getOrganization } from '@/lib/strapi/data';
 import './globals.css';
 
@@ -55,8 +56,10 @@ export default async function RootLayout({
   return (
     <html lang="cs" className={inter.variable}>
       <body className="font-sans">
-        <Header navigation={navigation} />
-        {children}
+        <NavigationProvider defaultNavigation={navigation}>
+          <Header />
+          {children}
+        </NavigationProvider>
         <Footer footer={footer} organization={organization} />
       </body>
     </html>
