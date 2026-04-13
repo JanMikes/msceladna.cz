@@ -48,7 +48,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
           ]}
         />
 
-        <article className="max-w-4xl space-y-6">
+        <article className="space-y-6">
           <div>
             <div className="flex items-center gap-2 mb-3 flex-wrap">
               {project.status && (
