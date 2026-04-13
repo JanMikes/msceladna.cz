@@ -1,16 +1,20 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import localFont from 'next/font/local';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { NavigationProvider } from '@/components/layout/NavigationContext';
 import { getNavigation, getFooter, getOrganization } from '@/lib/strapi/data';
 import './globals.css';
 
-const inter = Inter({
-  subsets: ['latin', 'latin-ext'],
+const gogh = localFont({
+  src: [
+    { path: '../../public/fonts/Gogh-400.woff2', weight: '400', style: 'normal' },
+    { path: '../../public/fonts/Gogh-500.woff2', weight: '500', style: 'normal' },
+    { path: '../../public/fonts/Gogh-700.woff2', weight: '700', style: 'normal' },
+    { path: '../../public/fonts/Gogh-800.woff2', weight: '800', style: 'normal' },
+  ],
   display: 'swap',
-  variable: '--font-inter',
-  weight: ['400', '500', '600', '700', '800'],
+  variable: '--font-gogh',
 });
 
 export const metadata: Metadata = {
@@ -54,7 +58,7 @@ export default async function RootLayout({
   ]);
 
   return (
-    <html lang="cs" className={inter.variable}>
+    <html lang="cs" className={gogh.variable}>
       <body className="font-sans">
         <NavigationProvider defaultNavigation={navigation}>
           <Header />
