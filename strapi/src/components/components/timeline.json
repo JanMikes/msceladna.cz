@@ -2,7 +2,8 @@
   "collectionName": "components_components_timelines",
   "info": {
     "displayName": "Časová osa",
-    "description": "Numbered timeline steps"
+    "description": "Numbered timeline steps",
+    "icon": "clock"
   },
   "attributes": {
     "items": {

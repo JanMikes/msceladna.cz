@@ -2,7 +2,8 @@
   "collectionName": "components_components_accordion_sections",
   "info": {
     "displayName": "Rozjížděcí sekce",
-    "description": "Accordion with expandable sections"
+    "description": "Accordion with expandable sections",
+    "icon": "list"
   },
   "attributes": {
     "sections": {

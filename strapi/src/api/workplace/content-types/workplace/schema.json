@@ -78,7 +78,8 @@
         "components.form",
         "components.workplace-cards",
         "components.employee-cards",
-        "components.map"
+        "components.map",
+        "components.stats-section"
       ]
     },
     "sidebar": {

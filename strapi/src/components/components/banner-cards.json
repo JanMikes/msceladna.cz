@@ -2,7 +2,8 @@
   "collectionName": "components_components_banner_cards",
   "info": {
     "displayName": "Banner karty",
-    "description": "Full-width stacked banner cards"
+    "description": "Full-width stacked banner cards",
+    "icon": "layout"
   },
   "attributes": {
     "cards": {

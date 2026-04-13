@@ -2,7 +2,8 @@
   "collectionName": "components_components_stats_highlights",
   "info": {
     "displayName": "Statistiky",
-    "description": "Stats highlight blocks"
+    "description": "Stats highlight blocks",
+    "icon": "chartBubble"
   },
   "attributes": {
     "items": {

@@ -2,7 +2,8 @@
   "collectionName": "components_components_hero_sliders",
   "info": {
     "displayName": "Slider",
-    "description": "Full-width content slider with image, text and info items"
+    "description": "Full-width content slider with image, text and info items",
+    "icon": "monitor"
   },
   "attributes": {
     "slides": {

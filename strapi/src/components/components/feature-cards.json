@@ -2,7 +2,8 @@
   "collectionName": "components_components_feature_cards",
   "info": {
     "displayName": "Karty",
-    "description": "Grid of feature cards"
+    "description": "Grid of feature cards",
+    "icon": "grid"
   },
   "attributes": {
     "cards": {

@@ -2,7 +2,8 @@
   "collectionName": "components_components_workplace_cards",
   "info": {
     "displayName": "Dlaždice pracovišť",
-    "description": "Grid of workplace cards"
+    "description": "Grid of workplace cards",
+    "icon": "house"
   },
   "attributes": {
     "cards": {

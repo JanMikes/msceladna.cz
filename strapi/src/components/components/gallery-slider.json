@@ -2,7 +2,8 @@
   "collectionName": "components_components_gallery_sliders",
   "info": {
     "displayName": "Pás galerie",
-    "description": "Horizontal photo strip slider"
+    "description": "Horizontal photo strip slider",
+    "icon": "landscape"
   },
   "attributes": {
     "photos": {

@@ -2,7 +2,8 @@
   "collectionName": "components_components_badges",
   "info": {
     "displayName": "Badges",
-    "description": "Group of badge labels"
+    "description": "Group of badge labels",
+    "icon": "priceTag"
   },
   "attributes": {
     "badges": {

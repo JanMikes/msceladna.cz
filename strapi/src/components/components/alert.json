@@ -2,7 +2,8 @@
   "collectionName": "components_components_alerts",
   "info": {
     "displayName": "Upozornění",
-    "description": "Alert message with type variants"
+    "description": "Alert message with type variants",
+    "icon": "information"
   },
   "attributes": {
     "type": {

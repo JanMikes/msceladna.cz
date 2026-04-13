@@ -2,7 +2,8 @@
   "collectionName": "components_components_popups",
   "info": {
     "displayName": "Popup",
-    "description": "Modal popup with dismissal memory"
+    "description": "Modal popup with dismissal memory",
+    "icon": "message"
   },
   "attributes": {
     "title": {

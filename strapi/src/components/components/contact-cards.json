@@ -2,7 +2,8 @@
   "collectionName": "components_components_contact_cards",
   "info": {
     "displayName": "Kontakty",
-    "description": "Grid of contact person cards"
+    "description": "Grid of contact person cards",
+    "icon": "envelop"
   },
   "attributes": {
     "cards": {

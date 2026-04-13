@@ -596,8 +596,8 @@ export interface ApiMenuSetMenuSet extends Struct.CollectionTypeSchema {
       'api::menu-set.menu-set'
     > &
       Schema.Attribute.Private;
-    name: Schema.Attribute.String & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -758,6 +758,7 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
         'components.workplace-cards',
         'components.employee-cards',
         'components.map',
+        'components.stats-section',
       ]
     > &
       Schema.Attribute.Required;
@@ -922,6 +923,7 @@ export interface ApiWorkplaceWorkplace extends Struct.CollectionTypeSchema {
         'components.workplace-cards',
         'components.employee-cards',
         'components.map',
+        'components.stats-section',
       ]
     >;
     createdAt: Schema.Attribute.DateTime;

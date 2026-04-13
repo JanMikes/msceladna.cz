@@ -2,7 +2,8 @@
   "collectionName": "components_components_section_dividers",
   "info": {
     "displayName": "Rozdělovník",
-    "description": "Horizontal divider with spacing and style"
+    "description": "Horizontal divider with spacing and style",
+    "icon": "collapse"
   },
   "attributes": {
     "spacing": {
