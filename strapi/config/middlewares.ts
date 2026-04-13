@@ -25,7 +25,13 @@ export default [
     },
   },
   'strapi::poweredBy',
-  'strapi::query',
+  {
+    name: 'strapi::query',
+    config: {
+      parameterLimit: 10000,
+      depth: 20,
+    },
+  },
   'strapi::body',
   'strapi::session',
   'strapi::favicon',
