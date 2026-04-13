@@ -212,7 +212,6 @@ function mapDynamicZoneComponent(raw: StrapiRawDynamicZoneComponent): DynamicZon
       return {
         ...base,
         __component: 'components.news-articles',
-        workplaces: mapWorkplaceRefs(raw.workplaces),
         newsArticleType: (raw.news_article_type as string) ?? null,
         limit: (raw.limit as number) ?? 6,
         show_all_link: resolveTextLink(raw.show_all_link as Parameters<typeof resolveTextLink>[0]),

@@ -396,7 +396,6 @@ export interface ComponentImage extends DynamicZoneBase {
 
 export interface ComponentNewsArticles extends DynamicZoneBase {
   __component: 'components.news-articles';
-  workplaces: { name: string; slug: string }[];
   newsArticleType: string | null;
   limit: number;
   show_all_link: ResolvedTextLink | null;

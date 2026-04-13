@@ -193,7 +193,6 @@ function buildDynamicZonePopulate() {
       },
       'components.news-articles': {
         populate: {
-          workplaces: { fields: ['name', 'slug'] },
           show_all_link: textLinkPopulate,
         },
       },

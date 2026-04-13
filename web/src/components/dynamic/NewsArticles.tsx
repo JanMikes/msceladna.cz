@@ -9,9 +9,7 @@ interface NewsArticlesProps {
 }
 
 export async function NewsArticles({ data, sidebar }: NewsArticlesProps) {
-  const workplaceSlug = data.workplaces?.[0]?.slug;
   const { articles } = await getNewsArticles({
-    workplaceSlug,
     type: data.newsArticleType ?? undefined,
     limit: data.limit || 6,
   });
