@@ -83,11 +83,11 @@ export default function Footer({ footer, organization }: FooterProps) {
               {footer?.text && (
                 <MarkdownInline
                   content={footer.text}
-                  className="text-white/60 text-sm mb-5 leading-relaxed max-w-xs"
+                  className="text-white text-sm mb-5 leading-relaxed max-w-xs"
                 />
               )}
               {organization && (
-                <div className="text-white/40 text-xs space-y-1">
+                <div className="text-white text-xs space-y-1">
                   {organization.ico && <p>IČ: {organization.ico}</p>}
                   {organization.dataBox && <p>Datová schránka: {organization.dataBox}</p>}
                 </div>
@@ -110,7 +110,7 @@ export default function Footer({ footer, organization }: FooterProps) {
                       <li key={linkIndex}>
                         <Link
                           href={link.href}
-                          className="text-white/60 hover:text-accent transition-colors inline-flex items-center gap-2 group text-sm"
+                          className="text-white hover:text-accent transition-colors inline-flex items-center gap-2 group text-sm"
                           {...props}
                         >
                           <ArrowRight className="w-3.5 h-3.5 text-accent/50 group-hover:text-accent group-hover:translate-x-0.5 transition-all" />
@@ -139,12 +139,12 @@ export default function Footer({ footer, organization }: FooterProps) {
                       {item.href ? (
                         <a
                           href={item.href}
-                          className="text-white/60 hover:text-white transition-colors text-sm mt-1"
+                          className="text-white hover:text-white transition-colors text-sm mt-1"
                         >
                           {item.text}
                         </a>
                       ) : (
-                        <span className="text-white/60 text-sm mt-1">{item.text}</span>
+                        <span className="text-white text-sm mt-1">{item.text}</span>
                       )}
                     </li>
                   ))}
@@ -157,7 +157,7 @@ export default function Footer({ footer, organization }: FooterProps) {
         {/* Bottom Bar */}
         <div className="border-t border-white/10 relative">
           <div className="container mx-auto px-4 lg:px-8 py-5">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-white/40">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-white">
               <p>&copy; {new Date().getFullYear()} {organization?.name || 'MŠ Čeladná'}. Všechna práva vyhrazena.</p>
               {bottomLinks.length > 0 && (
                 <div className="flex items-center gap-6">
@@ -169,7 +169,7 @@ export default function Footer({ footer, organization }: FooterProps) {
                       <Link
                         key={index}
                         href={link.href}
-                        className="hover:text-white/70 transition-colors"
+                        className="hover:text-white transition-colors"
                         {...props}
                       >
                         {link.text}

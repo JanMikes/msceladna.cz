@@ -44,7 +44,7 @@ function Style1Card({ card }: { card: BannerCard }) {
         {card.description && (
           <MarkdownInline
             content={card.description}
-            className="text-white/70 text-sm leading-relaxed mb-4 max-w-lg"
+            className="text-white text-sm leading-relaxed mb-4 max-w-lg"
           />
         )}
         {card.link && (
@@ -81,7 +81,7 @@ function Style2Card({ card }: { card: BannerCard }) {
         {card.description && (
           <MarkdownInline
             content={card.description}
-            className="text-white/70 text-sm leading-relaxed mb-4 max-w-lg"
+            className="text-white text-sm leading-relaxed mb-4 max-w-lg"
           />
         )}
         {card.link && (

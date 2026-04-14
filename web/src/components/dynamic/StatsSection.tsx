@@ -21,7 +21,7 @@ export function StatsSection({ data }: StatsSectionProps) {
           {data.description && (
             <MarkdownInline
               content={data.description}
-              className="text-white/70 text-sm leading-relaxed mb-6"
+              className="text-white text-sm leading-relaxed mb-6"
             />
           )}
           {data.link && (
@@ -63,7 +63,7 @@ export function StatsSection({ data }: StatsSectionProps) {
               {item.description && (
                 <MarkdownInline
                   content={item.description}
-                  className="text-white/70 text-xs leading-relaxed"
+                  className="text-white text-xs leading-relaxed"
                 />
               )}
             </div>

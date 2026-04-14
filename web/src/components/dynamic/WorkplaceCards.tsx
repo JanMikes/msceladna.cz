@@ -32,7 +32,7 @@ export function WorkplaceCards({ data }: WorkplaceCardsProps) {
               {workplace.description && (
                 <MarkdownInline
                   content={workplace.description}
-                  className="text-white/70 text-sm leading-relaxed mb-4"
+                  className="text-white text-sm leading-relaxed mb-4"
                 />
               )}
               {workplace.link && (
