@@ -3,7 +3,9 @@ import type { Core } from '@strapi/strapi';
 const SEPARATOR = ' / ';
 const PAGE_UID = 'api::page.page' as const;
 const PAGE_TABLE = 'pages';
-const CM_CONFIG_KEY = `plugin_content_manager_configuration_content_types::${PAGE_UID}`;
+const CM_CT_PREFIX = 'plugin_content_manager_configuration_content_types';
+const CM_COMP_PREFIX = 'plugin_content_manager_configuration_components';
+const CM_CONFIG_KEY = `${CM_CT_PREFIX}::${PAGE_UID}`;
 
 type PageRow = {
   id: number;
@@ -46,25 +48,64 @@ async function backfillPageAdminLabels(strapi: Core.Strapi) {
   if (updated > 0) strapi.log.info(`[page admin_label] backfilled ${updated} page(s)`);
 }
 
-async function ensurePageMainField(strapi: Core.Strapi) {
-  const row = await strapi.db
-    .query('strapi::core-store')
-    .findOne({ where: { key: CM_CONFIG_KEY } });
-  if (!row?.value) return; // admin will create the config on first view; re-run will pick it up
+async function patchConfig(
+  strapi: Core.Strapi,
+  key: string,
+  mutate: (config: any) => boolean,
+): Promise<boolean> {
+  const row = await strapi.db.query('strapi::core-store').findOne({ where: { key } });
+  if (!row?.value) return false;
   const raw = typeof row.value === 'string' ? row.value : JSON.stringify(row.value);
-  let config: { settings?: { mainField?: string } };
+  let config: any;
   try {
     config = JSON.parse(raw);
   } catch {
-    return;
+    return false;
   }
-  if (!config?.settings) return;
-  if (config.settings.mainField === 'admin_label') return;
-  config.settings.mainField = 'admin_label';
+  if (!mutate(config)) return false;
   await strapi.db
     .query('strapi::core-store')
-    .update({ where: { key: CM_CONFIG_KEY }, data: { value: JSON.stringify(config) } });
-  strapi.log.info('[page admin_label] set mainField = admin_label');
+    .update({ where: { key }, data: { value: JSON.stringify(config) } });
+  return true;
+}
+
+async function ensurePageMainFields(strapi: Core.Strapi) {
+  // 1. Page's own entry-title / mainField
+  if (
+    await patchConfig(strapi, CM_CONFIG_KEY, (config) => {
+      if (config?.settings?.mainField === 'admin_label') return false;
+      config.settings.mainField = 'admin_label';
+      return true;
+    })
+  ) {
+    strapi.log.info('[page admin_label] Page.mainField -> admin_label');
+  }
+
+  // 2. Per-relation mainField in every model that has a relation to api::page.page
+  const collect = (
+    models: Record<string, { attributes?: Record<string, any> }>,
+    prefix: string,
+  ): Array<{ key: string; attribute: string }> =>
+    Object.entries(models).flatMap(([uid, model]) =>
+      Object.entries(model.attributes ?? {})
+        .filter(([, attr]) => attr?.type === 'relation' && attr?.target === PAGE_UID)
+        .map(([attrName]) => ({ key: `${prefix}::${uid}`, attribute: attrName })),
+    );
+
+  const targets = [
+    ...collect(strapi.contentTypes as any, CM_CT_PREFIX),
+    ...collect(strapi.components as any, CM_COMP_PREFIX),
+  ];
+
+  for (const { key, attribute } of targets) {
+    const changed = await patchConfig(strapi, key, (config) => {
+      const meta = config?.metadatas?.[attribute]?.edit;
+      if (!meta || meta.mainField === 'admin_label') return false;
+      meta.mainField = 'admin_label';
+      return true;
+    });
+    if (changed) strapi.log.info(`[page admin_label] ${key}.${attribute} -> admin_label`);
+  }
 }
 
 export default {
@@ -77,7 +118,7 @@ export default {
       strapi.log.warn(`[page admin_label] backfill skipped: ${(err as Error).message}`);
     }
     try {
-      await ensurePageMainField(strapi);
+      await ensurePageMainFields(strapi);
     } catch (err) {
       strapi.log.warn(`[page admin_label] mainField update skipped: ${(err as Error).message}`);
     }
