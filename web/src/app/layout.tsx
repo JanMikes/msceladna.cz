@@ -59,7 +59,7 @@ export default async function RootLayout({
 
   return (
     <html lang="cs" className={gogh.variable}>
-      <body className="font-sans">
+      <body className="font-sans min-h-screen flex flex-col">
         <NavigationProvider defaultNavigation={navigation}>
           <Header />
           {children}

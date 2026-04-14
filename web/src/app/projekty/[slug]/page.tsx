@@ -38,9 +38,9 @@ export default async function ProjectDetailPage({ params }: PageProps) {
   }
 
   return (
-    <main className="bg-surface pt-16 lg:pt-20">
+    <main className="bg-surface pt-16 lg:pt-[4.5rem] flex-1">
       <MenuSetOverride pageSlug="projekty" />
-      <div className="container mx-auto px-4 lg:px-8 pb-8 lg:pb-12">
+      <div className="container mx-auto px-4 lg:px-8 py-[30px]">
         <Breadcrumbs
           items={[
             { label: 'Projekty', href: '/projekty' },

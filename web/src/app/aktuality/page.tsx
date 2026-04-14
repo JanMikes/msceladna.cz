@@ -28,9 +28,9 @@ export default async function AktualityPage({ searchParams }: PageProps) {
   const totalPages = Math.ceil(total / pageSize);
 
   return (
-    <main className="bg-surface pt-16 lg:pt-20">
+    <main className="bg-surface pt-16 lg:pt-[4.5rem] flex-1">
       <MenuSetOverride pageSlug="aktuality" />
-      <div className="container mx-auto px-4 lg:px-8 py-8 lg:py-12">
+      <div className="container mx-auto px-4 lg:px-8 py-[30px]">
         <h1 className="text-3xl lg:text-4xl font-bold text-primary heading-accent mb-8">
           Aktuality
         </h1>

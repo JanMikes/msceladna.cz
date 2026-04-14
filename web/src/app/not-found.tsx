@@ -2,12 +2,12 @@ import Link from 'next/link';
 
 export default function NotFound() {
   return (
-    <main className="bg-surface pt-16 lg:pt-20 min-h-screen flex items-center relative overflow-hidden">
+    <main className="bg-surface pt-16 lg:pt-[4.5rem] flex-1 flex items-center relative overflow-hidden">
       {/* Decorative circles */}
       <div className="absolute top-1/4 -left-20 w-64 h-64 rounded-full bg-teal-tint opacity-60" />
       <div className="absolute bottom-1/4 -right-16 w-48 h-48 rounded-full bg-lime-tint opacity-60" />
 
-      <div className="container mx-auto px-4 lg:px-8 py-16 text-center relative">
+      <div className="container mx-auto px-4 lg:px-8 py-[30px] text-center relative">
         <p className="text-[8rem] lg:text-[12rem] font-black text-primary/[0.06] leading-none select-none">404</p>
         <div className="-mt-16 lg:-mt-24">
           <h2 className="text-2xl lg:text-3xl font-bold text-primary mb-4">

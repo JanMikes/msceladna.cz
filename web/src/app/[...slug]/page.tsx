@@ -49,9 +49,9 @@ export default async function CmsPage({ params }: PageProps) {
   const hasSidebar = page.sidebar && page.sidebar.length > 0;
 
   return (
-    <main className="bg-surface pt-16 lg:pt-20">
+    <main className="bg-surface pt-16 lg:pt-[4.5rem] flex-1">
       {menuNavigation && <NavigationOverride navigation={menuNavigation} />}
-      <div className="container mx-auto px-4 lg:px-8 pb-8 lg:pb-12">
+      <div className="container mx-auto px-4 lg:px-8 py-[30px]">
         <Breadcrumbs items={page.breadcrumbs} />
         {hasSidebar ? (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
