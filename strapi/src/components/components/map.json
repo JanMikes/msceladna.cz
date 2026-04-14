@@ -2,14 +2,17 @@
   "collectionName": "components_components_maps",
   "info": {
     "displayName": "Mapa",
-    "description": "Map with location pins",
+    "description": "Map embed from a Google Maps URL",
     "icon": "pin"
   },
   "attributes": {
-    "locations": {
-      "type": "component",
-      "component": "elements.map-location",
-      "repeatable": true
+    "url": {
+      "type": "string",
+      "required": true
+    },
+    "height": {
+      "type": "integer",
+      "default": 400
     }
   }
 }

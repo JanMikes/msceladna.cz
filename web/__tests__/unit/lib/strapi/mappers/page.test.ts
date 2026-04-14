@@ -258,7 +258,7 @@ describe('mapDynamicZone / mapDynamicZoneComponent', () => {
       {
         id: 10,
         __component: 'components.map',
-        embedUrl: 'https://maps.google.com/embed?q=1',
+        url: 'https://maps.app.goo.gl/GFmeVPUY3iv1JDgy6',
         height: 500,
       },
     ];
@@ -266,11 +266,11 @@ describe('mapDynamicZone / mapDynamicZoneComponent', () => {
     expect(result).toHaveLength(1);
     const map = result[0] as {
       __component: string;
-      embedUrl: string;
+      url: string;
       height: number;
     };
     expect(map.__component).toBe('components.map');
-    expect(map.embedUrl).toBe('https://maps.google.com/embed?q=1');
+    expect(map.url).toBe('https://maps.app.goo.gl/GFmeVPUY3iv1JDgy6');
     expect(map.height).toBe(500);
   });
 
@@ -279,8 +279,8 @@ describe('mapDynamicZone / mapDynamicZoneComponent', () => {
       { id: 10, __component: 'components.map' },
     ];
     const result = mapDynamicZone(raw);
-    const map = result[0] as { embedUrl: string | null; height: number };
-    expect(map.embedUrl).toBeNull();
+    const map = result[0] as { url: string | null; height: number };
+    expect(map.url).toBeNull();
     expect(map.height).toBe(400);
   });
 

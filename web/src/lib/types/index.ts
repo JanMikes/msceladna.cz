@@ -414,7 +414,7 @@ export interface ComponentEmployeeCards extends DynamicZoneBase {
 
 export interface ComponentMap extends DynamicZoneBase {
   __component: 'components.map';
-  embedUrl: string | null;
+  url: string | null;
   height: number;
 }
 

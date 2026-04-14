@@ -1,11 +1,15 @@
 import type { ComponentMap } from '@/lib/types';
+import { resolveMapEmbedUrl } from '@/lib/maps';
 
 interface MapEmbedProps {
   data: ComponentMap;
 }
 
-export function MapEmbed({ data }: MapEmbedProps) {
-  if (!data.embedUrl) return null;
+export async function MapEmbed({ data }: MapEmbedProps) {
+  if (!data.url) return null;
+
+  const embedUrl = await resolveMapEmbedUrl(data.url);
+  if (!embedUrl) return null;
 
   return (
     <div
@@ -13,7 +17,7 @@ export function MapEmbed({ data }: MapEmbedProps) {
       style={{ height: data.height || 400 }}
     >
       <iframe
-        src={data.embedUrl}
+        src={embedUrl}
         width="100%"
         height="100%"
         style={{ border: 0 }}

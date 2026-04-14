@@ -239,7 +239,7 @@ function mapDynamicZoneComponent(raw: StrapiRawDynamicZoneComponent): DynamicZon
       return {
         ...base,
         __component: 'components.map',
-        embedUrl: (raw.embedUrl as string) ?? null,
+        url: (raw.url as string) ?? null,
         height: (raw.height as number) ?? 400,
       };
 

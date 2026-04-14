@@ -221,11 +221,12 @@ export interface ComponentsLinksList extends Struct.ComponentSchema {
 export interface ComponentsMap extends Struct.ComponentSchema {
   collectionName: 'components_components_maps';
   info: {
-    description: 'Map with location pins';
+    description: 'Map embed from a Google Maps URL';
     displayName: 'Mapa';
   };
   attributes: {
-    locations: Schema.Attribute.Component<'elements.map-location', true>;
+    height: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<400>;
+    url: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
@@ -583,20 +584,6 @@ export interface ElementsLink extends Struct.ComponentSchema {
   };
 }
 
-export interface ElementsMapLocation extends Struct.ComponentSchema {
-  collectionName: 'components_elements_map_locations';
-  info: {
-    description: 'Map location pin';
-    displayName: 'Um\u00EDst\u011Bn\u00ED na map\u011B';
-  };
-  attributes: {
-    address: Schema.Attribute.String;
-    lat: Schema.Attribute.String;
-    lng: Schema.Attribute.String;
-    name: Schema.Attribute.String & Schema.Attribute.Required;
-  };
-}
-
 export interface ElementsNavItem extends Struct.ComponentSchema {
   collectionName: 'components_elements_nav_items';
   info: {
@@ -868,7 +855,6 @@ declare module '@strapi/strapi' {
       'elements.hero-slider-info': ElementsHeroSliderInfo;
       'elements.hero-slider-slide': ElementsHeroSliderSlide;
       'elements.link': ElementsLink;
-      'elements.map-location': ElementsMapLocation;
       'elements.nav-item': ElementsNavItem;
       'elements.partner-logo': ElementsPartnerLogo;
       'elements.photo': ElementsPhoto;
