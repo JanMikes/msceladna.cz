@@ -247,6 +247,7 @@ export interface ComponentsNewsArticles extends Struct.ComponentSchema {
       > &
       Schema.Attribute.DefaultTo<6>;
     show_all_link: Schema.Attribute.Component<'elements.text-link', false>;
+    tag: Schema.Attribute.Relation<'oneToOne', 'api::tag.tag'>;
   };
 }
 

@@ -186,6 +186,7 @@ function buildDynamicZonePopulate() {
       'components.news-articles': {
         populate: {
           show_all_link: textLinkPopulate,
+          tag: { fields: ['name', 'slug'] },
         },
       },
       'components.workplace-cards': {

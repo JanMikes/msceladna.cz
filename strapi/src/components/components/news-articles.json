@@ -16,6 +16,11 @@
       "type": "component",
       "component": "elements.text-link",
       "repeatable": false
+    },
+    "tag": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::tag.tag"
     }
   }
 }

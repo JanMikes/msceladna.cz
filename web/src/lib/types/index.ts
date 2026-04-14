@@ -387,6 +387,7 @@ export interface ComponentNewsArticles extends DynamicZoneBase {
   __component: 'components.news-articles';
   newsArticleType: string | null;
   limit: number;
+  tagSlug: string | null;
   show_all_link: ResolvedTextLink | null;
 }
 

@@ -209,14 +209,17 @@ function mapDynamicZoneComponent(raw: StrapiRawDynamicZoneComponent): DynamicZon
         align: (raw.align as ComponentImage['align']) ?? 'center',
       };
 
-    case 'components.news-articles':
+    case 'components.news-articles': {
+      const tagRaw = raw.tag as { slug?: string | null } | null;
       return {
         ...base,
         __component: 'components.news-articles',
         newsArticleType: (raw.news_article_type as string) ?? null,
         limit: (raw.limit as number) ?? 6,
+        tagSlug: tagRaw?.slug ?? null,
         show_all_link: resolveTextLink(raw.show_all_link as Parameters<typeof resolveTextLink>[0]),
       };
+    }
 
     case 'components.workplace-cards':
       return {

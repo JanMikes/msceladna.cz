@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { getNewsArticles } from '@/lib/strapi/data';
-import { NewsCard } from '@/components/ui/NewsCard';
+import { NewsArticlesList } from './NewsArticlesList';
 import type { ComponentNewsArticles } from '@/lib/types';
 
 interface NewsArticlesProps {
@@ -11,6 +11,7 @@ interface NewsArticlesProps {
 export async function NewsArticles({ data, sidebar }: NewsArticlesProps) {
   const { articles } = await getNewsArticles({
     type: data.newsArticleType ?? undefined,
+    tagSlug: data.tagSlug ?? undefined,
     limit: data.limit || 6,
   });
 
@@ -18,14 +19,11 @@ export async function NewsArticles({ data, sidebar }: NewsArticlesProps) {
 
   return (
     <div>
-      <div className={sidebar ? 'space-y-6' : 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6'}>
-        {articles.map((article) => (
-          <NewsCard
-            key={article.documentId}
-            article={article}
-          />
-        ))}
-      </div>
+      <NewsArticlesList
+        articles={articles}
+        sidebar={sidebar}
+        showFilter={!data.tagSlug}
+      />
       {data.show_all_link && (
         <div className="mt-6 text-center">
           <Link
