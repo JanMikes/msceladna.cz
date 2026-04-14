@@ -7,81 +7,78 @@
   border-left-color: var(--color-accent);
 }
 
-/* Inline markdown — inherits font/color/size from parent so short
-   descriptions render identically to the plain <p> they replaced. Block
-   tags (headings, lists, links) get visible styling restored via em-based
-   sizes and currentColor so they match the surrounding context. */
-.md-inline {
-  font: inherit;
-  color: inherit;
-}
+/* Inline markdown — the wrapper keeps whatever Tailwind utility classes the
+   caller passed (color, font-size, line-height, etc.), so single-paragraph
+   content renders identically to the plain <p> it replaced. Rules below only
+   restore block styling on descendants (headings, lists, links, etc.) that
+   Tailwind preflight stripped; they never set font/color on the wrapper
+   itself so utilities like `text-white/70` win the cascade. */
+@layer components {
+  .md-inline > *:first-child { margin-top: 0; }
+  .md-inline > *:last-child { margin-bottom: 0; }
 
-.md-inline > *:first-child { margin-top: 0; }
-.md-inline > *:last-child { margin-bottom: 0; }
+  .md-inline p { margin: 0 0 0.75em; }
+  .md-inline p:last-child { margin-bottom: 0; }
 
-.md-inline p { margin: 0 0 0.75em; }
-.md-inline p:last-child { margin-bottom: 0; }
+  .md-inline strong { font-weight: 700; }
+  .md-inline em { font-style: italic; }
 
-.md-inline strong { font-weight: 700; }
-.md-inline em { font-style: italic; }
+  .md-inline a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: color 0.2s ease;
+  }
+  .md-inline a:hover { color: var(--color-accent); }
 
-.md-inline a {
-  color: currentColor;
-  text-decoration: underline;
-  text-underline-offset: 2px;
-  transition: color 0.2s ease;
-}
-.md-inline a:hover { color: var(--color-accent); }
+  .md-inline ul,
+  .md-inline ol {
+    margin: 0.5em 0;
+    padding-left: 1.5em;
+  }
+  .md-inline ul { list-style: disc; }
+  .md-inline ol { list-style: decimal; }
+  .md-inline li { margin: 0.25em 0; }
+  .md-inline li::marker { color: var(--color-accent); }
 
-.md-inline ul,
-.md-inline ol {
-  margin: 0.5em 0;
-  padding-left: 1.5em;
-}
-.md-inline ul { list-style: disc; }
-.md-inline ol { list-style: decimal; }
-.md-inline li { margin: 0.25em 0; }
-.md-inline li::marker { color: var(--color-accent); }
+  .md-inline h1,
+  .md-inline h2,
+  .md-inline h3,
+  .md-inline h4,
+  .md-inline h5,
+  .md-inline h6 {
+    font-weight: 700;
+    line-height: 1.25;
+    margin: 1em 0 0.35em;
+  }
+  .md-inline h1 { font-size: 1.6em; }
+  .md-inline h2 { font-size: 1.4em; }
+  .md-inline h3 { font-size: 1.2em; }
+  .md-inline h4 { font-size: 1.1em; }
+  .md-inline h5 { font-size: 1em; }
+  .md-inline h6 { font-size: 0.95em; text-transform: uppercase; letter-spacing: 0.05em; }
 
-.md-inline h1,
-.md-inline h2,
-.md-inline h3,
-.md-inline h4,
-.md-inline h5,
-.md-inline h6 {
-  font-weight: 700;
-  line-height: 1.25;
-  color: inherit;
-  margin: 1em 0 0.35em;
-}
-.md-inline h1 { font-size: 1.6em; }
-.md-inline h2 { font-size: 1.4em; }
-.md-inline h3 { font-size: 1.2em; }
-.md-inline h4 { font-size: 1.1em; }
-.md-inline h5 { font-size: 1em; }
-.md-inline h6 { font-size: 0.95em; text-transform: uppercase; letter-spacing: 0.05em; }
+  .md-inline blockquote {
+    margin: 0.5em 0;
+    padding-left: 0.875em;
+    border-left: 3px solid var(--color-accent);
+    font-style: normal;
+  }
 
-.md-inline blockquote {
-  margin: 0.5em 0;
-  padding-left: 0.875em;
-  border-left: 3px solid var(--color-accent);
-  color: inherit;
-  font-style: normal;
-}
+  .md-inline code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.9em;
+    padding: 0.1em 0.3em;
+    background-color: rgba(0, 0, 0, 0.06);
+    border-radius: 4px;
+  }
 
-.md-inline code {
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 0.9em;
-  padding: 0.1em 0.3em;
-  background-color: rgba(0, 0, 0, 0.06);
-  border-radius: 4px;
-}
-
-.md-inline hr {
-  border: 0;
-  border-top: 1px solid currentColor;
-  opacity: 0.2;
-  margin: 0.75em 0;
+  .md-inline hr {
+    border: 0;
+    border-top: 1px solid currentColor;
+    opacity: 0.2;
+    margin: 0.75em 0;
+  }
 }
 
 :root {
