@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { clsx } from 'clsx';
 import type { ComponentFeatureCards } from '@/lib/types';
+import { MarkdownInline } from '@/components/ui/MarkdownInline';
 
 interface FeatureCardsProps {
   data: ComponentFeatureCards;
@@ -79,7 +80,10 @@ export function FeatureCards({ data, sidebar }: FeatureCardsProps) {
                   <h3 className="font-bold text-primary text-lg mb-1">{card.title}</h3>
                 )}
                 {card.description && (
-                  <p className="text-text-muted text-sm leading-relaxed mb-3">{card.description}</p>
+                  <MarkdownInline
+                    content={card.description}
+                    className="text-text-muted text-sm leading-relaxed mb-3"
+                  />
                 )}
                 {card.link && !data.card_clickable && (
                   style === '2' ? (

@@ -6,6 +6,7 @@ import Link from 'next/link';
 import useEmblaCarousel from 'embla-carousel-react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import type { ComponentCardSlider } from '@/lib/types';
+import { MarkdownInline } from '@/components/ui/MarkdownInline';
 
 interface CardSliderProps {
   data: ComponentCardSlider;
@@ -49,7 +50,10 @@ export function CardSlider({ data }: CardSliderProps) {
                   <h3 className="font-bold text-primary text-lg mb-2 italic">{item.heading}</h3>
                 )}
                 {item.text && (
-                  <p className="text-text-muted text-sm leading-relaxed mb-4">{item.text}</p>
+                  <MarkdownInline
+                    content={item.text}
+                    className="text-text-muted text-sm leading-relaxed mb-4"
+                  />
                 )}
                 {item.link && (
                   <span className="inline-flex self-center mt-auto px-5 py-2 bg-accent text-white text-sm font-semibold rounded-lg text-center justify-center">

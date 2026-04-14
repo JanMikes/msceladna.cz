@@ -19,7 +19,7 @@
       "default": "Odeslat"
     },
     "successMessage": {
-      "type": "text",
+      "type": "richtext",
       "default": "Formulář byl úspěšně odeslán. Děkujeme!"
     },
     "inputGroups": {

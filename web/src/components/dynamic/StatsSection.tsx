@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type { ComponentStatsSection } from '@/lib/types';
+import { MarkdownInline } from '@/components/ui/MarkdownInline';
 
 interface StatsSectionProps {
   data: ComponentStatsSection;
@@ -18,7 +19,10 @@ export function StatsSection({ data }: StatsSectionProps) {
             <h2 className="text-2xl lg:text-3xl font-extrabold text-white mb-4">{data.heading}</h2>
           )}
           {data.description && (
-            <p className="text-white/70 text-sm leading-relaxed mb-6">{data.description}</p>
+            <MarkdownInline
+              content={data.description}
+              className="text-white/70 text-sm leading-relaxed mb-6"
+            />
           )}
           {data.link && (
             <Link
@@ -57,7 +61,10 @@ export function StatsSection({ data }: StatsSectionProps) {
                 <p className="font-bold text-white text-base mb-1">{item.title}</p>
               )}
               {item.description && (
-                <p className="text-white/70 text-xs leading-relaxed">{item.description}</p>
+                <MarkdownInline
+                  content={item.description}
+                  className="text-white/70 text-xs leading-relaxed"
+                />
               )}
             </div>
           ))}

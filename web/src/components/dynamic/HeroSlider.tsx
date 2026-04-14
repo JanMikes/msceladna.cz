@@ -6,6 +6,7 @@ import Link from 'next/link';
 import useEmblaCarousel from 'embla-carousel-react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import type { ComponentHeroSlider } from '@/lib/types';
+import { MarkdownInline } from '@/components/ui/MarkdownInline';
 
 interface HeroSliderProps {
   data: ComponentHeroSlider;
@@ -33,7 +34,10 @@ export function HeroSlider({ data }: HeroSliderProps) {
                     <h2 className="text-3xl lg:text-4xl font-bold text-primary mb-4">{slide.heading}</h2>
                   )}
                   {slide.text && (
-                    <p className="text-text-muted leading-relaxed mb-6">{slide.text}</p>
+                    <MarkdownInline
+                      content={slide.text}
+                      className="text-text-muted leading-relaxed mb-6"
+                    />
                   )}
                   {slide.link && (
                     <Link
@@ -65,7 +69,10 @@ export function HeroSlider({ data }: HeroSliderProps) {
                             <h4 className="font-bold text-primary text-sm mb-1">{info.heading}</h4>
                           )}
                           {info.text && (
-                            <p className="text-text-muted text-xs leading-relaxed">{info.text}</p>
+                            <MarkdownInline
+                              content={info.text}
+                              className="text-text-muted text-xs leading-relaxed"
+                            />
                           )}
                         </div>
                       ))}

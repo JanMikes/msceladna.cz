@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { clsx } from 'clsx';
 import type { ComponentBannerCards, BannerCard, MediaImage } from '@/lib/types';
+import { MarkdownInline } from '@/components/ui/MarkdownInline';
 
 interface BannerCardsProps {
   data: ComponentBannerCards;
@@ -41,7 +42,10 @@ function Style1Card({ card }: { card: BannerCard }) {
           <h3 className="text-xl lg:text-2xl font-extrabold text-white mb-2">{card.title}</h3>
         )}
         {card.description && (
-          <p className="text-white/70 text-sm leading-relaxed mb-4 max-w-lg">{card.description}</p>
+          <MarkdownInline
+            content={card.description}
+            className="text-white/70 text-sm leading-relaxed mb-4 max-w-lg"
+          />
         )}
         {card.link && (
           <Link
@@ -75,7 +79,10 @@ function Style2Card({ card }: { card: BannerCard }) {
           <h3 className="text-xl lg:text-2xl font-extrabold text-white mb-2">{card.title}</h3>
         )}
         {card.description && (
-          <p className="text-white/70 text-sm leading-relaxed mb-4 max-w-lg">{card.description}</p>
+          <MarkdownInline
+            content={card.description}
+            className="text-white/70 text-sm leading-relaxed mb-4 max-w-lg"
+          />
         )}
         {card.link && (
           <Link

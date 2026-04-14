@@ -3,6 +3,7 @@
 import { useState, useRef } from 'react';
 import { Send, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
 import type { FormDefinition, FormInput, FormInputGroup } from '@/lib/types';
+import { MarkdownInline } from '@/components/ui/MarkdownInline';
 
 interface FormClientProps {
   form: FormDefinition;
@@ -48,7 +49,7 @@ export function FormClient({ form, token }: FormClientProps) {
     return (
       <div className="card p-8 text-center">
         <CheckCircle className="w-12 h-12 text-green-500 mx-auto mb-4" />
-        <p className="text-primary text-lg">{form.successMessage}</p>
+        <MarkdownInline content={form.successMessage} className="text-primary text-lg" />
       </div>
     );
   }

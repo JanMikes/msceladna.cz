@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Mail, Phone, MapPin, ArrowRight } from 'lucide-react';
 import type { Footer as FooterType, Organization } from '@/lib/types';
+import { MarkdownInline } from '@/components/ui/MarkdownInline';
 
 interface FooterProps {
   footer: FooterType | null;
@@ -80,9 +81,10 @@ export default function Footer({ footer, organization }: FooterProps) {
                 <span className="text-xl font-extrabold text-white tracking-tight">MŠ Čeladná</span>
               </Link>
               {footer?.text && (
-                <p className="text-white/60 text-sm mb-5 leading-relaxed max-w-xs">
-                  {footer.text}
-                </p>
+                <MarkdownInline
+                  content={footer.text}
+                  className="text-white/60 text-sm mb-5 leading-relaxed max-w-xs"
+                />
               )}
               {organization && (
                 <div className="text-white/40 text-xs space-y-1">

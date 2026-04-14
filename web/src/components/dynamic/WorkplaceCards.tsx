@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { clsx } from 'clsx';
 import type { ComponentWorkplaceCards } from '@/lib/types';
+import { MarkdownInline } from '@/components/ui/MarkdownInline';
 
 interface WorkplaceCardsProps {
   data: ComponentWorkplaceCards;
@@ -29,7 +30,10 @@ export function WorkplaceCards({ data }: WorkplaceCardsProps) {
                 <h3 className="text-2xl lg:text-3xl font-extrabold text-white mb-3">{workplace.name}</h3>
               )}
               {workplace.description && (
-                <p className="text-white/70 text-sm leading-relaxed mb-4">{workplace.description}</p>
+                <MarkdownInline
+                  content={workplace.description}
+                  className="text-white/70 text-sm leading-relaxed mb-4"
+                />
               )}
               {workplace.link && (
                 <span className={clsx(

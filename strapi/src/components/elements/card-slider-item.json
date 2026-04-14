@@ -14,7 +14,7 @@
       "type": "string"
     },
     "text": {
-      "type": "text"
+      "type": "richtext"
     },
     "link": {
       "type": "component",
