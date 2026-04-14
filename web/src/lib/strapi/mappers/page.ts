@@ -390,6 +390,7 @@ function mapContactCards(raw: unknown) {
     icon_1: mapMedia(c.icon_1),
     icon_2: mapMedia(c.icon_2),
     icon_3: mapMedia(c.icon_3),
+    style: (c.style as '1' | '2' | '3' | null) ?? null,
   }));
 }
 

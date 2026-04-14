@@ -348,6 +348,7 @@ export interface ComponentContactCards extends DynamicZoneBase {
     icon_1: MediaImage | null;
     icon_2: MediaImage | null;
     icon_3: MediaImage | null;
+    style: '1' | '2' | '3' | null;
   }[];
 }
 

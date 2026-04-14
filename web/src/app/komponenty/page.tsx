@@ -265,6 +265,7 @@ export default function KomponentyPage() {
                   icon_1: { url: 'https://placehold.co/96x96/AFC25E/FFFFFF?text=Ikon+1', alternativeText: 'Ikon 1', width: 96, height: 96 },
                   icon_2: { url: 'https://placehold.co/64x64/AFC25E/FFFFFF?text=Ikon+2', alternativeText: 'Ikon 2', width: 64, height: 64 },
                   icon_3: { url: 'https://placehold.co/56x56/AFC25E/FFFFFF?text=Ikon+3', alternativeText: 'Ikon 3', width: 56, height: 56 },
+                  style: null,
                 },
                 {
                   name: 'Jana Nováková', role: null, phone: 'kontakt', email: 'jana.novakova@msceladna.cz',
@@ -272,6 +273,7 @@ export default function KomponentyPage() {
                   icon_1: { url: 'https://placehold.co/96x96/AFC25E/FFFFFF?text=Ikon+1', alternativeText: 'Ikon 1', width: 96, height: 96 },
                   icon_2: { url: 'https://placehold.co/64x64/AFC25E/FFFFFF?text=Ikon+2', alternativeText: 'Ikon 2', width: 64, height: 64 },
                   icon_3: { url: 'https://placehold.co/56x56/AFC25E/FFFFFF?text=Ikon+3', alternativeText: 'Ikon 3', width: 56, height: 56 },
+                  style: null,
                 },
                 {
                   name: 'Jana Nováková', role: null, phone: 'kontakt', email: 'jana.novakova@msceladna.cz',
@@ -279,6 +281,7 @@ export default function KomponentyPage() {
                   icon_1: { url: 'https://placehold.co/96x96/AFC25E/FFFFFF?text=Ikon+1', alternativeText: 'Ikon 1', width: 96, height: 96 },
                   icon_2: { url: 'https://placehold.co/64x64/AFC25E/FFFFFF?text=Ikon+2', alternativeText: 'Ikon 2', width: 64, height: 64 },
                   icon_3: { url: 'https://placehold.co/56x56/AFC25E/FFFFFF?text=Ikon+3', alternativeText: 'Ikon 3', width: 56, height: 56 },
+                  style: null,
                 },
               ],
             } satisfies ComponentContactCards} />

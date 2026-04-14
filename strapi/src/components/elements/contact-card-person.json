@@ -37,6 +37,10 @@
       "type": "media",
       "allowedTypes": ["images"],
       "multiple": false
+    },
+    "style": {
+      "type": "enumeration",
+      "enum": ["1", "2", "3"]
     }
   }
 }
