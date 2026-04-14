@@ -65,7 +65,6 @@ export function Slider({ data }: SliderProps) {
                   className="object-cover"
                 />
               )}
-              <div className="absolute inset-0 bg-gradient-card" />
               <div className="absolute inset-0 p-6 lg:p-10 flex flex-col justify-end">
                 {slide.title && (
                   <h3 className="text-xl lg:text-3xl font-bold text-white mb-2">{slide.title}</h3>
