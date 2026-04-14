@@ -606,6 +606,20 @@ export default function KomponentyPage() {
           } satisfies ComponentHeroSlider} />
         </Section>
 
+        {/* Slider without info items */}
+        <Section title="Slider (bez info položek)">
+          <HeroSlider data={{
+            id: 216, __component: 'components.hero-slider',
+            slides: Array.from({ length: 3 }, (_, i) => ({
+              heading: `Nadpis slide ${i + 1}`,
+              text: 'Lorem ipsum je ukázkový text používaný v tiskařském a sazečském průmyslu. Lorem ipsum je standardní fiktivní text.',
+              link: { href: '#', external: false, text: 'Více informací', disabled: false },
+              image: { url: `https://placehold.co/800x600/275D56/FFFFFF?text=Slide+${i + 1}`, alternativeText: `Slide ${i + 1}`, width: 800, height: 600 },
+              informations: [],
+            })),
+          } satisfies ComponentHeroSlider} />
+        </Section>
+
         {/* Gallery Slider */}
         <Section title="GallerySlider">
           <GallerySlider data={{

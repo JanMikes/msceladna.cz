@@ -25,14 +25,6 @@ const photoPopulate = {
   },
 };
 
-const slidePopulate = {
-  populate: {
-    link: textLinkPopulate,
-    image: mediaFields,
-    background_image: mediaFields,
-  },
-};
-
 const contactCardPopulate = {
   populate: {
     photo: mediaFields,
@@ -240,11 +232,6 @@ function buildDynamicZonePopulate() {
               },
             },
           },
-        },
-      },
-      'components.slider': {
-        populate: {
-          slides: slidePopulate,
         },
       },
     },

@@ -275,15 +275,6 @@ function mapDynamicZoneComponent(raw: StrapiRawDynamicZoneComponent): DynamicZon
         items: mapSimpleItems(raw.items),
       };
 
-    case 'components.slider':
-      return {
-        ...base,
-        __component: 'components.slider',
-        slides: mapSlides(raw.slides),
-        autoplay: (raw.autoplay as boolean) ?? false,
-        autoplay_interval: (raw.autoplay_interval as number) ?? 5000,
-      };
-
     default:
       return null;
   }
@@ -349,17 +340,6 @@ function mapSimpleItems(raw: unknown) {
     icon_1: mapMedia(i.icon_1),
     icon_2: mapMedia(i.icon_2),
     icon_3: mapMedia(i.icon_3),
-  }));
-}
-
-function mapSlides(raw: unknown) {
-  if (!Array.isArray(raw)) return [];
-  return raw.map((s) => ({
-    title: s.title ?? null,
-    description: s.description ?? null,
-    link: resolveTextLink(s.link),
-    image: mapMedia(s.image),
-    background_image: mapMedia(s.background_image),
   }));
 }
 

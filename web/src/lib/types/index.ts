@@ -302,19 +302,6 @@ export interface ComponentSectionDivider extends DynamicZoneBase {
   style: 'solid' | 'dashed' | 'dotted' | 'v1' | 'v2' | 'v3' | 'v4' | 'v5';
 }
 
-export interface ComponentSlider extends DynamicZoneBase {
-  __component: 'components.slider';
-  slides: {
-    title: string | null;
-    description: string | null;
-    link: ResolvedTextLink | null;
-    image: MediaImage | null;
-    background_image: MediaImage | null;
-  }[];
-  autoplay: boolean;
-  autoplay_interval: number;
-}
-
 export interface ComponentGallerySlider extends DynamicZoneBase {
   __component: 'components.gallery-slider';
   photos: { image: MediaImage | null }[];
@@ -514,5 +501,4 @@ export type DynamicZoneComponent =
   | ComponentForm
   | ComponentCardSlider
   | ComponentHeroSlider
-  | ComponentStatsSection
-  | ComponentSlider;
+  | ComponentStatsSection;
