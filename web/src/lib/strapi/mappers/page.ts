@@ -53,6 +53,7 @@ function mapDynamicZoneComponent(raw: StrapiRawDynamicZoneComponent): DynamicZon
         __component: 'components.heading',
         text: (raw.text as string) ?? null,
         type: (raw.type as 'h2' | 'h3' | 'h4' | 'h5' | 'h6') ?? 'h2',
+        style: (raw.style as 'style1' | 'style2') ?? 'style2',
         anchor: (raw.anchor as string) ?? null,
       };
 

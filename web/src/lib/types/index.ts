@@ -200,6 +200,7 @@ export interface ComponentHeading extends DynamicZoneBase {
   __component: 'components.heading';
   text: string | null;
   type: 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+  style: 'style1' | 'style2';
   anchor: string | null;
 }
 

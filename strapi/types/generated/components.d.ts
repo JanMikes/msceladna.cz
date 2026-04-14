@@ -169,6 +169,8 @@ export interface ComponentsHeading extends Struct.ComponentSchema {
   };
   attributes: {
     anchor: Schema.Attribute.String;
+    style: Schema.Attribute.Enumeration<['style1', 'style2']> &
+      Schema.Attribute.DefaultTo<'style2'>;
     text: Schema.Attribute.String;
     type: Schema.Attribute.Enumeration<['h2', 'h3', 'h4', 'h5', 'h6']> &
       Schema.Attribute.DefaultTo<'h2'>;

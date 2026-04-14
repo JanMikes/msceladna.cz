@@ -10,6 +10,7 @@ describe('Heading component', () => {
       __component: 'components.heading',
       text: 'Default Heading',
       type: 'h2',
+      style: 'style2',
       anchor: null,
     };
     render(<Heading data={data} />);
@@ -25,6 +26,7 @@ describe('Heading component', () => {
       __component: 'components.heading',
       text: 'H3 Heading',
       type: 'h3',
+      style: 'style2',
       anchor: null,
     };
     render(<Heading data={data} />);
@@ -39,6 +41,7 @@ describe('Heading component', () => {
       __component: 'components.heading',
       text: 'H4 Heading',
       type: 'h4',
+      style: 'style2',
       anchor: null,
     };
     render(<Heading data={data} />);
@@ -53,6 +56,7 @@ describe('Heading component', () => {
       __component: 'components.heading',
       text: 'Anchored',
       type: 'h2',
+      style: 'style2',
       anchor: 'my-section',
     };
     render(<Heading data={data} />);
@@ -66,6 +70,7 @@ describe('Heading component', () => {
       __component: 'components.heading',
       text: 'No Anchor',
       type: 'h2',
+      style: 'style2',
       anchor: null,
     };
     render(<Heading data={data} />);
@@ -79,6 +84,7 @@ describe('Heading component', () => {
       __component: 'components.heading',
       text: null,
       type: 'h2',
+      style: 'style2',
       anchor: null,
     };
     const { container } = render(<Heading data={data} />);

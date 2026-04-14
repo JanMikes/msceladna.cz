@@ -16,7 +16,9 @@ export function Heading({ data }: HeadingProps) {
   if (!data.text) return null;
 
   const Tag = data.type || 'h2';
-  const className = `font-bold text-primary heading-accent ${sizeClasses[Tag] || sizeClasses.h2}`;
+  const style = data.style || 'style2';
+  const accentClass = style === 'style2' ? 'heading-accent' : '';
+  const className = `font-bold text-primary mt-5 ${accentClass} ${sizeClasses[Tag] || sizeClasses.h2}`.trim().replace(/\s+/g, ' ');
 
   return (
     <Tag id={data.anchor || undefined} className={className}>

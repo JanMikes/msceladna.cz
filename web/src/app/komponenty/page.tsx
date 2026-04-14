@@ -80,8 +80,8 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 
 export default function KomponentyPage() {
   return (
-    <main className="bg-surface pt-16 lg:pt-20">
-      <div className="container mx-auto px-4 lg:px-8 py-8 lg:py-12 space-y-12">
+    <main className="bg-surface pt-16 lg:pt-[4.5rem] flex-1">
+      <div className="container mx-auto px-4 lg:px-8 py-[30px] space-y-12">
         <div>
           <h1 className="text-4xl font-bold text-primary mb-2">Přehled komponent</h1>
           <p className="text-text-muted">Všechny komponenty designového systému MŠ Čeladná s ukázkovými daty.</p>
@@ -89,11 +89,22 @@ export default function KomponentyPage() {
 
         {/* Typography */}
         <Section title="Typografie">
-          <Heading data={{ id: 1, __component: 'components.heading', text: 'Nadpis H2', type: 'h2', anchor: null }} />
-          <Heading data={{ id: 2, __component: 'components.heading', text: 'Nadpis H3', type: 'h3', anchor: null }} />
-          <Heading data={{ id: 3, __component: 'components.heading', text: 'Nadpis H4', type: 'h4', anchor: null }} />
-          <Heading data={{ id: 4, __component: 'components.heading', text: 'Nadpis H5', type: 'h5', anchor: null }} />
-          <Heading data={{ id: 5, __component: 'components.heading', text: 'Nadpis H6', type: 'h6', anchor: null }} />
+          <div className="space-y-4">
+            <p className="text-sm text-text-muted uppercase tracking-wide">Style 1 (bez accentu)</p>
+            <Heading data={{ id: 101, __component: 'components.heading', text: 'Nadpis H2', type: 'h2', style: 'style1', anchor: null }} />
+            <Heading data={{ id: 102, __component: 'components.heading', text: 'Nadpis H3', type: 'h3', style: 'style1', anchor: null }} />
+            <Heading data={{ id: 103, __component: 'components.heading', text: 'Nadpis H4', type: 'h4', style: 'style1', anchor: null }} />
+            <Heading data={{ id: 104, __component: 'components.heading', text: 'Nadpis H5', type: 'h5', style: 'style1', anchor: null }} />
+            <Heading data={{ id: 105, __component: 'components.heading', text: 'Nadpis H6', type: 'h6', style: 'style1', anchor: null }} />
+          </div>
+          <div className="space-y-4 mt-8">
+            <p className="text-sm text-text-muted uppercase tracking-wide">Style 2 (s accentem)</p>
+            <Heading data={{ id: 1, __component: 'components.heading', text: 'Nadpis H2', type: 'h2', style: 'style2', anchor: null }} />
+            <Heading data={{ id: 2, __component: 'components.heading', text: 'Nadpis H3', type: 'h3', style: 'style2', anchor: null }} />
+            <Heading data={{ id: 3, __component: 'components.heading', text: 'Nadpis H4', type: 'h4', style: 'style2', anchor: null }} />
+            <Heading data={{ id: 4, __component: 'components.heading', text: 'Nadpis H5', type: 'h5', style: 'style2', anchor: null }} />
+            <Heading data={{ id: 5, __component: 'components.heading', text: 'Nadpis H6', type: 'h6', style: 'style2', anchor: null }} />
+          </div>
         </Section>
 
         {/* RichText */}

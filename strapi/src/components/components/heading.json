@@ -14,6 +14,11 @@
       "enum": ["h2", "h3", "h4", "h5", "h6"],
       "default": "h2"
     },
+    "style": {
+      "type": "enumeration",
+      "enum": ["style1", "style2"],
+      "default": "style2"
+    },
     "anchor": {
       "type": "string"
     }

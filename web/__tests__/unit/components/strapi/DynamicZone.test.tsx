@@ -16,6 +16,7 @@ describe('DynamicZone component', () => {
         __component: 'components.heading',
         text: 'First Heading',
         type: 'h2',
+        style: 'style2',
         anchor: null,
       } as ComponentHeading,
       {
