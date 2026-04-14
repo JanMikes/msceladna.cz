@@ -242,6 +242,11 @@ function buildDynamicZonePopulate() {
           },
         },
       },
+      'components.slider': {
+        populate: {
+          slides: slidePopulate,
+        },
+      },
     },
   };
 }

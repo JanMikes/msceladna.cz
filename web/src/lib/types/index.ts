@@ -513,4 +513,5 @@ export type DynamicZoneComponent =
   | ComponentForm
   | ComponentCardSlider
   | ComponentHeroSlider
-  | ComponentStatsSection;
+  | ComponentStatsSection
+  | ComponentSlider;

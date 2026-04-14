@@ -275,6 +275,15 @@ function mapDynamicZoneComponent(raw: StrapiRawDynamicZoneComponent): DynamicZon
         items: mapSimpleItems(raw.items),
       };
 
+    case 'components.slider':
+      return {
+        ...base,
+        __component: 'components.slider',
+        slides: mapSlides(raw.slides),
+        autoplay: (raw.autoplay as boolean) ?? false,
+        autoplay_interval: (raw.autoplay_interval as number) ?? 5000,
+      };
+
     default:
       return null;
   }
