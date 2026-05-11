@@ -49,6 +49,8 @@ services:
             DATABASE_USERNAME: postgres
             DATABASE_PASSWORD: postgres
             DATABASE_SSL: false
+            DATABASE_POOL_MIN: "2"
+            DATABASE_POOL_MAX: "20"
             # IMPORTANT: Change these secrets in production!
             APP_KEYS: toBeModified1,toBeModified2
             API_TOKEN_SALT: toBeModifiedApiTokenSalt
