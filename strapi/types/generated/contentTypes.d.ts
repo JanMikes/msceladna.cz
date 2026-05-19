@@ -537,7 +537,7 @@ export interface ApiFooterFooter extends Struct.SingleTypeSchema {
     mail: Schema.Attribute.Email;
     phone: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
-    text: Schema.Attribute.Text;
+    text: Schema.Attribute.RichText;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -567,7 +567,7 @@ export interface ApiFormForm extends Struct.CollectionTypeSchema {
     publishedAt: Schema.Attribute.DateTime;
     submitButtonText: Schema.Attribute.String &
       Schema.Attribute.DefaultTo<'Odeslat'>;
-    successMessage: Schema.Attribute.Text &
+    successMessage: Schema.Attribute.RichText &
       Schema.Attribute.DefaultTo<'Formul\u00E1\u0159 byl \u00FAsp\u011B\u0161n\u011B odesl\u00E1n. D\u011Bkujeme!'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -730,6 +730,7 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
     draftAndPublish: false;
   };
   attributes: {
+    admin_label: Schema.Attribute.String;
     content: Schema.Attribute.DynamicZone<
       [
         'components.text',
@@ -744,7 +745,7 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
         'components.stats-highlights',
         'components.timeline',
         'components.section-divider',
-        'components.slider',
+        'components.hero-slider',
         'components.gallery-slider',
         'components.photo-gallery',
         'components.button-group',
@@ -784,7 +785,7 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
         'components.section-divider',
         'components.timeline',
         'components.feature-cards',
-        'components.slider',
+        'components.hero-slider',
         'components.gallery-slider',
         'components.photo-gallery',
         'components.news-articles',
@@ -909,7 +910,7 @@ export interface ApiWorkplaceWorkplace extends Struct.CollectionTypeSchema {
         'components.stats-highlights',
         'components.timeline',
         'components.section-divider',
-        'components.slider',
+        'components.hero-slider',
         'components.gallery-slider',
         'components.photo-gallery',
         'components.button-group',
@@ -954,7 +955,7 @@ export interface ApiWorkplaceWorkplace extends Struct.CollectionTypeSchema {
         'components.section-divider',
         'components.timeline',
         'components.feature-cards',
-        'components.slider',
+        'components.hero-slider',
         'components.gallery-slider',
         'components.photo-gallery',
         'components.news-articles',

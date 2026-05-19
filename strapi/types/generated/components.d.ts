@@ -5,6 +5,7 @@ export interface ComponentsAccordionSections extends Struct.ComponentSchema {
   info: {
     description: 'Accordion with expandable sections';
     displayName: 'Rozj\u00ED\u017Ed\u011Bc\u00ED sekce';
+    icon: 'list';
   };
   attributes: {
     sections: Schema.Attribute.Component<'elements.expandable-section', true>;
@@ -16,6 +17,7 @@ export interface ComponentsAlert extends Struct.ComponentSchema {
   info: {
     description: 'Alert message with type variants';
     displayName: 'Upozorn\u011Bn\u00ED';
+    icon: 'information';
   };
   attributes: {
     text: Schema.Attribute.RichText;
@@ -32,6 +34,7 @@ export interface ComponentsBadges extends Struct.ComponentSchema {
   info: {
     description: 'Group of badge labels';
     displayName: 'Badges';
+    icon: 'priceTag';
   };
   attributes: {
     alignment: Schema.Attribute.Enumeration<['L', 'C', 'R']> &
@@ -45,6 +48,7 @@ export interface ComponentsBannerCards extends Struct.ComponentSchema {
   info: {
     description: 'Full-width stacked banner cards';
     displayName: 'Banner karty';
+    icon: 'layout';
   };
   attributes: {
     cards: Schema.Attribute.Component<'elements.banner-card', true>;
@@ -58,6 +62,7 @@ export interface ComponentsButtonGroup extends Struct.ComponentSchema {
   info: {
     description: 'Group of buttons with alignment';
     displayName: 'Tla\u010D\u00EDtka';
+    icon: 'cursor';
   };
   attributes: {
     alignment: Schema.Attribute.Enumeration<['L', 'C', 'R']> &
@@ -71,6 +76,7 @@ export interface ComponentsCardSlider extends Struct.ComponentSchema {
   info: {
     description: 'Carousel of cards with icon, heading, text and CTA';
     displayName: 'Slider karet';
+    icon: 'layer';
   };
   attributes: {
     items: Schema.Attribute.Component<'elements.card-slider-item', true>;
@@ -82,6 +88,7 @@ export interface ComponentsContactCards extends Struct.ComponentSchema {
   info: {
     description: 'Grid of contact person cards';
     displayName: 'Kontakty';
+    icon: 'envelop';
   };
   attributes: {
     cards: Schema.Attribute.Component<'elements.contact-card-person', true>;
@@ -95,6 +102,7 @@ export interface ComponentsDocuments extends Struct.ComponentSchema {
   info: {
     description: 'Document download grid';
     displayName: 'Dokumenty';
+    icon: 'file';
   };
   attributes: {
     columns: Schema.Attribute.Enumeration<['1', '2', '3']> &
@@ -108,6 +116,7 @@ export interface ComponentsEmployeeCards extends Struct.ComponentSchema {
   info: {
     description: 'Employee cards grid with optional workplace filter';
     displayName: 'T\u00FDm zam\u011Bstnanc\u016F';
+    icon: 'user';
   };
   attributes: {
     showAll: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
@@ -123,6 +132,7 @@ export interface ComponentsFeatureCards extends Struct.ComponentSchema {
   info: {
     description: 'Grid of feature cards';
     displayName: 'Karty';
+    icon: 'grid';
   };
   attributes: {
     card_clickable: Schema.Attribute.Boolean &
@@ -155,6 +165,7 @@ export interface ComponentsGallerySlider extends Struct.ComponentSchema {
   info: {
     description: 'Horizontal photo strip slider';
     displayName: 'P\u00E1s galerie';
+    icon: 'landscape';
   };
   attributes: {
     photos: Schema.Attribute.Component<'elements.photo', true>;
@@ -166,6 +177,7 @@ export interface ComponentsHeading extends Struct.ComponentSchema {
   info: {
     description: 'Heading with configurable level and anchor';
     displayName: 'Nadpis';
+    icon: 'hashtag';
   };
   attributes: {
     anchor: Schema.Attribute.String;
@@ -182,6 +194,7 @@ export interface ComponentsHeroSlider extends Struct.ComponentSchema {
   info: {
     description: 'Full-width content slider with image, text and info items';
     displayName: 'Slider';
+    icon: 'monitor';
   };
   attributes: {
     slides: Schema.Attribute.Component<'elements.hero-slider-slide', true>;
@@ -193,6 +206,7 @@ export interface ComponentsImage extends Struct.ComponentSchema {
   info: {
     description: 'Single image display';
     displayName: 'Obr\u00E1zek';
+    icon: 'picture';
   };
   attributes: {
     align: Schema.Attribute.Enumeration<['left', 'center', 'right']> &
@@ -210,6 +224,7 @@ export interface ComponentsLinksList extends Struct.ComponentSchema {
   info: {
     description: 'List of text links in grid or rows layout';
     displayName: 'Seznam odkaz\u016F';
+    icon: 'link';
   };
   attributes: {
     layout: Schema.Attribute.Enumeration<['Grid', 'Rows']> &
@@ -223,6 +238,7 @@ export interface ComponentsMap extends Struct.ComponentSchema {
   info: {
     description: 'Map embed from a Google Maps URL';
     displayName: 'Mapa';
+    icon: 'pin';
   };
   attributes: {
     height: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<400>;
@@ -235,6 +251,7 @@ export interface ComponentsNewsArticles extends Struct.ComponentSchema {
   info: {
     description: 'News articles block';
     displayName: 'Aktuality';
+    icon: 'discuss';
   };
   attributes: {
     limit: Schema.Attribute.Integer &
@@ -256,6 +273,7 @@ export interface ComponentsPartnerLogos extends Struct.ComponentSchema {
   info: {
     description: 'Partner logo grid';
     displayName: 'Loga partner\u016F';
+    icon: 'crown';
   };
   attributes: {
     columns: Schema.Attribute.Enumeration<['2', '3', '4', '5', '6']> &
@@ -270,6 +288,7 @@ export interface ComponentsPhotoGallery extends Struct.ComponentSchema {
   info: {
     description: 'Photo gallery grid';
     displayName: 'Fotogalerie';
+    icon: 'picture';
   };
   attributes: {
     columns: Schema.Attribute.Enumeration<['2', '3', '4']> &
@@ -283,6 +302,7 @@ export interface ComponentsPopup extends Struct.ComponentSchema {
   info: {
     description: 'Modal popup with dismissal memory';
     displayName: 'Popup';
+    icon: 'message';
   };
   attributes: {
     description: Schema.Attribute.RichText;
@@ -298,6 +318,7 @@ export interface ComponentsSectionDivider extends Struct.ComponentSchema {
   info: {
     description: 'Horizontal divider with spacing and style';
     displayName: 'Rozd\u011Blovn\u00EDk';
+    icon: 'collapse';
   };
   attributes: {
     spacing: Schema.Attribute.Enumeration<['S', 'M', 'L']> &
@@ -309,25 +330,12 @@ export interface ComponentsSectionDivider extends Struct.ComponentSchema {
   };
 }
 
-export interface ComponentsSlider extends Struct.ComponentSchema {
-  collectionName: 'components_components_sliders';
-  info: {
-    description: 'Content slider with slides';
-    displayName: 'Slider';
-  };
-  attributes: {
-    autoplay: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
-    autoplay_interval: Schema.Attribute.Integer &
-      Schema.Attribute.DefaultTo<5000>;
-    slides: Schema.Attribute.Component<'elements.slide', true>;
-  };
-}
-
 export interface ComponentsStatsHighlights extends Struct.ComponentSchema {
   collectionName: 'components_components_stats_highlights';
   info: {
     description: 'Stats highlight blocks';
     displayName: 'Statistiky';
+    icon: 'chartBubble';
   };
   attributes: {
     columns: Schema.Attribute.Enumeration<['2', '3', '4', '5']> &
@@ -343,9 +351,10 @@ export interface ComponentsStatsSection extends Struct.ComponentSchema {
   info: {
     description: 'Stats section with heading, description, CTA and stat items';
     displayName: 'Sekce statistik';
+    icon: 'chartPie';
   };
   attributes: {
-    description: Schema.Attribute.Text;
+    description: Schema.Attribute.RichText;
     heading: Schema.Attribute.String;
     items: Schema.Attribute.Component<'elements.stat-item', true>;
     link: Schema.Attribute.Component<'elements.text-link', false>;
@@ -357,6 +366,7 @@ export interface ComponentsText extends Struct.ComponentSchema {
   info: {
     description: 'Rich text content block';
     displayName: 'Textov\u00E9 pole';
+    icon: 'feather';
   };
   attributes: {
     text: Schema.Attribute.RichText;
@@ -368,6 +378,7 @@ export interface ComponentsTimeline extends Struct.ComponentSchema {
   info: {
     description: 'Numbered timeline steps';
     displayName: '\u010Casov\u00E1 osa';
+    icon: 'clock';
   };
   attributes: {
     collapsible: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
@@ -383,6 +394,7 @@ export interface ComponentsVideo extends Struct.ComponentSchema {
   info: {
     description: 'YouTube video embed';
     displayName: 'Video';
+    icon: 'play';
   };
   attributes: {
     aspect_ratio: Schema.Attribute.Enumeration<['16:9', '4:3', '1:1']> &
@@ -396,6 +408,7 @@ export interface ComponentsWorkplaceCards extends Struct.ComponentSchema {
   info: {
     description: 'Grid of workplace cards';
     displayName: 'Dla\u017Edice pracovi\u0161\u0165';
+    icon: 'house';
   };
   attributes: {
     cards: Schema.Attribute.Component<'elements.workplace-card', true>;
@@ -428,7 +441,7 @@ export interface ElementsBannerCard extends Struct.ComponentSchema {
     displayName: 'Banner karta';
   };
   attributes: {
-    description: Schema.Attribute.Text;
+    description: Schema.Attribute.RichText;
     icon_1: Schema.Attribute.Media<'images'>;
     icon_2: Schema.Attribute.Media<'images'>;
     icon_3: Schema.Attribute.Media<'images'>;
@@ -471,7 +484,7 @@ export interface ElementsCardSliderItem extends Struct.ComponentSchema {
     heading: Schema.Attribute.String;
     icon: Schema.Attribute.Media<'images'>;
     link: Schema.Attribute.Component<'elements.text-link', false>;
-    text: Schema.Attribute.Text;
+    text: Schema.Attribute.RichText;
   };
 }
 
@@ -490,6 +503,7 @@ export interface ElementsContactCardPerson extends Struct.ComponentSchema {
     phone: Schema.Attribute.String;
     photo: Schema.Attribute.Media<'images'>;
     role: Schema.Attribute.String;
+    style: Schema.Attribute.Enumeration<['1', '2', '3']>;
   };
 }
 
@@ -528,7 +542,7 @@ export interface ElementsFeatureCard extends Struct.ComponentSchema {
     displayName: 'Karta';
   };
   attributes: {
-    description: Schema.Attribute.Text;
+    description: Schema.Attribute.RichText;
     icon: Schema.Attribute.Media<'images'>;
     icon_1: Schema.Attribute.Media<'images'>;
     icon_2: Schema.Attribute.Media<'images'>;
@@ -552,7 +566,7 @@ export interface ElementsHeroSliderInfo extends Struct.ComponentSchema {
   attributes: {
     heading: Schema.Attribute.String;
     icon: Schema.Attribute.Media<'images'>;
-    text: Schema.Attribute.Text;
+    text: Schema.Attribute.RichText;
   };
 }
 
@@ -567,7 +581,7 @@ export interface ElementsHeroSliderSlide extends Struct.ComponentSchema {
     image: Schema.Attribute.Media<'images'>;
     informations: Schema.Attribute.Component<'elements.hero-slider-info', true>;
     link: Schema.Attribute.Component<'elements.text-link', false>;
-    text: Schema.Attribute.Text;
+    text: Schema.Attribute.RichText;
   };
 }
 
@@ -622,21 +636,6 @@ export interface ElementsPhoto extends Struct.ComponentSchema {
   };
 }
 
-export interface ElementsSlide extends Struct.ComponentSchema {
-  collectionName: 'components_elements_slides';
-  info: {
-    description: 'Slide with title, description, link and images';
-    displayName: 'Slide';
-  };
-  attributes: {
-    background_image: Schema.Attribute.Media<'images'>;
-    description: Schema.Attribute.RichText;
-    image: Schema.Attribute.Media<'images'>;
-    link: Schema.Attribute.Component<'elements.text-link', false>;
-    title: Schema.Attribute.String;
-  };
-}
-
 export interface ElementsStatItem extends Struct.ComponentSchema {
   collectionName: 'components_elements_stat_items';
   info: {
@@ -644,7 +643,7 @@ export interface ElementsStatItem extends Struct.ComponentSchema {
     displayName: 'Statistick\u00E1 polo\u017Eka';
   };
   attributes: {
-    description: Schema.Attribute.Text;
+    description: Schema.Attribute.RichText;
     icon_1: Schema.Attribute.Media<'images'>;
     icon_2: Schema.Attribute.Media<'images'>;
     icon_3: Schema.Attribute.Media<'images'>;
@@ -703,7 +702,7 @@ export interface ElementsWorkplaceCard extends Struct.ComponentSchema {
     displayName: 'Dla\u017Edice pracovi\u0161t\u011B';
   };
   attributes: {
-    description: Schema.Attribute.Text;
+    description: Schema.Attribute.RichText;
     icon_1: Schema.Attribute.Media<'images'>;
     icon_2: Schema.Attribute.Media<'images'>;
     icon_3: Schema.Attribute.Media<'images'>;
@@ -838,7 +837,6 @@ declare module '@strapi/strapi' {
       'components.photo-gallery': ComponentsPhotoGallery;
       'components.popup': ComponentsPopup;
       'components.section-divider': ComponentsSectionDivider;
-      'components.slider': ComponentsSlider;
       'components.stats-highlights': ComponentsStatsHighlights;
       'components.stats-section': ComponentsStatsSection;
       'components.text': ComponentsText;
@@ -859,7 +857,6 @@ declare module '@strapi/strapi' {
       'elements.nav-item': ElementsNavItem;
       'elements.partner-logo': ElementsPartnerLogo;
       'elements.photo': ElementsPhoto;
-      'elements.slide': ElementsSlide;
       'elements.stat-item': ElementsStatItem;
       'elements.stat-value': ElementsStatValue;
       'elements.text-link': ElementsTextLink;
