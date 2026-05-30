@@ -32,7 +32,7 @@ export function GallerySlider({ data, sidebar }: GallerySliderProps) {
         <div className="flex">
           {photos.map((photo, i) => (
             <div key={i} className={sidebar ? 'flex-[0_0_100%] min-w-0' : 'flex-[0_0_80%] sm:flex-[0_0_45%] lg:flex-[0_0_30%] min-w-0'}>
-              <div className="relative aspect-[4/3] rounded-[var(--radius-card)] overflow-hidden mx-2">
+              <div className={`relative ${sidebar ? 'aspect-square' : 'aspect-[4/3]'} rounded-[var(--radius-card)] overflow-hidden mx-2`}>
                 <Image
                   src={photo.image!.url}
                   alt={photo.image!.alternativeText || ''}
