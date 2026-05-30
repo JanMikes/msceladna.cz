@@ -15,7 +15,7 @@ describe('Heading component', () => {
       anchor: null,
     };
     render(<Heading data={data} />);
-    const heading = screen.getByText('Default Heading');
+    const heading = screen.getByText('Default Heading').closest('h2')!;
     expect(heading.tagName).toBe('H2');
     expect(heading.className).toContain('heading-accent');
     expect(heading.className).toContain('text-2xl');
@@ -32,7 +32,7 @@ describe('Heading component', () => {
       anchor: null,
     };
     render(<Heading data={data} />);
-    const heading = screen.getByText('H3 Heading');
+    const heading = screen.getByText('H3 Heading').closest('h3')!;
     expect(heading.tagName).toBe('H3');
     expect(heading.className).toContain('text-xl');
   });
@@ -48,7 +48,7 @@ describe('Heading component', () => {
       anchor: null,
     };
     render(<Heading data={data} />);
-    const heading = screen.getByText('H4 Heading');
+    const heading = screen.getByText('H4 Heading').closest('h4')!;
     expect(heading.tagName).toBe('H4');
     expect(heading.className).toContain('text-lg');
   });
@@ -64,7 +64,7 @@ describe('Heading component', () => {
       anchor: 'my-section',
     };
     render(<Heading data={data} />);
-    const heading = screen.getByText('Anchored');
+    const heading = screen.getByText('Anchored').closest('h2')!;
     expect(heading.id).toBe('my-section');
   });
 
@@ -79,7 +79,7 @@ describe('Heading component', () => {
       anchor: null,
     };
     render(<Heading data={data} />);
-    const heading = screen.getByText('No Anchor');
+    const heading = screen.getByText('No Anchor').closest('h2')!;
     expect(heading.id).toBe('');
   });
 

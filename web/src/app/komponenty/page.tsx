@@ -354,7 +354,7 @@ export default function KomponentyPage() {
             heading: 'Testovací nadpis, raději napsaný na dva řádky',
             description: 'Popis karty s dalšími informacemi o obsahu, Popis karty s dalšími informacemi o obsahu',
             link: { href: '#', external: false, text: 'Více informací', disabled: false },
-            items: Array.from({ length: 3 }, (_, i) => ({
+            items: Array.from({ length: 3 }, () => ({
               number: '10',
               title: 'Headline',
               description: 'Lorem Ipsum is simply dummy text ofcsdcdnkjsndc knj sdkjxnsk djkjsdslkxsd',

@@ -292,18 +292,6 @@ function mapTextLinks(raw: unknown) {
   return raw.map((l) => resolveTextLink(l)).filter((l) => l !== null);
 }
 
-function mapCards(raw: unknown) {
-  if (!Array.isArray(raw)) return [];
-  return raw.map((c) => ({
-    icon_type: (c.icon_type as 'hidden' | 'image' | 'text' | 'initials') ?? 'initials',
-    icon: mapMedia(c.icon),
-    icon_text: (c.icon_text as string) ?? null,
-    title: c.title ?? null,
-    description: c.description ?? null,
-    link: resolveTextLink(c.link),
-  }));
-}
-
 function mapFeatureCards(raw: unknown) {
   if (!Array.isArray(raw)) return [];
   return raw.map((c) => ({
@@ -398,14 +386,6 @@ function mapBadges(raw: unknown) {
     label: b.label ?? '',
     variant: b.variant ?? 'default',
     size: b.size ?? 'M',
-  }));
-}
-
-function mapWorkplaceRefs(raw: unknown) {
-  if (!Array.isArray(raw)) return [];
-  return raw.map((w) => ({
-    name: w.name ?? '',
-    slug: w.slug ?? '',
   }));
 }
 

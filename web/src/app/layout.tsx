@@ -18,6 +18,11 @@ const gogh = localFont({
   variable: '--font-gogh',
 });
 
+// The site is rendered per request (Strapi data is cached in Redis, not at the
+// Next layer), so there is no static prerendering to do. Forcing dynamic avoids
+// build-time prerender attempts of inherently dynamic routes.
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: {
     template: '%s | MŠ Čeladná',
