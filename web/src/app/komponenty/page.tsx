@@ -91,19 +91,27 @@ export default function KomponentyPage() {
         <Section title="Typografie">
           <div className="space-y-4">
             <p className="text-sm text-text-muted uppercase tracking-wide">Style 1 (bez accentu)</p>
-            <Heading data={{ id: 101, __component: 'components.heading', text: 'Nadpis H2', type: 'h2', style: 'style1', anchor: null }} />
-            <Heading data={{ id: 102, __component: 'components.heading', text: 'Nadpis H3', type: 'h3', style: 'style1', anchor: null }} />
-            <Heading data={{ id: 103, __component: 'components.heading', text: 'Nadpis H4', type: 'h4', style: 'style1', anchor: null }} />
-            <Heading data={{ id: 104, __component: 'components.heading', text: 'Nadpis H5', type: 'h5', style: 'style1', anchor: null }} />
-            <Heading data={{ id: 105, __component: 'components.heading', text: 'Nadpis H6', type: 'h6', style: 'style1', anchor: null }} />
+            <Heading data={{ id: 101, __component: 'components.heading', text: 'Nadpis H2', type: 'h2', style: 'style1', number: null, anchor: null }} />
+            <Heading data={{ id: 102, __component: 'components.heading', text: 'Nadpis H3', type: 'h3', style: 'style1', number: null, anchor: null }} />
+            <Heading data={{ id: 103, __component: 'components.heading', text: 'Nadpis H4', type: 'h4', style: 'style1', number: null, anchor: null }} />
+            <Heading data={{ id: 104, __component: 'components.heading', text: 'Nadpis H5', type: 'h5', style: 'style1', number: null, anchor: null }} />
+            <Heading data={{ id: 105, __component: 'components.heading', text: 'Nadpis H6', type: 'h6', style: 'style1', number: null, anchor: null }} />
           </div>
           <div className="space-y-4 mt-8">
             <p className="text-sm text-text-muted uppercase tracking-wide">Style 2 (s accentem)</p>
-            <Heading data={{ id: 1, __component: 'components.heading', text: 'Nadpis H2', type: 'h2', style: 'style2', anchor: null }} />
-            <Heading data={{ id: 2, __component: 'components.heading', text: 'Nadpis H3', type: 'h3', style: 'style2', anchor: null }} />
-            <Heading data={{ id: 3, __component: 'components.heading', text: 'Nadpis H4', type: 'h4', style: 'style2', anchor: null }} />
-            <Heading data={{ id: 4, __component: 'components.heading', text: 'Nadpis H5', type: 'h5', style: 'style2', anchor: null }} />
-            <Heading data={{ id: 5, __component: 'components.heading', text: 'Nadpis H6', type: 'h6', style: 'style2', anchor: null }} />
+            <Heading data={{ id: 1, __component: 'components.heading', text: 'Nadpis H2', type: 'h2', style: 'style2', number: null, anchor: null }} />
+            <Heading data={{ id: 2, __component: 'components.heading', text: 'Nadpis H3', type: 'h3', style: 'style2', number: null, anchor: null }} />
+            <Heading data={{ id: 3, __component: 'components.heading', text: 'Nadpis H4', type: 'h4', style: 'style2', number: null, anchor: null }} />
+            <Heading data={{ id: 4, __component: 'components.heading', text: 'Nadpis H5', type: 'h5', style: 'style2', number: null, anchor: null }} />
+            <Heading data={{ id: 5, __component: 'components.heading', text: 'Nadpis H6', type: 'h6', style: 'style2', number: null, anchor: null }} />
+          </div>
+          <div className="space-y-4 mt-8">
+            <p className="text-sm text-text-muted uppercase tracking-wide">Style 3 (s číslem v rámečku)</p>
+            <Heading data={{ id: 201, __component: 'components.heading', text: 'Nadpis H2', type: 'h2', style: 'style3', number: '1', anchor: null }} />
+            <Heading data={{ id: 202, __component: 'components.heading', text: 'Nadpis H3', type: 'h3', style: 'style3', number: '2', anchor: null }} />
+            <Heading data={{ id: 203, __component: 'components.heading', text: 'Nadpis H4', type: 'h4', style: 'style3', number: '3', anchor: null }} />
+            <Heading data={{ id: 204, __component: 'components.heading', text: 'Nadpis H5', type: 'h5', style: 'style3', number: '4', anchor: null }} />
+            <Heading data={{ id: 205, __component: 'components.heading', text: 'Nadpis H6', type: 'h6', style: 'style3', number: '5', anchor: null }} />
           </div>
         </Section>
 
@@ -392,9 +400,9 @@ export default function KomponentyPage() {
           <AccordionSections data={{
             id: 110, __component: 'components.accordion-sections',
             sections: [
-              { title: 'Jak probíhá adaptace dítěte?', description: 'Adaptační proces probíhá individuálně. V prvním týdnu doporučujeme kratší pobyty, postupně prodlužované.', default_open: true, files: [], photos: [], contacts: [] },
-              { title: 'Jaké jsou provozní hodiny?', description: 'Mateřská škola je otevřena od **6:30** do **16:30** ve všední dny.', default_open: false, files: [], photos: [], contacts: [] },
-              { title: 'Co potřebuje dítě s sebou?', description: 'Náhradní oblečení, přezůvky, batůžek, pití. Více informací najdete ve školním řádu.', default_open: false, files: [{ name: 'Školní řád.pdf', file: placeholderImage }], photos: [], contacts: [] },
+              { title: 'Jak probíhá adaptace dítěte?', description: 'Adaptační proces probíhá individuálně podle potřeb každého dítěte:\n\n- v prvním týdnu doporučujeme kratší pobyty (dopoledne bez spánku)\n- postupně pobyt prodlužujeme dle toho, jak si dítě zvyká\n- s rodiči průběžně konzultujeme, co dítěti pomáhá\n\nHlavní fotka vlevo se na mobilu zobrazí nahoře, na tabletu a větších obrazovkách obtéká text zleva.', default_open: true, mainPhoto: placeholderImage, files: [], photos: [], contacts: [] },
+              { title: 'Jaké jsou provozní hodiny?', description: 'Mateřská škola je otevřena od **6:30** do **16:30** ve všední dny.', default_open: false, mainPhoto: null, files: [], photos: [], contacts: [] },
+              { title: 'Co potřebuje dítě s sebou?', description: 'Náhradní oblečení, přezůvky, batůžek, pití. Více informací najdete ve školním řádu.', default_open: false, mainPhoto: null, files: [{ name: 'Školní řád.pdf', file: placeholderImage }], photos: [], contacts: [] },
             ],
           } satisfies ComponentAccordionSections} />
         </Section>

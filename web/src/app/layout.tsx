@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
+import TopProgressBar from '@/components/layout/TopProgressBar';
 import { NavigationProvider } from '@/components/layout/NavigationContext';
 import { getNavigation, getFooter, getOrganization } from '@/lib/strapi/data';
 import './globals.css';
@@ -60,6 +61,7 @@ export default async function RootLayout({
   return (
     <html lang="cs" className={gogh.variable}>
       <body className="font-sans min-h-screen flex flex-col">
+        <TopProgressBar />
         <NavigationProvider defaultNavigation={navigation}>
           <Header />
           {children}

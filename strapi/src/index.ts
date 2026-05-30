@@ -1,4 +1,5 @@
 import type { Core } from '@strapi/strapi';
+import { registerRevalidation } from './revalidate';
 
 const SEPARATOR = ' / ';
 const PAGE_UID = 'api::page.page' as const;
@@ -121,6 +122,11 @@ export default {
       await ensurePageMainFields(strapi);
     } catch (err) {
       strapi.log.warn(`[page admin_label] mainField update skipped: ${(err as Error).message}`);
+    }
+    try {
+      registerRevalidation(strapi);
+    } catch (err) {
+      strapi.log.warn(`[revalidate] subscriber registration skipped: ${(err as Error).message}`);
     }
   },
 

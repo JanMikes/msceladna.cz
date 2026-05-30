@@ -36,6 +36,7 @@ const contactCardPopulate = {
 
 const expandableSectionPopulate = {
   populate: {
+    mainPhoto: mediaFields,
     files: documentItemPopulate,
     photos: photoPopulate,
     contacts: contactCardPopulate,

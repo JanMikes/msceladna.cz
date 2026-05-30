@@ -35,6 +35,7 @@ class StrapiClient {
 
       if (!res.ok) {
         console.error(`Strapi findMany ${contentType} failed: ${res.status}`);
+        if (options.throwOnError !== false) throw new Error(`Strapi findMany ${contentType} failed: ${res.status}`);
         return { data: [], total: 0 };
       }
 
@@ -45,6 +46,7 @@ class StrapiClient {
       };
     } catch (error) {
       console.error(`Strapi findMany ${contentType} error:`, error);
+      if (options.throwOnError !== false) throw error;
       return { data: [], total: 0 };
     }
   }
@@ -57,6 +59,7 @@ class StrapiClient {
     const firstPage = await this.findMany<T>(contentType, {
       ...options,
       pagination: { page: 1, pageSize },
+      throwOnError: false,
     });
 
     const results = [...firstPage.data];
@@ -66,6 +69,7 @@ class StrapiClient {
       const nextPage = await this.findMany<T>(contentType, {
         ...options,
         pagination: { page, pageSize },
+        throwOnError: false,
       });
       results.push(...nextPage.data);
     }
@@ -89,6 +93,7 @@ class StrapiClient {
 
       if (!res.ok) {
         console.error(`Strapi findSingle ${contentType} failed: ${res.status}`);
+        if (options.throwOnError !== false) throw new Error(`Strapi findSingle ${contentType} failed: ${res.status}`);
         return null;
       }
 
@@ -96,6 +101,7 @@ class StrapiClient {
       return json.data ?? null;
     } catch (error) {
       console.error(`Strapi findSingle ${contentType} error:`, error);
+      if (options.throwOnError !== false) throw error;
       return null;
     }
   }

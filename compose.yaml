@@ -59,6 +59,10 @@ services:
             JWT_SECRET: toBeModifiedJwtSecret
             NODE_OPTIONS: "--max-http-header-size=262144"
             REDIS_URL: redis://redis:6379
+            # Cache invalidation: Strapi notifies the web app to purge cached
+            # Strapi responses on content changes. Secret must match web's.
+            WEB_INTERNAL_URL: http://web:3000
+            STRAPI_WEBHOOK_SECRET: dev-webhook-secret
             # Email Configuration (Mailpit for development)
             SMTP_HOST: mailpit
             SMTP_PORT: "1025"

@@ -16,8 +16,11 @@
     },
     "style": {
       "type": "enumeration",
-      "enum": ["style1", "style2"],
+      "enum": ["style1", "style2", "style3"],
       "default": "style2"
+    },
+    "number": {
+      "type": "string"
     },
     "anchor": {
       "type": "string"

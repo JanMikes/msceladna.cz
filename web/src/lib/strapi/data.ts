@@ -1,3 +1,4 @@
+import { cache as reactCache } from 'react';
 import type {
   CooperatingInstitution,
   Employee,
@@ -24,6 +25,7 @@ import type {
   StrapiRawWorkplace,
 } from './types';
 import { getStrapiClient } from './client';
+import { cached } from './cache';
 import { mapFooter } from './mappers/footer';
 import { mapNavigation } from './mappers/navigation';
 import { mapNewsArticle, mapNewsArticleSummary } from './mappers/news-article';
@@ -40,61 +42,102 @@ import {
   buildProjectPopulate,
 } from './populates';
 
+// All getters cache the RAW Strapi response in Redis (keyed semantically and
+// indexed by invalidation tags), then run mappers fresh on every request. This
+// keeps the cache deploy-safe: changing a mapper or React component takes effect
+// immediately, because only the upstream data is cached, never rendered output.
+// They are additionally wrapped in React's `cache()` to dedupe identical calls
+// within a single request render (e.g. generateMetadata + the page component).
+//
+// Tag conventions (must stay in sync with strapi/src/revalidate.ts):
+//   page:<slug>, pages, nav, footer, org,
+//   workplaces, workplace:<slug>, employees, employees:<workplaceSlug>,
+//   news, news:<slug>, projects, project:<slug>, tags, coops
+
 // ── Pages ──
 
-export async function getPageBySlug(slug: string): Promise<Page | null> {
+export const getPageBySlug = reactCache(async (slug: string): Promise<Page | null> => {
   const client = getStrapiClient();
-  const { data } = await client.findMany<StrapiRawPage>('pages', {
-    filters: { slug: { $eq: slug } },
-    populate: buildPagePopulate(),
-    pagination: { pageSize: 1 },
-  });
-  return data.length > 0 ? mapPage(data[0]) : null;
-}
+  const res = await cached(
+    `page:${slug}`,
+    [`page:${slug}`, 'pages'],
+    () =>
+      client.findMany<StrapiRawPage>('pages', {
+        filters: { slug: { $eq: slug } },
+        populate: buildPagePopulate(),
+        pagination: { pageSize: 1 },
+      }),
+    { fallback: { data: [], total: 0 } },
+  );
+  return res.data.length > 0 ? mapPage(res.data[0]) : null;
+});
 
 // ── Navigation ──
 
-export async function getNavigation(menuSetId?: string): Promise<NavigationItem[]> {
+export const getNavigation = reactCache(async (menuSetId?: string): Promise<NavigationItem[]> => {
   const client = getStrapiClient();
   const filters: Record<string, unknown> = {};
   if (menuSetId) {
     filters.menu_set = { documentId: { $eq: menuSetId } };
   }
-  const { data } = await client.findMany<StrapiRawNavigation>('navigations', {
-    filters,
-    sort: 'sortOrder:asc',
-    populate: buildNavigationPopulate(),
-    pagination: { pageSize: 100 },
-  });
-  return data.map(mapNavigation).filter((item): item is NavigationItem => item !== null);
-}
+  const res = await cached(
+    `nav:${menuSetId ?? 'default'}`,
+    ['nav'],
+    () =>
+      client.findMany<StrapiRawNavigation>('navigations', {
+        filters,
+        sort: 'sortOrder:asc',
+        populate: buildNavigationPopulate(),
+        pagination: { pageSize: 100 },
+      }),
+    { fallback: { data: [], total: 0 } },
+  );
+  return res.data.map(mapNavigation).filter((item): item is NavigationItem => item !== null);
+});
 
-export async function getPageMenuSetId(slug: string): Promise<string | null> {
+export const getPageMenuSetId = reactCache(async (slug: string): Promise<string | null> => {
   const client = getStrapiClient();
-  const { data } = await client.findMany<{ menu_set: { documentId: string } | null }>('pages', {
-    filters: { slug: { $eq: slug } },
-    fields: ['slug'],
-    populate: { menu_set: { fields: ['documentId'] } },
-    pagination: { pageSize: 1 },
-  });
-  return data.length > 0 ? (data[0].menu_set?.documentId ?? null) : null;
-}
+  const res = await cached(
+    `page-menuset:${slug}`,
+    [`page:${slug}`, 'pages'],
+    () =>
+      client.findMany<{ menu_set: { documentId: string } | null }>('pages', {
+        filters: { slug: { $eq: slug } },
+        fields: ['slug'],
+        populate: { menu_set: { fields: ['documentId'] } },
+        pagination: { pageSize: 1 },
+      }),
+    { fallback: { data: [], total: 0 } },
+  );
+  return res.data.length > 0 ? (res.data[0].menu_set?.documentId ?? null) : null;
+});
 
 // ── Footer ──
 
-export async function getFooter(): Promise<Footer | null> {
+export const getFooter = reactCache(async (): Promise<Footer | null> => {
   const client = getStrapiClient();
-  const raw = await client.findSingle<StrapiRawFooter>('footer', {
-    populate: buildFooterPopulate(),
-  });
+  const raw = await cached(
+    'footer',
+    ['footer'],
+    () =>
+      client.findSingle<StrapiRawFooter>('footer', {
+        populate: buildFooterPopulate(),
+      }),
+    { fallback: null },
+  );
   return raw ? mapFooter(raw) : null;
-}
+});
 
 // ── Organization ──
 
-export async function getOrganization(): Promise<Organization | null> {
+export const getOrganization = reactCache(async (): Promise<Organization | null> => {
   const client = getStrapiClient();
-  const raw = await client.findSingle<StrapiRawOrganization>('organization');
+  const raw = await cached(
+    'org',
+    ['org'],
+    () => client.findSingle<StrapiRawOrganization>('organization'),
+    { fallback: null },
+  );
   if (!raw) return null;
   return {
     name: raw.name,
@@ -108,149 +151,211 @@ export async function getOrganization(): Promise<Organization | null> {
     founder: raw.founder ?? null,
     founderUrl: raw.founderUrl ?? null,
   };
-}
+});
 
 // ── Workplaces ──
 
-export async function getWorkplaces(): Promise<Workplace[]> {
+export const getWorkplaces = reactCache(async (): Promise<Workplace[]> => {
   const client = getStrapiClient();
-  const { data } = await client.findMany<StrapiRawWorkplace>('workplaces', {
-    sort: 'name:asc',
-    pagination: { pageSize: 100 },
-  });
-  return data.map(mapWorkplace);
-}
+  const res = await cached(
+    'workplaces',
+    ['workplaces'],
+    () =>
+      client.findMany<StrapiRawWorkplace>('workplaces', {
+        sort: 'name:asc',
+        pagination: { pageSize: 100 },
+      }),
+    { fallback: { data: [], total: 0 } },
+  );
+  return res.data.map(mapWorkplace);
+});
 
-export async function getWorkplaceBySlug(slug: string): Promise<Workplace | null> {
+export const getWorkplaceBySlug = reactCache(async (slug: string): Promise<Workplace | null> => {
   const client = getStrapiClient();
-  const { data } = await client.findMany<StrapiRawWorkplace>('workplaces', {
-    filters: { slug: { $eq: slug } },
-    pagination: { pageSize: 1 },
-  });
-  return data.length > 0 ? mapWorkplace(data[0]) : null;
-}
+  const res = await cached(
+    `workplace:${slug}`,
+    ['workplaces', `workplace:${slug}`],
+    () =>
+      client.findMany<StrapiRawWorkplace>('workplaces', {
+        filters: { slug: { $eq: slug } },
+        pagination: { pageSize: 1 },
+      }),
+    { fallback: { data: [], total: 0 } },
+  );
+  return res.data.length > 0 ? mapWorkplace(res.data[0]) : null;
+});
 
 // ── Employees ──
 
-export async function getEmployees(workplaceSlug?: string): Promise<Employee[]> {
+export const getEmployees = reactCache(async (workplaceSlug?: string): Promise<Employee[]> => {
   const client = getStrapiClient();
   const filters: Record<string, unknown> = {};
   if (workplaceSlug) {
     filters.workplace = { slug: { $eq: workplaceSlug } };
   }
-  const { data } = await client.findMany<StrapiRawEmployee>('employees', {
-    filters,
-    populate: buildEmployeePopulate(),
-    sort: 'sortOrder:asc',
-    pagination: { pageSize: 100 },
-  });
-  return data.map(mapEmployee);
-}
+  const res = await cached(
+    `employees:${workplaceSlug ?? 'all'}`,
+    ['employees'],
+    () =>
+      client.findMany<StrapiRawEmployee>('employees', {
+        filters,
+        populate: buildEmployeePopulate(),
+        sort: 'sortOrder:asc',
+        pagination: { pageSize: 100 },
+      }),
+    { fallback: { data: [], total: 0 } },
+  );
+  return res.data.map(mapEmployee);
+});
 
 // ── News Articles ──
 
-export async function getNewsArticles(options: {
-  type?: string;
-  workplaceSlug?: string;
-  tagSlug?: string;
-  page?: number;
-  limit?: number;
-} = {}): Promise<{ articles: NewsArticleSummary[]; total: number }> {
+export const getNewsArticles = reactCache(
+  async (
+    options: {
+      type?: string;
+      workplaceSlug?: string;
+      tagSlug?: string;
+      page?: number;
+      limit?: number;
+    } = {},
+  ): Promise<{ articles: NewsArticleSummary[]; total: number }> => {
+    const client = getStrapiClient();
+    const filters: Record<string, unknown> = { date: { $notNull: true } };
+
+    if (options.type) {
+      filters.type = { $eq: options.type };
+    }
+    if (options.workplaceSlug) {
+      filters.workplaces = { slug: { $eq: options.workplaceSlug } };
+    }
+    if (options.tagSlug) {
+      filters.tags = { slug: { $eq: options.tagSlug } };
+    }
+
+    const page = options.page ?? 1;
+    const limit = options.limit ?? 12;
+    const res = await cached(
+      `news:list:${options.type ?? ''}:${options.workplaceSlug ?? ''}:${options.tagSlug ?? ''}:${page}:${limit}`,
+      ['news'],
+      () =>
+        client.findMany<StrapiRawNewsArticle>('news-articles', {
+          filters,
+          populate: {
+            mainPhoto: { fields: ['url', 'alternativeText', 'width', 'height'] },
+            workplaces: { fields: ['name', 'slug'] },
+            tags: { fields: ['name', 'slug'] },
+          },
+          sort: 'date:desc',
+          pagination: { page, pageSize: limit },
+        }),
+      { fallback: { data: [], total: 0 } },
+    );
+    return {
+      articles: res.data.map(mapNewsArticleSummary),
+      total: res.total,
+    };
+  },
+);
+
+export const getNewsArticleBySlug = reactCache(async (slug: string): Promise<NewsArticle | null> => {
   const client = getStrapiClient();
-  const filters: Record<string, unknown> = { date: { $notNull: true } };
-
-  if (options.type) {
-    filters.type = { $eq: options.type };
-  }
-  if (options.workplaceSlug) {
-    filters.workplaces = { slug: { $eq: options.workplaceSlug } };
-  }
-  if (options.tagSlug) {
-    filters.tags = { slug: { $eq: options.tagSlug } };
-  }
-
-  const { data, total } = await client.findMany<StrapiRawNewsArticle>('news-articles', {
-    filters,
-    populate: {
-      mainPhoto: { fields: ['url', 'alternativeText', 'width', 'height'] },
-      workplaces: { fields: ['name', 'slug'] },
-      tags: { fields: ['name', 'slug'] },
-    },
-    sort: 'date:desc',
-    pagination: { page: options.page ?? 1, pageSize: options.limit ?? 12 },
-  });
-  return {
-    articles: data.map(mapNewsArticleSummary),
-    total,
-  };
-}
-
-export async function getNewsArticleBySlug(slug: string): Promise<NewsArticle | null> {
-  const client = getStrapiClient();
-  const { data } = await client.findMany<StrapiRawNewsArticle>('news-articles', {
-    filters: { slug: { $eq: slug } },
-    populate: buildNewsArticlePopulate(),
-    pagination: { pageSize: 1 },
-  });
-  return data.length > 0 ? mapNewsArticle(data[0]) : null;
-}
+  const res = await cached(
+    `news:${slug}`,
+    ['news', `news:${slug}`],
+    () =>
+      client.findMany<StrapiRawNewsArticle>('news-articles', {
+        filters: { slug: { $eq: slug } },
+        populate: buildNewsArticlePopulate(),
+        pagination: { pageSize: 1 },
+      }),
+    { fallback: { data: [], total: 0 } },
+  );
+  return res.data.length > 0 ? mapNewsArticle(res.data[0]) : null;
+});
 
 // ── Projects ──
 
-export async function getProjects(status?: string): Promise<Project[]> {
+export const getProjects = reactCache(async (status?: string): Promise<Project[]> => {
   const client = getStrapiClient();
   const filters: Record<string, unknown> = {};
   if (status) {
     filters.status = { $eq: status };
   }
-  const { data } = await client.findMany<StrapiRawProject>('projects', {
-    filters,
-    populate: buildProjectPopulate(),
-    sort: 'dateFrom:desc',
-    pagination: { pageSize: 100 },
-  });
-  return data.map(mapProject);
-}
+  const res = await cached(
+    `projects:${status ?? 'all'}`,
+    ['projects'],
+    () =>
+      client.findMany<StrapiRawProject>('projects', {
+        filters,
+        populate: buildProjectPopulate(),
+        sort: 'dateFrom:desc',
+        pagination: { pageSize: 100 },
+      }),
+    { fallback: { data: [], total: 0 } },
+  );
+  return res.data.map(mapProject);
+});
 
-export async function getProjectBySlug(slug: string): Promise<Project | null> {
+export const getProjectBySlug = reactCache(async (slug: string): Promise<Project | null> => {
   const client = getStrapiClient();
-  const { data } = await client.findMany<StrapiRawProject>('projects', {
-    filters: { slug: { $eq: slug } },
-    populate: buildProjectPopulate(),
-    pagination: { pageSize: 1 },
-  });
-  return data.length > 0 ? mapProject(data[0]) : null;
-}
+  const res = await cached(
+    `project:${slug}`,
+    ['projects', `project:${slug}`],
+    () =>
+      client.findMany<StrapiRawProject>('projects', {
+        filters: { slug: { $eq: slug } },
+        populate: buildProjectPopulate(),
+        pagination: { pageSize: 1 },
+      }),
+    { fallback: { data: [], total: 0 } },
+  );
+  return res.data.length > 0 ? mapProject(res.data[0]) : null;
+});
 
 // ── Tags ──
 
-export async function getTags(): Promise<Tag[]> {
+export const getTags = reactCache(async (): Promise<Tag[]> => {
   const client = getStrapiClient();
-  const { data } = await client.findMany<StrapiRawTag>('tags', {
-    sort: 'name:asc',
-    pagination: { pageSize: 100 },
-  });
-  return data.map((t) => ({ documentId: t.documentId, name: t.name, slug: t.slug }));
-}
+  const res = await cached(
+    'tags',
+    ['tags'],
+    () =>
+      client.findMany<StrapiRawTag>('tags', {
+        sort: 'name:asc',
+        pagination: { pageSize: 100 },
+      }),
+    { fallback: { data: [], total: 0 } },
+  );
+  return res.data.map((t) => ({ documentId: t.documentId, name: t.name, slug: t.slug }));
+});
 
 // ── Cooperating Institutions ──
 
-export async function getCooperatingInstitutions(): Promise<CooperatingInstitution[]> {
-  const client = getStrapiClient();
-  const { data } = await client.findMany<StrapiRawCooperatingInstitution>('cooperating-institutions', {
-    sort: 'sortOrder:asc',
-    pagination: { pageSize: 100 },
-  });
-  return data.map((raw) => ({
-    documentId: raw.documentId,
-    name: raw.name,
-    type: raw.type ?? null,
-    contactPerson: raw.contactPerson ?? null,
-    phone: raw.phone ?? null,
-    email: raw.email ?? null,
-    web: raw.web ?? null,
-    address: raw.address ?? null,
-    description: raw.description ?? null,
-    sortOrder: raw.sortOrder ?? 0,
-  }));
-}
+export const getCooperatingInstitutions = reactCache(
+  async (): Promise<CooperatingInstitution[]> => {
+    const client = getStrapiClient();
+    const res = await cached(
+      'coops',
+      ['coops'],
+      () =>
+        client.findMany<StrapiRawCooperatingInstitution>('cooperating-institutions', {
+          sort: 'sortOrder:asc',
+          pagination: { pageSize: 100 },
+        }),
+      { fallback: { data: [], total: 0 } },
+    );
+    return res.data.map((raw) => ({
+      documentId: raw.documentId,
+      name: raw.name,
+      type: raw.type ?? null,
+      contactPerson: raw.contactPerson ?? null,
+      phone: raw.phone ?? null,
+      email: raw.email ?? null,
+      web: raw.web ?? null,
+      address: raw.address ?? null,
+      description: raw.description ?? null,
+      sortOrder: raw.sortOrder ?? 0,
+    }));
+  },
+);

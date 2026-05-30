@@ -53,7 +53,8 @@ function mapDynamicZoneComponent(raw: StrapiRawDynamicZoneComponent): DynamicZon
         __component: 'components.heading',
         text: (raw.text as string) ?? null,
         type: (raw.type as 'h2' | 'h3' | 'h4' | 'h5' | 'h6') ?? 'h2',
-        style: (raw.style as 'style1' | 'style2') ?? 'style2',
+        style: (raw.style as 'style1' | 'style2' | 'style3') ?? 'style2',
+        number: (raw.number as string) ?? null,
         anchor: (raw.anchor as string) ?? null,
       };
 
@@ -384,6 +385,7 @@ function mapExpandableSections(raw: unknown) {
     title: s.title ?? null,
     description: s.description ?? null,
     default_open: s.default_open ?? false,
+    mainPhoto: mapMedia(s.mainPhoto),
     files: mapDocuments(s.files),
     photos: mapPhotos(s.photos),
     contacts: mapContactCards(s.contacts),

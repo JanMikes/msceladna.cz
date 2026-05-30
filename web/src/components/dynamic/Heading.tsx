@@ -17,12 +17,16 @@ export function Heading({ data }: HeadingProps) {
 
   const Tag = data.type || 'h2';
   const style = data.style || 'style2';
-  const accentClass = style === 'style2' ? 'heading-accent' : '';
-  const className = `font-bold text-primary mt-5 ${accentClass} ${sizeClasses[Tag] || sizeClasses.h2}`.trim().replace(/\s+/g, ' ');
+  const showNumber = style === 'style3' && !!data.number;
+
+  const styleClass =
+    style === 'style2' ? 'heading-accent' : showNumber ? 'heading-numbered' : '';
+  const className = `font-bold text-primary mt-5 ${styleClass} ${sizeClasses[Tag] || sizeClasses.h2}`.trim().replace(/\s+/g, ' ');
 
   return (
     <Tag id={data.anchor || undefined} className={className}>
-      {data.text}
+      {showNumber && <span className="heading-number-box">{data.number}</span>}
+      <span>{data.text}</span>
     </Tag>
   );
 }

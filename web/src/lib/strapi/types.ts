@@ -29,6 +29,14 @@ export interface StrapiQueryOptions {
     limit?: number;
   };
   fields?: string[];
+  /**
+   * Client-only flag (never serialized into the query string). The client
+   * throws on a failed request by DEFAULT so the cache layer can distinguish a
+   * genuine empty response (cacheable) from a Strapi failure (must NOT be
+   * cached). Set to `false` to restore the legacy "return empty on error"
+   * behaviour for non-cached callers.
+   */
+  throwOnError?: boolean;
 }
 
 // ── Raw media ──

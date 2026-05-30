@@ -11,6 +11,7 @@ describe('Heading component', () => {
       text: 'Default Heading',
       type: 'h2',
       style: 'style2',
+      number: null,
       anchor: null,
     };
     render(<Heading data={data} />);
@@ -27,6 +28,7 @@ describe('Heading component', () => {
       text: 'H3 Heading',
       type: 'h3',
       style: 'style2',
+      number: null,
       anchor: null,
     };
     render(<Heading data={data} />);
@@ -42,6 +44,7 @@ describe('Heading component', () => {
       text: 'H4 Heading',
       type: 'h4',
       style: 'style2',
+      number: null,
       anchor: null,
     };
     render(<Heading data={data} />);
@@ -57,6 +60,7 @@ describe('Heading component', () => {
       text: 'Anchored',
       type: 'h2',
       style: 'style2',
+      number: null,
       anchor: 'my-section',
     };
     render(<Heading data={data} />);
@@ -71,11 +75,28 @@ describe('Heading component', () => {
       text: 'No Anchor',
       type: 'h2',
       style: 'style2',
+      number: null,
       anchor: null,
     };
     render(<Heading data={data} />);
     const heading = screen.getByText('No Anchor');
     expect(heading.id).toBe('');
+  });
+
+  it('renders style3 with a numbered box', () => {
+    const data: ComponentHeading = {
+      id: 7,
+      __component: 'components.heading',
+      text: 'Numbered Heading',
+      type: 'h2',
+      style: 'style3',
+      number: '3',
+      anchor: null,
+    };
+    render(<Heading data={data} />);
+    const heading = screen.getByText('Numbered Heading');
+    expect(heading.closest('h2')?.className).toContain('heading-numbered');
+    expect(screen.getByText('3').className).toContain('heading-number-box');
   });
 
   it('returns null when text is null', () => {
@@ -85,6 +106,7 @@ describe('Heading component', () => {
       text: null,
       type: 'h2',
       style: 'style2',
+      number: null,
       anchor: null,
     };
     const { container } = render(<Heading data={data} />);

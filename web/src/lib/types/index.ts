@@ -201,7 +201,8 @@ export interface ComponentHeading extends DynamicZoneBase {
   __component: 'components.heading';
   text: string | null;
   type: 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
-  style: 'style1' | 'style2';
+  style: 'style1' | 'style2' | 'style3';
+  number: string | null;
   anchor: string | null;
 }
 
@@ -347,6 +348,7 @@ export interface ComponentAccordionSections extends DynamicZoneBase {
     title: string | null;
     description: string | null;
     default_open: boolean;
+    mainPhoto: MediaImage | null;
     files: { name: string | null; file: MediaImage | null }[];
     photos: { image: MediaImage | null }[];
     contacts: {

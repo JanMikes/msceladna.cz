@@ -15,6 +15,11 @@
       "type": "boolean",
       "default": false
     },
+    "mainPhoto": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["images"]
+    },
     "files": {
       "type": "component",
       "component": "elements.document-item",

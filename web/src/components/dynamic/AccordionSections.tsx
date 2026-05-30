@@ -25,7 +25,23 @@ export function AccordionSections({ data, sidebar }: AccordionSectionsProps) {
 }
 
 function AccordionItem({ section, sidebar }: { section: ComponentAccordionSections['sections'][0]; sidebar?: boolean }) {
-  const [isOpen, setIsOpen] = useState(section.default_open);
+  const hasContent =
+    !!section.description ||
+    !!section.mainPhoto ||
+    (section.files?.length ?? 0) > 0 ||
+    (section.photos?.length ?? 0) > 0 ||
+    (section.contacts?.length ?? 0) > 0;
+  const [isOpen, setIsOpen] = useState(hasContent && section.default_open);
+
+  if (!hasContent) {
+    return (
+      <div className="border border-border rounded-[var(--radius-card)] overflow-hidden">
+        <div className="w-full flex items-center justify-between p-4 text-left bg-card">
+          <span className="font-medium text-primary">{section.title}</span>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="border border-border rounded-[var(--radius-card)] overflow-hidden">
@@ -43,8 +59,31 @@ function AccordionItem({ section, sidebar }: { section: ComponentAccordionSectio
       </button>
       {isOpen && (
         <div className="p-4 bg-card space-y-4">
-          {section.description && (
-            <MarkdownContent content={section.description} className="prose-sm text-text-muted" />
+          {(section.mainPhoto || section.description) && (
+            <div className={clsx(!sidebar && 'md:flex md:items-start md:gap-8')}>
+              {section.mainPhoto && (
+                <div
+                  className={clsx(
+                    'mb-4 w-full',
+                    !sidebar && 'md:mb-0 md:w-auto md:max-w-[45%] md:shrink-0'
+                  )}
+                >
+                  <Image
+                    src={section.mainPhoto.url}
+                    alt={section.mainPhoto.alternativeText || section.title || ''}
+                    width={section.mainPhoto.width || undefined}
+                    height={section.mainPhoto.height || undefined}
+                    className="h-auto w-full object-contain"
+                    sizes={sidebar ? '100vw' : '(max-width: 768px) 100vw, 45vw'}
+                  />
+                </div>
+              )}
+              {section.description && (
+                <div className={clsx(!sidebar && 'md:flex-1 md:min-w-0')}>
+                  <MarkdownContent content={section.description} className="prose-sm text-text-muted" />
+                </div>
+              )}
+            </div>
           )}
           {section.files && section.files.length > 0 && (
             <div className="space-y-2">

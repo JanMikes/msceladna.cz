@@ -50,7 +50,7 @@ export function SectionDivider({ data }: SectionDividerProps) {
   return (
     <hr
       className={clsx(
-        'border-t border-border',
+        'border-t border-[#B2B2B2]',
         spacingClasses[data.spacing] || spacingClasses.M,
         styleClasses[data.style] || styleClasses.solid
       )}
