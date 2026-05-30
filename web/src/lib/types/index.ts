@@ -59,7 +59,8 @@ export interface Organization {
   dataBox: string | null;
   web: string | null;
   email: string | null;
-  phones: string[];
+  phoneManagement: string | null;
+  phoneAdmin: string | null;
   founder: string | null;
   founderUrl: string | null;
 }

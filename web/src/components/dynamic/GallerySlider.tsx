@@ -37,7 +37,7 @@ export function GallerySlider({ data, sidebar }: GallerySliderProps) {
                   src={photo.image!.url}
                   alt={photo.image!.alternativeText || ''}
                   fill
-                  className="object-cover"
+                  className={sidebar ? 'object-contain' : 'object-cover'}
                   sizes="(max-width: 640px) 80vw, (max-width: 1024px) 45vw, 30vw"
                 />
               </div>

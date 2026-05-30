@@ -81,6 +81,47 @@
   }
 }
 
+/* MarkdownContent (.prose) — the Tailwind typography plugin styles headings and
+   lists with generic defaults, but markdown can't add the project's utility
+   classes the way the <Heading> component does. These rules restyle the rendered
+   headings/lists to match normal section content exactly: headings mirror
+   Heading.tsx style1 (text-primary, font-bold, responsive sizes, no accent bar)
+   and list markers use the accent color like .md-inline.
+
+   These MUST stay unlayered (like .prose blockquote above): the typography
+   plugin emits its prose styles inside a cascade layer, and unlayered rules beat
+   layered ones regardless of specificity. Inside @layer components the plugin
+   would win on any property it sets (e.g. its default h4 { font-size: 1em }),
+   leaving headings with the wrong size. */
+.prose :is(h1, h2, h3, h4, h5, h6) {
+  color: var(--color-primary);
+  font-weight: 700;
+  line-height: 1.25;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+.prose h1,
+.prose h2 { font-size: 1.5rem; }
+.prose h3 { font-size: 1.25rem; }
+.prose h4 { font-size: 1.125rem; }
+.prose h5 { font-size: 1rem; }
+.prose h6 { font-size: 0.875rem; }
+
+@media (min-width: 1024px) {
+  .prose h1,
+  .prose h2 { font-size: 1.875rem; }
+  .prose h3 { font-size: 1.5rem; }
+  .prose h4 { font-size: 1.25rem; }
+  .prose h5 { font-size: 1.125rem; }
+  .prose h6 { font-size: 1rem; }
+}
+
+.prose ul,
+.prose ol { padding-left: 1.5em; }
+.prose ul { list-style: disc; }
+.prose ol { list-style: decimal; }
+.prose li::marker { color: var(--color-accent); }
+
 :root {
   --color-primary: #275D56;
   --color-accent: #AFC25E;

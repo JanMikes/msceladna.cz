@@ -31,7 +31,7 @@ function AccordionItem({ section, sidebar }: { section: ComponentAccordionSectio
     <div className="border border-border rounded-[var(--radius-card)] overflow-hidden">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center justify-between p-4 text-left bg-card hover:bg-surface transition-colors"
+        className="w-full flex items-center justify-between p-4 text-left bg-card hover:bg-lime-tint transition-colors"
       >
         <span className="font-medium text-primary">{section.title}</span>
         <ChevronDown

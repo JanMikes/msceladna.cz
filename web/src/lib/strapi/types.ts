@@ -146,7 +146,8 @@ export interface StrapiRawOrganization {
   dataBox: string | null;
   web: string | null;
   email: string | null;
-  phones: { phone: string }[] | null;
+  phoneManagement: string | null;
+  phoneAdmin: string | null;
   founder: string | null;
   founderUrl: string | null;
 }

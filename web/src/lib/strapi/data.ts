@@ -94,11 +94,7 @@ export async function getFooter(): Promise<Footer | null> {
 
 export async function getOrganization(): Promise<Organization | null> {
   const client = getStrapiClient();
-  const raw = await client.findSingle<StrapiRawOrganization>('organization', {
-    populate: {
-      phones: { populate: '*' },
-    },
-  });
+  const raw = await client.findSingle<StrapiRawOrganization>('organization');
   if (!raw) return null;
   return {
     name: raw.name,
@@ -107,7 +103,8 @@ export async function getOrganization(): Promise<Organization | null> {
     dataBox: raw.dataBox ?? null,
     web: raw.web ?? null,
     email: raw.email ?? null,
-    phones: (raw.phones ?? []).map((p) => p.phone),
+    phoneManagement: raw.phoneManagement ?? null,
+    phoneAdmin: raw.phoneAdmin ?? null,
     founder: raw.founder ?? null,
     founderUrl: raw.founderUrl ?? null,
   };
