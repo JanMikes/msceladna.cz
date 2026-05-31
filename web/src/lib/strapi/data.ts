@@ -76,10 +76,12 @@ export const getPageBySlug = reactCache(async (slug: string): Promise<Page | nul
 
 export const getNavigation = reactCache(async (menuSetId?: string): Promise<NavigationItem[]> => {
   const client = getStrapiClient();
-  const filters: Record<string, unknown> = {};
-  if (menuSetId) {
-    filters.menu_set = { documentId: { $eq: menuSetId } };
-  }
+  // With an explicit menu set, return just that set. Otherwise fall back to the
+  // single menu set flagged `is_default` in Strapi — NOT every navigation item,
+  // which would merge all sets together and surface duplicate links.
+  const filters: Record<string, unknown> = menuSetId
+    ? { menu_set: { documentId: { $eq: menuSetId } } }
+    : { menu_set: { is_default: { $eq: true } } };
   const res = await cached(
     `nav:${menuSetId ?? 'default'}`,
     ['nav'],
@@ -93,6 +95,31 @@ export const getNavigation = reactCache(async (menuSetId?: string): Promise<Navi
     { fallback: { data: [], total: 0 } },
   );
   return res.data.map(mapNavigation).filter((item): item is NavigationItem => item !== null);
+});
+
+// Routes that render lists/details under a section slug (e.g. /aktuality/<slug>)
+// take their navbar from the section page, not the individual entry. Mirrors the
+// explicit `pageSlug` each of these pages passes to <MenuSetOverride>.
+const SECTION_ROUTES = new Set(['aktuality', 'projekty', 'reportaze']);
+
+/** The page slug whose assigned menu set governs the navbar for a given path. */
+export function pageSlugForPath(pathname: string): string {
+  const segments = pathname.split(/[?#]/)[0].split('/').filter(Boolean);
+  if (segments.length === 0) return 'uvod';
+  if (SECTION_ROUTES.has(segments[0])) return segments[0];
+  return segments[segments.length - 1];
+}
+
+/**
+ * Resolves the navigation items to render for a request path: the menu set
+ * assigned to the matching page, or the default set when none is assigned. Used
+ * by the root layout to seed the navbar server-side so the correct set is
+ * rendered on first paint (no hydration flash). Client-side navigation is then
+ * handled by <NavigationOverride>.
+ */
+export const getNavigationForPath = reactCache(async (pathname: string): Promise<NavigationItem[]> => {
+  const menuSetId = await getPageMenuSetId(pageSlugForPath(pathname));
+  return getNavigation(menuSetId ?? undefined);
 });
 
 export const getPageMenuSetId = reactCache(async (slug: string): Promise<string | null> => {

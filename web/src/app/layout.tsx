@@ -3,8 +3,9 @@ import localFont from 'next/font/local';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import TopProgressBar from '@/components/layout/TopProgressBar';
+import { headers } from 'next/headers';
 import { NavigationProvider } from '@/components/layout/NavigationContext';
-import { getNavigation, getFooter, getOrganization } from '@/lib/strapi/data';
+import { getNavigation, getNavigationForPath, getFooter, getOrganization } from '@/lib/strapi/data';
 import './globals.css';
 
 const gogh = localFont({
@@ -57,8 +58,10 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const [navigation, footer, organization] = await Promise.all([
+  const pathname = (await headers()).get('x-pathname') ?? '/';
+  const [defaultNavigation, navigation, footer, organization] = await Promise.all([
     getNavigation(),
+    getNavigationForPath(pathname),
     getFooter(),
     getOrganization(),
   ]);
@@ -67,7 +70,7 @@ export default async function RootLayout({
     <html lang="cs" className={gogh.variable}>
       <body className="font-sans min-h-screen flex flex-col">
         <TopProgressBar />
-        <NavigationProvider defaultNavigation={navigation}>
+        <NavigationProvider defaultNavigation={defaultNavigation} initialNavigation={navigation}>
           <Header />
           {children}
         </NavigationProvider>
