@@ -1,10 +1,9 @@
 import { clsx } from 'clsx';
 
-// Reusable loading skeletons shown by route `loading.tsx` files. They render
-// instantly when a navigation starts (Next.js Suspense boundary), giving the
-// user immediate feedback while the server fetches/renders the destination —
-// the fix for "I clicked and nothing happened". The top progress bar itself is
-// rendered globally by TopProgressBar (driven by link clicks, not Suspense).
+// Reusable loading skeletons. They are NOT shown eagerly on every navigation —
+// TopProgressBar renders one in an overlay ONLY when a navigation is still in
+// flight after a short delay (i.e. a cache miss waiting on Strapi). A fast
+// cached navigation never shows a skeleton; the top progress bar covers it.
 
 /** A single shimmering placeholder block. */
 function Block({ className }: { className?: string }) {

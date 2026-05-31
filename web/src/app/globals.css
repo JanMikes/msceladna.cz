@@ -242,6 +242,23 @@
   .route-progress { transition-duration: 0ms; }
 }
 
+/* Slow-load skeleton overlay. TopProgressBar mounts this ONLY when a navigation
+   is still pending after its delay (a cache miss waiting on Strapi) — fast
+   cached navigations never render it. It sits below the header (z-50) and above
+   the page, covering the outgoing content with a placeholder that resembles the
+   destination, then is unmounted the instant the route commits. */
+.route-skeleton-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  overflow-y: auto;
+  background: var(--color-surface);
+  animation: fadeIn 200ms ease-out;
+}
+@media (prefers-reduced-motion: reduce) {
+  .route-skeleton-overlay { animation-duration: 0ms; }
+}
+
 html {
   scroll-behavior: smooth;
 }

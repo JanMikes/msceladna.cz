@@ -45,8 +45,11 @@ momentary Strapi error (which surfaces as an empty result) is never persisted.
 
 ### Safety net: TTL
 
-Every entry also has a TTL (`CACHE_TTL_SECONDS`, default 3600s). Even if a
-webhook is ever missed, content self-heals within the TTL window.
+Every entry also has a TTL (`CACHE_TTL_SECONDS`, default 604800s = one week).
+Even if a webhook is ever missed, content self-heals within the TTL window.
+The TTL is deliberately long because correctness is owned by the invalidation
+webhook, not by expiry — a long TTL just reduces cold misses against Strapi
+(e.g. after a Redis restart or for rarely-visited pages).
 
 ## Tag map
 
@@ -85,7 +88,7 @@ cooperating-institution) also purge `pages`. Correctness beats minimal purging.
 | ------------------------ | ------- | --------------------------------------------------- |
 | `REDIS_URL`              | web     | Redis connection (empty disables caching)           |
 | `CACHE_VERSION`          | web     | Bump to invalidate **all** entries at once          |
-| `CACHE_TTL_SECONDS`      | web     | Cache + tag-index TTL (default 3600)                |
+| `CACHE_TTL_SECONDS`      | web     | Cache + tag-index TTL (default 604800 = one week)   |
 | `STRAPI_WEBHOOK_SECRET`  | web + strapi | Shared secret for the revalidate webhook       |
 | `WEB_INTERNAL_URL`       | strapi  | Internal URL of the web app (e.g. `http://web:3000`)|
 

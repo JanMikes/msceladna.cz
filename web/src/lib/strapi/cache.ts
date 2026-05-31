@@ -6,7 +6,10 @@ import { getRedis } from '@/lib/redis';
 // only changes to what we ask Strapi to return do.
 const VERSION = process.env.CACHE_VERSION || 'v1';
 const PREFIX = `msc:${VERSION}:`;
-const DEFAULT_TTL = parseInt(process.env.CACHE_TTL_SECONDS || '3600', 10);
+// One week. The TTL is only a safety net — correctness is owned by the
+// tag-based invalidation webhook (Strapi purges the moment content changes),
+// so a long TTL is safe and simply means fewer cold misses against Strapi.
+const DEFAULT_TTL = parseInt(process.env.CACHE_TTL_SECONDS || '604800', 10);
 
 const dataKey = (key: string) => `${PREFIX}${key}`;
 const tagKey = (tag: string) => `${PREFIX}tag:${tag}`;
