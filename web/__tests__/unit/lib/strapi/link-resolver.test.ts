@@ -33,6 +33,52 @@ describe('resolveLink', () => {
     expect(resolveLink(raw)).toEqual({ href: '/about#team', external: false });
   });
 
+  it('resolves a nested page link to its full ancestor path', () => {
+    const raw: StrapiRawLink = {
+      id: 1,
+      page: { slug: 'historie', parent: { slug: 'o-skolce' } },
+      anchor: null,
+      url: null,
+      file: null,
+    };
+    expect(resolveLink(raw)).toEqual({ href: '/o-skolce/historie', external: false });
+  });
+
+  it('resolves a deeply nested page link through the whole chain', () => {
+    const raw: StrapiRawLink = {
+      id: 1,
+      page: { slug: 'c', parent: { slug: 'b', parent: { slug: 'a' } } },
+      anchor: 'sec',
+      url: null,
+      file: null,
+    };
+    expect(resolveLink(raw)).toEqual({ href: '/a/b/c#sec', external: false });
+  });
+
+  it('treats an explicitly null parent as a top-level page', () => {
+    const raw: StrapiRawLink = {
+      id: 1,
+      page: { slug: 'about', parent: null },
+      anchor: null,
+      url: null,
+      file: null,
+    };
+    expect(resolveLink(raw)).toEqual({ href: '/about', external: false });
+  });
+
+  it('terminates on a malformed parent cycle instead of looping', () => {
+    const cyclic: { slug: string; parent?: unknown } = { slug: 'loop' };
+    cyclic.parent = cyclic;
+    const raw: StrapiRawLink = {
+      id: 1,
+      page: cyclic as StrapiRawLink['page'],
+      anchor: null,
+      url: null,
+      file: null,
+    };
+    expect(resolveLink(raw)).toEqual({ href: '/loop', external: false });
+  });
+
   it('resolves external URL', () => {
     const raw: StrapiRawLink = {
       id: 1,

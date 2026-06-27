@@ -34,8 +34,10 @@ function tagsForEvent(event: LifecycleEvent): string[] {
 
   switch (uid) {
     case 'api::page.page':
-      // Any page edit can change nav labels and child breadcrumbs/URLs.
-      return slug ? [`page:${slug}`, 'pages', 'nav'] : ['pages', 'nav'];
+      // Any page edit can change nav labels, child breadcrumbs/URLs, and the
+      // resolved targets of footer links (which embed page slug + ancestor
+      // chain), so purge the footer too.
+      return slug ? [`page:${slug}`, 'pages', 'nav', 'footer'] : ['pages', 'nav', 'footer'];
     case 'api::navigation.navigation':
     case 'api::menu-set.menu-set':
       return ['nav'];

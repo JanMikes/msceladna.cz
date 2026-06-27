@@ -1,4 +1,4 @@
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import type { Metadata } from 'next';
 import SidePanel from '@/components/layout/SidePanel';
 import Breadcrumbs from '@/components/layout/Breadcrumbs';
@@ -39,10 +39,17 @@ export default async function CmsPage({ params }: PageProps) {
     notFound();
   }
 
-  // Verify URL path matches the parent chain from Strapi
+  // A page is served only at its canonical nested path (the full parent chain).
+  // If the request used a different/shorter path — e.g. a leaf-slug link from
+  // the footer or page content, or a bookmark from before a re-parent — redirect
+  // to the canonical URL rather than 404ing. (Navbar links already carry the
+  // full ancestor chain and hit the canonical path directly.) Slugs are unique,
+  // so the requested leaf unambiguously identifies this one page and target.
   const expectedSlugs = getParentChainSlugs(page.breadcrumbs);
-  if (expectedSlugs.length !== slug.length || !expectedSlugs.every((s, i) => s === slug[i])) {
-    notFound();
+  const canonicalPath = `/${expectedSlugs.join('/')}`;
+  const requestedPath = `/${slug.join('/')}`;
+  if (canonicalPath !== requestedPath) {
+    redirect(canonicalPath);
   }
 
   const menuNavigation = page.menuSetId ? await getNavigation(page.menuSetId) : null;

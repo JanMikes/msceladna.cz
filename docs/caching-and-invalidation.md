@@ -24,7 +24,13 @@ older version of the code. Only the *data* is cached.
 - `web/src/lib/strapi/cache.ts` — `cached(key, tags, fn, opts)` read-through
   cache and `revalidateTags(tags)` purge helper. Each entry is stored under
   `msc:<CACHE_VERSION>:<key>` and indexed in a Redis set per tag
-  (`msc:<CACHE_VERSION>:tag:<tag>`).
+  (`msc:<CACHE_VERSION>:tag:<tag>`). A monotonic **generation** counter
+  (`msc:<CACHE_VERSION>:gen`) closes the read-through invalidation race: a miss
+  snapshots the generation before fetching and writes via a generation-gated Lua
+  script, while `revalidateTags` bumps the generation *before* deleting. If a
+  purge lands while a fetch is in flight, the write is rejected — so a slow read
+  can never re-populate a just-purged key with pre-edit data and pin it for the
+  whole TTL.
 - `web/src/lib/strapi/data.ts` — every getter wraps its Strapi call in `cached`
   with a semantic key and one or more tags, and is also wrapped in React
   `cache()` to dedupe identical calls within a single request render.
@@ -58,7 +64,7 @@ sync**. Current mapping:
 
 | Strapi content type            | Purges on change                         |
 | ------------------------------ | ---------------------------------------- |
-| `page`                         | `page:<slug>`, `pages`, `nav`            |
+| `page`                         | `page:<slug>`, `pages`, `nav`, `footer`  |
 | `navigation`, `menu-set`       | `nav`                                    |
 | `footer`                       | `footer`                                 |
 | `organization`                 | `org`                                    |
@@ -74,6 +80,10 @@ sync**. Current mapping:
 single cheap Strapi query each and edits are rare, so entities that can be
 embedded in a page's dynamic zone (workplace, employee, news, project, form,
 cooperating-institution) also purge `pages`. Correctness beats minimal purging.
+
+A page edit also purges `footer`: the footer embeds links whose resolved target
+includes the page's slug **and ancestor chain**, so renaming or re-parenting a
+page would otherwise leave the cached footer pointing at a stale URL.
 
 ## Adding a new content type
 

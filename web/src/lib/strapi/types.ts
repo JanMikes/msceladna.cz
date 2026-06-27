@@ -54,9 +54,20 @@ export interface StrapiRawMedia {
 
 // ── Raw link types ──
 
+/**
+ * A page reference inside a link, with its ancestor chain. The parent chain is
+ * required so links to NESTED pages can resolve to the page's full canonical
+ * URL (e.g. `/o-skolce/historie`) — which is the only path the catch-all route
+ * serves the page at. See {@link resolveLink}.
+ */
+export interface StrapiRawLinkPage {
+  slug: string;
+  parent?: StrapiRawLinkPage | null;
+}
+
 export interface StrapiRawLink {
   id: number;
-  page: { slug: string } | null;
+  page: StrapiRawLinkPage | null;
   anchor: string | null;
   url: string | null;
   file: StrapiRawMedia | null;

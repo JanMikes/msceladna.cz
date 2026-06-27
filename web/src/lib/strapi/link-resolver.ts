@@ -1,7 +1,30 @@
 import type { ResolvedLink, ResolvedTextLink } from '@/lib/types';
-import type { StrapiRawLink, StrapiRawTextLink } from './types';
+import type { StrapiRawLink, StrapiRawLinkPage, StrapiRawTextLink } from './types';
 import { transformImageUrl } from './mappers/shared';
 import { config } from '@/lib/config';
+
+/**
+ * Builds a page's canonical URL path from its slug and ancestor chain, e.g.
+ * `{ slug: 'historie', parent: { slug: 'o-skolce' } }` → `/o-skolce/historie`.
+ *
+ * This MUST mirror the breadcrumb chain produced by `buildBreadcrumbs`
+ * (mappers/page.ts), because the catch-all route (`app/[...slug]/page.tsx`)
+ * 404s any URL whose segments don't exactly equal the page's full ancestor
+ * chain. Resolving a nested-page link to the leaf slug alone is what made those
+ * links 404. A `seen` guard makes a malformed parent cycle terminate rather
+ * than loop (slugs are unique, so a repeat means a bad chain).
+ */
+function pageHref(page: StrapiRawLinkPage): string {
+  const slugs: string[] = [];
+  const seen = new Set<string>();
+  let node: StrapiRawLinkPage | null | undefined = page;
+  while (node?.slug && !seen.has(node.slug)) {
+    seen.add(node.slug);
+    slugs.unshift(node.slug);
+    node = node.parent;
+  }
+  return `/${slugs.join('/')}`;
+}
 
 function resolveUrl(url: string): { href: string; external: boolean } {
   if (!url.startsWith('http://') && !url.startsWith('https://')) {
@@ -29,7 +52,7 @@ export function resolveLink(raw: StrapiRawLink | null | undefined): ResolvedLink
   // Priority: page slug > url > file > anchor
   if (raw.page?.slug) {
     const anchor = raw.anchor ? `#${raw.anchor}` : '';
-    return { href: `/${raw.page.slug}${anchor}`, external: false };
+    return { href: `${pageHref(raw.page)}${anchor}`, external: false };
   }
 
   if (raw.url) {

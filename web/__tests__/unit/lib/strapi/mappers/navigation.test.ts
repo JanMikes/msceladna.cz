@@ -102,6 +102,42 @@ describe('mapNavigation', () => {
     expect(result!.children[0].title).toBe('Valid');
   });
 
+  it('resolves nested-page links to their full canonical path', () => {
+    const raw: StrapiRawNavigation = {
+      id: 1,
+      documentId: 'nav-1',
+      title: 'Náš tým',
+      link: {
+        id: 1,
+        page: { slug: 'nas-tym', parent: { slug: 'pracoviste-beruska' } },
+        anchor: null,
+        url: null,
+        file: null,
+      },
+      children: [
+        {
+          id: 2,
+          title: 'Kontakty',
+          link: {
+            id: 2,
+            page: { slug: 'kontakty', parent: { slug: 'pracoviste-beruska' } },
+            anchor: null,
+            url: null,
+            file: null,
+          },
+          sortOrder: 1,
+        },
+      ],
+      sortOrder: 0,
+      menu_set: null,
+    };
+
+    const result = mapNavigation(raw);
+    expect(result).not.toBeNull();
+    expect(result!.href).toBe('/pracoviste-beruska/nas-tym');
+    expect(result!.children[0].href).toBe('/pracoviste-beruska/kontakty');
+  });
+
   it('maps external link', () => {
     const raw: StrapiRawNavigation = {
       id: 1,
