@@ -46,16 +46,29 @@ momentary Strapi error (which surfaces as an empty result) is never persisted.
   content type to a set of tags and POSTs them to the web app.
 - `web/src/app/api/revalidate/route.ts` validates the shared secret and calls
   `revalidateTags`, deleting every cached entry indexed under those tags.
-- The notification is **fire-and-forget**: a purge failure is logged but never
-  blocks or fails the admin save.
+- The notification never blocks or fails the admin save, but it **retries with
+  exponential backoff** (up to 5 attempts, ~7.5s) so a brief web outage — e.g. a
+  redeploy when an editor saves — does not silently drop the purge. A 4xx (bad
+  secret/body) is not retried; if every attempt fails it is logged loudly and the
+  TTL backstop takes over.
 
 ### Safety net: TTL
 
-Every entry also has a TTL (`CACHE_TTL_SECONDS`, default 604800s = one week).
-Even if a webhook is ever missed, content self-heals within the TTL window.
-The TTL is deliberately long because correctness is owned by the invalidation
-webhook, not by expiry — a long TTL just reduces cold misses against Strapi
-(e.g. after a Redis restart or for rarely-visited pages).
+Every entry also has a TTL (`CACHE_TTL_SECONDS`, default 3600s = one hour).
+Correctness is owned by the invalidation webhook (which now retries); the TTL is
+only the last line of defence. It is kept **short** so that even a fully-missed
+purge self-heals within an hour instead of lingering for days. At this traffic
+the extra cold re-fetches against Strapi are negligible.
+
+### Self-managing namespace (no manual version bumps)
+
+Cache keys are stored under `msc:<version>:<key>`. The `<version>` is **derived
+automatically from a hash of the populate builders** (`shapeVersion()` in
+`cache.ts`): change *what* a query fetches and the namespace changes, so old
+wrong-shaped entries are abandoned without anyone bumping a constant. The few
+getters that inline a one-off `populate` are not covered — prefer lifting those
+into a builder (e.g. `buildNewsListPopulate`) so they're tracked too. Setting
+`CACHE_VERSION` explicitly still forces a one-off full flush.
 
 ## Tag map
 
@@ -97,8 +110,8 @@ page would otherwise leave the cached footer pointing at a stale URL.
 | Variable                 | Service | Purpose                                             |
 | ------------------------ | ------- | --------------------------------------------------- |
 | `REDIS_URL`              | web     | Redis connection (empty disables caching)           |
-| `CACHE_VERSION`          | web     | Bump to invalidate **all** entries at once          |
-| `CACHE_TTL_SECONDS`      | web     | Cache + tag-index TTL (default 604800 = one week)   |
+| `CACHE_VERSION`          | web     | Override the auto-derived namespace (emergency flush) |
+| `CACHE_TTL_SECONDS`      | web     | Cache + tag-index TTL (default 3600 = one hour)     |
 | `STRAPI_WEBHOOK_SECRET`  | web + strapi | Shared secret for the revalidate webhook       |
 | `WEB_INTERNAL_URL`       | strapi  | Internal URL of the web app (e.g. `http://web:3000`)|
 
@@ -106,8 +119,9 @@ page would otherwise leave the cached footer pointing at a stale URL.
 
 ## Operations
 
-- **Force a full flush:** bump `CACHE_VERSION` (old keys are simply orphaned and
-  expire via TTL). Useful when a cached Strapi response *shape* changes.
+- **Force a full flush:** set `CACHE_VERSION` to any new value (old keys are
+  orphaned and expire via TTL). A cached-response *shape* change already does
+  this automatically (the namespace is a hash of the populate builders).
 - **Manually purge a tag:** `POST http://web:3000/api/revalidate` with header
   `x-revalidate-secret: <secret>` and body `{"tags":["pages"]}`.
 - **Verify a cache hit:** request a page twice and watch `docker compose logs
@@ -119,6 +133,6 @@ page would otherwise leave the cached footer pointing at a stale URL.
 | Failure                     | Behaviour                                          |
 | --------------------------- | -------------------------------------------------- |
 | Redis down / not configured | Direct Strapi fetch every request (slow, not broken) |
-| Revalidate webhook fails    | Logged in Strapi; entry self-heals at TTL          |
-| Strapi response shape change| Bump `CACHE_VERSION`                               |
+| Revalidate webhook fails    | Retried w/ backoff (5×); else self-heals at TTL    |
+| Strapi response shape change| Automatic — namespace tracks the populate builders |
 | Bulk `*Many` write w/o slug | Falls back to broad tags (`pages`, etc.)           |

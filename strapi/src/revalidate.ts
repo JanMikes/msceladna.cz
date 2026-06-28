@@ -12,6 +12,14 @@ import type { Core } from '@strapi/strapi';
 const WEB_URL = process.env.WEB_INTERNAL_URL || 'http://web:3000';
 const SECRET = process.env.STRAPI_WEBHOOK_SECRET || '';
 
+// A purge that is computed but never delivered leaves content stale until the
+// web cache TTL — so retry transient failures (web redeploying, a network blip,
+// a 5xx) with exponential backoff instead of dropping the purge after one try.
+const MAX_ATTEMPTS = 5;
+const RETRY_BASE_MS = 500; // backoff: 0.5s, 1s, 2s, 4s between attempts (~7.5s total)
+
+const delay = (ms: number): Promise<void> => new Promise((resolve) => setTimeout(resolve, ms));
+
 interface LifecycleEvent {
   action: string;
   model: { uid: string };
@@ -46,7 +54,12 @@ function tagsForEvent(event: LifecycleEvent): string[] {
     case 'api::organization.organization':
       return ['org'];
     case 'api::workplace.workplace':
-      return slug ? ['workplaces', `workplace:${slug}`, 'pages'] : ['workplaces', 'pages'];
+      // A workplace's name/slug is embedded (via relations) in news cards,
+      // project pills and employee cards, so renaming/deleting one must also
+      // refresh those surfaces — not just the workplace's own pages.
+      return slug
+        ? ['workplaces', `workplace:${slug}`, 'pages', 'news', 'projects', 'employees']
+        : ['workplaces', 'pages', 'news', 'projects', 'employees'];
     case 'api::employee.employee':
       return ['employees', 'pages'];
     case 'api::news-article.news-article':
@@ -70,25 +83,41 @@ async function notify(strapi: Core.Strapi, tags: string[]): Promise<void> {
     strapi.log.warn('[revalidate] STRAPI_WEBHOOK_SECRET not set — skipping cache purge');
     return;
   }
-  try {
-    const res = await fetch(`${WEB_URL}/api/revalidate`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-revalidate-secret': SECRET,
-      },
-      body: JSON.stringify({ tags }),
-      signal: AbortSignal.timeout(5000),
-    });
-    if (!res.ok) {
-      strapi.log.error(`[revalidate] web responded ${res.status} for tags: ${tags.join(', ')}`);
-    } else {
-      strapi.log.info(`[revalidate] purged tags: ${tags.join(', ')}`);
+  for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
+    try {
+      const res = await fetch(`${WEB_URL}/api/revalidate`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-revalidate-secret': SECRET,
+        },
+        body: JSON.stringify({ tags }),
+        signal: AbortSignal.timeout(5000),
+      });
+      if (res.ok) {
+        const note = attempt > 1 ? ` (attempt ${attempt})` : '';
+        strapi.log.info(`[revalidate] purged tags: ${tags.join(', ')}${note}`);
+        return;
+      }
+      // A 4xx (e.g. wrong secret, bad body) will never succeed on retry — stop.
+      if (res.status >= 400 && res.status < 500) {
+        strapi.log.error(`[revalidate] web responded ${res.status} for tags ${tags.join(', ')} — not retrying`);
+        return;
+      }
+      strapi.log.warn(`[revalidate] web responded ${res.status} for tags ${tags.join(', ')} (attempt ${attempt}/${MAX_ATTEMPTS})`);
+    } catch (err) {
+      // Network error / timeout — typically the web app restarting. Retryable.
+      strapi.log.warn(`[revalidate] attempt ${attempt}/${MAX_ATTEMPTS} failed for tags ${tags.join(', ')}: ${(err as Error).message}`);
     }
-  } catch (err) {
-    // Never let a cache-purge failure surface to the admin save.
-    strapi.log.error(`[revalidate] failed for tags ${tags.join(', ')}: ${(err as Error).message}`);
+    if (attempt < MAX_ATTEMPTS) {
+      await delay(RETRY_BASE_MS * 2 ** (attempt - 1));
+    }
   }
+  // All attempts failed: the entry self-heals at the (now short) TTL, but this
+  // is a real incident worth surfacing. Never let it surface to the admin save.
+  strapi.log.error(
+    `[revalidate] GAVE UP after ${MAX_ATTEMPTS} attempts — tags may be stale until TTL: ${tags.join(', ')}`,
+  );
 }
 
 export function registerRevalidation(strapi: Core.Strapi): void {

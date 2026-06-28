@@ -319,6 +319,16 @@ export function buildNewsArticlePopulate() {
   };
 }
 
+// Lighter populate for news LISTS (cards), kept as a builder so the cache
+// auto-version (cache.ts) picks up shape changes here too.
+export function buildNewsListPopulate() {
+  return {
+    mainPhoto: { fields: ['url', 'alternativeText', 'width', 'height'] },
+    workplaces: { fields: ['name', 'slug'] },
+    tags: { fields: ['name', 'slug'] },
+  };
+}
+
 export function buildWorkplacePopulate() {
   return '*' as const;
 }

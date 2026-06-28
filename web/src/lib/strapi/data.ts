@@ -38,6 +38,7 @@ import {
   buildFooterPopulate,
   buildPagePopulate,
   buildNewsArticlePopulate,
+  buildNewsListPopulate,
   buildEmployeePopulate,
   buildProjectPopulate,
 } from './populates';
@@ -268,11 +269,7 @@ export const getNewsArticles = reactCache(
       () =>
         client.findMany<StrapiRawNewsArticle>('news-articles', {
           filters,
-          populate: {
-            mainPhoto: { fields: ['url', 'alternativeText', 'width', 'height'] },
-            workplaces: { fields: ['name', 'slug'] },
-            tags: { fields: ['name', 'slug'] },
-          },
+          populate: buildNewsListPopulate(),
           sort: 'date:desc',
           pagination: { page, pageSize: limit },
         }),

@@ -1,17 +1,42 @@
+import { createHash } from 'crypto';
 import { getRedis } from '@/lib/redis';
+import * as populates from './populates';
 
-// Bump CACHE_VERSION to invalidate every cached entry at once (e.g. when the
-// shape of a cached Strapi response changes). We cache RAW Strapi responses and
-// run mappers fresh on every request, so most deploys do NOT require a bump —
-// only changes to what we ask Strapi to return do.
-// v2: navigation now populates each link page's parent chain (for nested-page
-// URLs), so the cached navigation shape changed — bump to drop v1 entries.
-const VERSION = process.env.CACHE_VERSION || 'v2';
+// The cache namespace is AUTO-DERIVED from the shape of what we fetch from
+// Strapi. Every exported populate builder describes a query's response shape, so
+// hashing their combined output gives a namespace that changes by itself the
+// moment we change what we ask Strapi for. Old, wrong-shaped entries are then
+// abandoned automatically (and expire via TTL) — no one has to remember to bump
+// a version when editing a populate. CACHE_VERSION still works as an explicit
+// override / emergency full flush.
+//
+// Caveat: this captures the populate BUILDERS. The few getters in data.ts that
+// inline a one-off `populate`/`fields` are not covered; if you change one of
+// those, either lift it into a builder here or set CACHE_VERSION once. The short
+// TTL also self-heals such a change within the hour.
+function shapeVersion(): string {
+  try {
+    const shapes = Object.keys(populates)
+      .sort()
+      .map((name) => {
+        const value = (populates as Record<string, unknown>)[name];
+        return [name, typeof value === 'function' ? (value as () => unknown)() : value];
+      });
+    return 'auto-' + createHash('sha1').update(JSON.stringify(shapes)).digest('hex').slice(0, 10);
+  } catch {
+    // A hashing problem must never break caching — fall back to a static namespace.
+    return 'static';
+  }
+}
+
+const VERSION = process.env.CACHE_VERSION || shapeVersion();
 const PREFIX = `msc:${VERSION}:`;
-// One week. The TTL is only a safety net — correctness is owned by the
-// tag-based invalidation webhook (Strapi purges the moment content changes),
-// so a long TTL is safe and simply means fewer cold misses against Strapi.
-const DEFAULT_TTL = parseInt(process.env.CACHE_TTL_SECONDS || '604800', 10);
+// One hour. This is ONLY the backstop for the rare case where a purge webhook
+// never lands — correctness is owned by the invalidation webhook (which now
+// retries). Kept short so that even a fully-missed purge self-heals within an
+// hour instead of lingering for days; at this traffic the extra re-fetches are
+// negligible.
+const DEFAULT_TTL = parseInt(process.env.CACHE_TTL_SECONDS || '3600', 10);
 
 const dataKey = (key: string) => `${PREFIX}${key}`;
 const tagKey = (tag: string) => `${PREFIX}tag:${tag}`;
