@@ -20,6 +20,11 @@ const RETRY_BASE_MS = 500; // backoff: 0.5s, 1s, 2s, 4s between attempts (~7.5s 
 
 const delay = (ms: number): Promise<void> => new Promise((resolve) => setTimeout(resolve, ms));
 
+// A media file (url / alt text / crop) can be embedded in any of these cached
+// surfaces, so replacing or deleting one in the Media Library must refresh them
+// all. Media edits are rare, so this broad purge is cheap.
+const MEDIA_TAGS = ['pages', 'news', 'projects', 'employees', 'footer', 'nav'];
+
 interface LifecycleEvent {
   action: string;
   model: { uid: string };
@@ -67,11 +72,19 @@ function tagsForEvent(event: LifecycleEvent): string[] {
     case 'api::project.project':
       return slug ? ['projects', `project:${slug}`, 'pages'] : ['projects', 'pages'];
     case 'api::tag.tag':
-      return ['tags', 'news'];
+      // A tag's name/slug is embedded in news cards AND in a page's cached
+      // news-articles block (its tagSlug filter), so a slug change must purge
+      // pages too — otherwise the block keeps filtering by the old slug and
+      // silently renders empty.
+      return ['tags', 'news', 'pages'];
     case 'api::cooperating-institution.cooperating-institution':
       return ['coops', 'pages'];
     case 'api::form.form':
       return ['pages'];
+    case 'plugin::upload.file':
+      // Media has no slug and can appear anywhere — over-purge every surface
+      // that can embed a file (see MEDIA_TAGS).
+      return MEDIA_TAGS;
     default:
       return [];
   }

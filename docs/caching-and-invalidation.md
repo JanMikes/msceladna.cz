@@ -81,13 +81,14 @@ sync**. Current mapping:
 | `navigation`, `menu-set`       | `nav`                                    |
 | `footer`                       | `footer`                                 |
 | `organization`                 | `org`                                    |
-| `workplace`                    | `workplaces`, `workplace:<slug>`, `pages`|
+| `workplace`                    | `workplaces`, `workplace:<slug>`, `pages`, `news`, `projects`, `employees` |
 | `employee`                     | `employees`, `pages`                     |
 | `news-article`                 | `news`, `news:<slug>`, `pages`           |
 | `project`                      | `projects`, `project:<slug>`, `pages`    |
-| `tag`                          | `tags`, `news`                           |
+| `tag`                          | `tags`, `news`, `pages`                  |
 | `cooperating-institution`      | `coops`, `pages`                         |
 | `form`                         | `pages`                                  |
+| `upload.file` (media)          | `pages`, `news`, `projects`, `employees`, `footer`, `nav` (MEDIA_TAGS) |
 
 **Reliability principle: when in doubt, over-purge.** Pages and navigation are a
 single cheap Strapi query each and edits are rare, so entities that can be
@@ -97,6 +98,18 @@ cooperating-institution) also purge `pages`. Correctness beats minimal purging.
 A page edit also purges `footer`: the footer embeds links whose resolved target
 includes the page's slug **and ancestor chain**, so renaming or re-parenting a
 page would otherwise leave the cached footer pointing at a stale URL.
+
+Some fields are **denormalized** into other caches, so an edit must purge those
+too — not just the entity's own surface:
+
+- A **workplace** name/slug is copied into news cards, project pills and employee
+  cards, so a workplace edit purges `news`, `projects`, `employees`.
+- A **tag** name/slug is embedded in a page's `news-articles` block filter, so a
+  tag edit purges `pages` (otherwise the block keeps filtering by the old slug
+  and renders empty).
+- A **media file** can be referenced anywhere, so any Media Library change purges
+  the broad `MEDIA_TAGS` set. Note media edits fire `plugin::upload.file`
+  lifecycle events, which the same global subscriber receives.
 
 ## Adding a new content type
 
