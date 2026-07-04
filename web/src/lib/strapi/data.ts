@@ -249,7 +249,9 @@ export const getNewsArticles = reactCache(
     } = {},
   ): Promise<{ articles: NewsArticleSummary[]; total: number }> => {
     const client = getStrapiClient();
-    const filters: Record<string, unknown> = { date: { $notNull: true } };
+    // `approved` is a hard gate: an article not explicitly approved must never
+    // appear on the site — in any list, under any type/workplace/tag filter.
+    const filters: Record<string, unknown> = { date: { $notNull: true }, approved: { $eq: true } };
 
     if (options.type) {
       filters.type = { $eq: options.type };
@@ -289,7 +291,9 @@ export const getNewsArticleBySlug = reactCache(async (slug: string): Promise<New
     ['news', `news:${slug}`],
     () =>
       client.findMany<StrapiRawNewsArticle>('news-articles', {
-        filters: { slug: { $eq: slug } },
+        // Same hard gate as the list: an unapproved article's detail page must
+        // 404, so exclude it here too (the caller treats null as notFound()).
+        filters: { slug: { $eq: slug }, approved: { $eq: true } },
         populate: buildNewsArticlePopulate(),
         pagination: { pageSize: 1 },
       }),

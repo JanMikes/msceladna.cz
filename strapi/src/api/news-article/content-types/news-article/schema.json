@@ -49,6 +49,10 @@
       "enum": ["aktualita", "reportaz"],
       "required": true
     },
+    "approved": {
+      "type": "boolean",
+      "default": false
+    },
     "workplaces": {
       "type": "relation",
       "relation": "manyToMany",

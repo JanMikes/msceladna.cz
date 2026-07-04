@@ -648,6 +648,7 @@ export interface ApiNewsArticleNewsArticle extends Struct.CollectionTypeSchema {
     draftAndPublish: false;
   };
   attributes: {
+    approved: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

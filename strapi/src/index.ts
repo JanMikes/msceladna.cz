@@ -8,6 +8,13 @@ const CM_CT_PREFIX = 'plugin_content_manager_configuration_content_types';
 const CM_COMP_PREFIX = 'plugin_content_manager_configuration_components';
 const CM_CONFIG_KEY = `${CM_CT_PREFIX}::${PAGE_UID}`;
 
+const NEWS_UID = 'api::news-article.news-article' as const;
+const NEWS_TABLE = 'news_articles';
+const NEWS_CM_CONFIG_KEY = `${CM_CT_PREFIX}::${NEWS_UID}`;
+const NEWS_APPROVED_LABEL = 'Schváleno k zobrazení';
+const NEWS_APPROVED_DESCRIPTION =
+  'Když není zaškrtnuto, aktualita se nikde na webu nezobrazí (ani v seznamu, ani na detailu).';
+
 type PageRow = {
   id: number;
   title: string;
@@ -109,6 +116,42 @@ async function ensurePageMainFields(strapi: Core.Strapi) {
   }
 }
 
+// The `approved` gate on Aktualita defaults to false, so a freshly-added column
+// would hide every article that already existed. Those were already public, so
+// grandfather them to approved exactly once. Guarded by a core-store flag: on a
+// later restart this must NOT re-approve an article an editor has deliberately
+// unchecked, so it runs only until the flag is set.
+async function backfillNewsApproved(strapi: Core.Strapi) {
+  const store = strapi.store({ type: 'core', name: 'msc-news-approved' });
+  if (await store.get({ key: 'backfilled' })) return;
+
+  const updated = await strapi.db.connection(NEWS_TABLE).update({ approved: true });
+  await store.set({ key: 'backfilled', value: true });
+  strapi.log.info(`[news approved] one-time backfill: approved ${updated} existing article(s)`);
+}
+
+// Give the `approved` boolean a Czech label + hint in the admin edit view. The
+// content-manager generates default metadata for every attribute on startup, so
+// by app bootstrap `metadatas.approved.edit` exists; if it somehow doesn't we
+// leave the humanized default rather than fabricate config.
+async function ensureNewsApprovedLabel(strapi: Core.Strapi) {
+  const changed = await patchConfig(strapi, NEWS_CM_CONFIG_KEY, (config) => {
+    const edit = config?.metadatas?.approved?.edit;
+    if (!edit) return false;
+    let dirty = false;
+    if (edit.label !== NEWS_APPROVED_LABEL) {
+      edit.label = NEWS_APPROVED_LABEL;
+      dirty = true;
+    }
+    if (edit.description !== NEWS_APPROVED_DESCRIPTION) {
+      edit.description = NEWS_APPROVED_DESCRIPTION;
+      dirty = true;
+    }
+    return dirty;
+  });
+  if (changed) strapi.log.info('[news approved] set Czech label on approved field');
+}
+
 export default {
   register() {},
 
@@ -122,6 +165,16 @@ export default {
       await ensurePageMainFields(strapi);
     } catch (err) {
       strapi.log.warn(`[page admin_label] mainField update skipped: ${(err as Error).message}`);
+    }
+    try {
+      await backfillNewsApproved(strapi);
+    } catch (err) {
+      strapi.log.warn(`[news approved] backfill skipped: ${(err as Error).message}`);
+    }
+    try {
+      await ensureNewsApprovedLabel(strapi);
+    } catch (err) {
+      strapi.log.warn(`[news approved] label update skipped: ${(err as Error).message}`);
     }
     try {
       registerRevalidation(strapi);

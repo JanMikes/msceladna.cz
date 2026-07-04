@@ -230,6 +230,7 @@ export interface StrapiRawNewsArticle {
   gallery: StrapiRawMedia[] | null;
   files: StrapiRawMedia[] | null;
   type: string | null;
+  approved: boolean | null;
   workplaces: StrapiRawWorkplace[] | null;
   tags: StrapiRawTag[] | null;
   createdAt: string;
