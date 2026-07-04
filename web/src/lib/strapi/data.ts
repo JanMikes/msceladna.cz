@@ -163,7 +163,12 @@ export const getOrganization = reactCache(async (): Promise<Organization | null>
   const raw = await cached(
     'org',
     ['org'],
-    () => client.findSingle<StrapiRawOrganization>('organization'),
+    // `throwOnError: false` returns null (instead of throwing) when the single
+    // type is absent/unpublished, so the empty result is CACHED rather than
+    // re-fetched on every render. Without this, a persistent 404 makes each
+    // request hit Strapi again (fn throws → fallback returned but never stored).
+    // Publishing the organization purges the `org` tag, so this self-corrects.
+    () => client.findSingle<StrapiRawOrganization>('organization', { throwOnError: false }),
     { fallback: null },
   );
   if (!raw) return null;
