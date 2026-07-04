@@ -51,9 +51,9 @@ export default async function ProjectDetailPage({ params }: PageProps) {
         <article className="space-y-6">
           <div>
             <div className="flex items-center gap-2 mb-3 flex-wrap">
-              {project.status && (
+              {project.projectStatus && (
                 <span className="pill bg-accent/15 text-primary">
-                  {statusLabels[project.status] || project.status}
+                  {statusLabels[project.projectStatus] || project.projectStatus}
                 </span>
               )}
               {project.workplaces.map((w) => (

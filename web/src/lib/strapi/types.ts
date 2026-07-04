@@ -249,7 +249,7 @@ export interface StrapiRawProject {
   description: string | null;
   logos: StrapiRawMedia[] | null;
   publicityPoster: StrapiRawMedia | null;
-  status: 'aktivni' | 'ukonceny' | null;
+  projectStatus: 'aktivni' | 'ukonceny' | null;
   dateFrom: string | null;
   dateTo: string | null;
   workplaces: StrapiRawWorkplace[] | null;

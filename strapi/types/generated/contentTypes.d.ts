@@ -834,12 +834,12 @@ export interface ApiProjectProject extends Struct.CollectionTypeSchema {
     logos: Schema.Attribute.Media<'images', true>;
     name: Schema.Attribute.String & Schema.Attribute.Required;
     projectNumber: Schema.Attribute.String;
+    projectStatus: Schema.Attribute.Enumeration<['aktivni', 'ukonceny']>;
     publicityPoster: Schema.Attribute.Media<
       'files' | 'images' | 'videos' | 'audios'
     >;
     publishedAt: Schema.Attribute.DateTime;
     slug: Schema.Attribute.UID<'name'> & Schema.Attribute.Required;
-    status: Schema.Attribute.Enumeration<['aktivni', 'ukonceny']>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

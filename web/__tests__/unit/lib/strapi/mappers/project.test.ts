@@ -24,7 +24,7 @@ describe('mapProject', () => {
         width: 800,
         height: 1200,
       },
-      status: 'aktivni',
+      projectStatus: 'aktivni',
       dateFrom: '2024-01-01',
       dateTo: '2025-12-31',
       workplaces: [
@@ -44,7 +44,7 @@ describe('mapProject', () => {
     expect(result.logos[0].url).toBe('https://cdn.example.com/logo1.png');
     expect(result.publicityPoster).not.toBeNull();
     expect(result.publicityPoster!.url).toBe('https://cdn.example.com/poster.jpg');
-    expect(result.status).toBe('aktivni');
+    expect(result.projectStatus).toBe('aktivni');
     expect(result.dateFrom).toBe('2024-01-01');
     expect(result.dateTo).toBe('2025-12-31');
     expect(result.workplaces).toHaveLength(1);
@@ -63,7 +63,7 @@ describe('mapProject', () => {
       description: null,
       logos: null,
       publicityPoster: null,
-      status: null,
+      projectStatus: null,
       dateFrom: null,
       dateTo: null,
       workplaces: null,
@@ -76,7 +76,7 @@ describe('mapProject', () => {
     expect(result.goal).toBeNull();
     expect(result.financialAmount).toBeNull();
     expect(result.description).toBeNull();
-    expect(result.status).toBeNull();
+    expect(result.projectStatus).toBeNull();
     expect(result.dateFrom).toBeNull();
     expect(result.dateTo).toBeNull();
     expect(result.workplaces).toEqual([]);
@@ -94,13 +94,13 @@ describe('mapProject', () => {
       description: null,
       logos: null,
       publicityPoster: null,
-      status: 'ukonceny',
+      projectStatus: 'ukonceny',
       dateFrom: null,
       dateTo: null,
       workplaces: null,
     };
 
     const result = mapProject(raw);
-    expect(result.status).toBe('ukonceny');
+    expect(result.projectStatus).toBe('ukonceny');
   });
 });

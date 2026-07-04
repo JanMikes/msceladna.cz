@@ -304,7 +304,7 @@ export const getProjects = reactCache(async (status?: string): Promise<Project[]
   const client = getStrapiClient();
   const filters: Record<string, unknown> = {};
   if (status) {
-    filters.status = { $eq: status };
+    filters.projectStatus = { $eq: status };
   }
   const res = await cached(
     `projects:${status ?? 'all'}`,

@@ -139,7 +139,7 @@ export interface Project {
   description: string | null;
   logos: MediaImage[];
   publicityPoster: MediaImage | null;
-  status: 'aktivni' | 'ukonceny' | null;
+  projectStatus: 'aktivni' | 'ukonceny' | null;
   dateFrom: string | null;
   dateTo: string | null;
   workplaces: { name: string; slug: string }[];

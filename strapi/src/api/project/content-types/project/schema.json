@@ -41,7 +41,7 @@
       "multiple": false,
       "allowedTypes": ["files", "images", "videos", "audios"]
     },
-    "status": {
+    "projectStatus": {
       "type": "enumeration",
       "enum": ["aktivni", "ukonceny"]
     },

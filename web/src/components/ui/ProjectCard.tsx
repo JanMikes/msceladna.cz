@@ -23,9 +23,9 @@ export function ProjectCard({ project }: ProjectCardProps) {
           <h3 className="font-bold text-primary text-lg group-hover:text-primary-light transition-colors line-clamp-2">
             {project.name}
           </h3>
-          {project.status && (
-            <span className={`pill shrink-0 ${statusColors[project.status] || ''}`}>
-              {statusLabels[project.status] || project.status}
+          {project.projectStatus && (
+            <span className={`pill shrink-0 ${statusColors[project.projectStatus] || ''}`}>
+              {statusLabels[project.projectStatus] || project.projectStatus}
             </span>
           )}
         </div>

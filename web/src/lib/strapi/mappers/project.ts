@@ -13,7 +13,7 @@ export function mapProject(raw: StrapiRawProject): Project {
     description: raw.description ?? null,
     logos: mapMediaArray(raw.logos),
     publicityPoster: mapMedia(raw.publicityPoster),
-    status: raw.status ?? null,
+    projectStatus: raw.projectStatus ?? null,
     dateFrom: raw.dateFrom ?? null,
     dateTo: raw.dateTo ?? null,
     workplaces: (raw.workplaces ?? []).map((w) => ({ name: w.name, slug: w.slug })),
