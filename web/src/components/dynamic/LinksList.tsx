@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Link from '@/components/ui/Link';
 import { clsx } from 'clsx';
 import { ExternalLink } from 'lucide-react';
 import type { ComponentLinksList } from '@/lib/types';

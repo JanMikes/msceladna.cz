@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Link from '@/components/ui/Link';
 import { getNewsArticles } from '@/lib/strapi/data';
 import { NewsArticlesList } from './NewsArticlesList';
 import type { ComponentNewsArticles } from '@/lib/types';

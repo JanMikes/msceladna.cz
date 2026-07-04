@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { getProjects } from '@/lib/strapi/data';
 import { ProjectCard } from '@/components/ui/ProjectCard';
 import MenuSetOverride from '@/components/layout/MenuSetOverride';
-import Link from 'next/link';
+import Link from '@/components/ui/Link';
 import { clsx } from 'clsx';
 
 export const metadata: Metadata = {

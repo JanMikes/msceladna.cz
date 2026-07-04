@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Link from '@/components/ui/Link';
 import type { ComponentStatsSection } from '@/lib/types';
 import { MarkdownInline } from '@/components/ui/MarkdownInline';
 

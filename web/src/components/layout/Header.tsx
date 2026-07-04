@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import Link from 'next/link';
+import Link from '@/components/ui/Link';
 import { usePathname } from 'next/navigation';
 import { clsx } from 'clsx';
 import { motion, AnimatePresence } from 'framer-motion';

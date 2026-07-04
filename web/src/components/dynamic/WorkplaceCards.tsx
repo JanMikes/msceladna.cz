@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Link from '@/components/ui/Link';
 import { clsx } from 'clsx';
 import type { ComponentWorkplaceCards } from '@/lib/types';
 import { MarkdownInline } from '@/components/ui/MarkdownInline';

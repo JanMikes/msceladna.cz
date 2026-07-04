@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Link from '@/components/ui/Link';
 import { Mail, Phone, MapPin, ArrowRight } from 'lucide-react';
 import type { Footer as FooterType, Organization } from '@/lib/types';
 import { MarkdownInline } from '@/components/ui/MarkdownInline';

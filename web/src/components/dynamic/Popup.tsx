@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Link from 'next/link';
+import Link from '@/components/ui/Link';
 import { X } from 'lucide-react';
 import type { ComponentPopup } from '@/lib/types';
 import { MarkdownContent } from '../ui/MarkdownContent';
