@@ -39,6 +39,19 @@ export function mapMedia(raw: StrapiRawMedia | null | undefined): MediaImage | n
   };
 }
 
+// Like mapMedia, but resolves to the PUBLIC uploads URL. Use for media that the
+// browser fetches directly (e.g. document download links via <a href>), which
+// cannot reach the internal host used for server-side <Image> optimization.
+export function mapPublicMedia(raw: StrapiRawMedia | null | undefined): MediaImage | null {
+  if (!raw?.url) return null;
+  return {
+    url: transformPublicUrl(raw.url),
+    alternativeText: raw.alternativeText ?? null,
+    width: raw.width ?? 0,
+    height: raw.height ?? 0,
+  };
+}
+
 export function mapMediaArray(raw: StrapiRawMedia[] | null | undefined): MediaImage[] {
   if (!raw) return [];
   return raw.map(mapMedia).filter((m): m is MediaImage => m !== null);

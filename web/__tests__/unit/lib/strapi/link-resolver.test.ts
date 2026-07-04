@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { resolveLink, resolveTextLink } from '@/lib/strapi/link-resolver';
+import { config } from '@/lib/config';
 import type { StrapiRawLink, StrapiRawTextLink } from '@/lib/strapi/types';
 
 describe('resolveLink', () => {
@@ -137,7 +138,9 @@ describe('resolveLink', () => {
     };
     const result = resolveLink(raw);
     expect(result).not.toBeNull();
-    expect(result!.href).toContain('/uploads/document.pdf');
+    // File links are browser-facing <a href>, so they must use the PUBLIC
+    // uploads URL, not the internal server-side <Image> host.
+    expect(result!.href).toBe(`${config.publicUploadsUrl}/uploads/document.pdf`);
     expect(result!.external).toBe(false);
   });
 

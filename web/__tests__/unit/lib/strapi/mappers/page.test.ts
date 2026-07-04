@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { mapPage, mapDynamicZone } from '@/lib/strapi/mappers/page';
+import { config } from '@/lib/config';
 import type { StrapiRawDynamicZoneComponent, StrapiRawPage } from '@/lib/strapi/types';
 
 // We test mapDynamicZone (which calls mapDynamicZoneComponent internally)
@@ -158,6 +159,9 @@ describe('mapDynamicZone / mapDynamicZoneComponent', () => {
     expect(docs.documents).toHaveLength(1);
     expect(docs.documents[0].name).toBe('Annual Report');
     expect(docs.documents[0].file).not.toBeNull();
+    // Download links are fetched directly by the browser, so they must use the
+    // PUBLIC uploads URL, never the internal server-side <Image> host.
+    expect(docs.documents[0].file!.url).toBe(`${config.publicUploadsUrl}/uploads/report.pdf`);
   });
 
   it('maps components.timeline', () => {

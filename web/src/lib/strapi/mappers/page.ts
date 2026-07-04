@@ -1,7 +1,7 @@
 import type { BreadcrumbItem, ComponentImage, DynamicZoneComponent, Page } from '@/lib/types';
 import type { StrapiRawDynamicZoneComponent, StrapiRawPage, StrapiRawPageParent } from '../types';
 import { resolveTextLink } from '../link-resolver';
-import { mapMedia } from './shared';
+import { mapMedia, mapPublicMedia } from './shared';
 
 function buildBreadcrumbs(parent: StrapiRawPageParent | null | undefined, currentTitle: string, currentSlug: string): BreadcrumbItem[] {
   const ancestors: { title: string; slug: string }[] = [];
@@ -311,7 +311,7 @@ function mapDocuments(raw: unknown) {
   if (!Array.isArray(raw)) return [];
   return raw.map((d) => ({
     name: d.name ?? null,
-    file: mapMedia(d.file),
+    file: mapPublicMedia(d.file),
   }));
 }
 

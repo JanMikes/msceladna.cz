@@ -1,6 +1,6 @@
 import type { ResolvedLink, ResolvedTextLink } from '@/lib/types';
 import type { StrapiRawLink, StrapiRawLinkPage, StrapiRawTextLink } from './types';
-import { transformImageUrl } from './mappers/shared';
+import { transformPublicUrl } from './mappers/shared';
 import { config } from '@/lib/config';
 
 /**
@@ -60,7 +60,9 @@ export function resolveLink(raw: StrapiRawLink | null | undefined): ResolvedLink
   }
 
   if (raw.file?.url) {
-    return { href: transformImageUrl(raw.file.url), external: false };
+    // A link to an uploaded file becomes a browser <a href>, so it must use the
+    // PUBLIC uploads URL — not the internal host used for <Image> optimization.
+    return { href: transformPublicUrl(raw.file.url), external: false };
   }
 
   if (raw.anchor) {
