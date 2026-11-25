@@ -9,3 +9,4 @@ RUN mkdir -p /var/www/uploads
 
 # Expose HTTP port
 EXPOSE 80
+# 2026-11-25: trigger-only commit for a security rebuild (nginx:alpine 1.31.10, Alpine 3.24.4); no functional change.
