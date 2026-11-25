@@ -15,3 +15,5 @@ RUN npm run build
 EXPOSE 1337
 
 CMD ["npm", "run", "start"]
+
+# 2026-11-25: trigger-only commit for a security rebuild (Brotli KEV); no functional change.
